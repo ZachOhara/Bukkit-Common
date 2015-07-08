@@ -34,46 +34,46 @@ public class StringUtil {
 	 * The color that the server admin's name should appear in.
 	 */
 	public static final ChatColor ADMINCOLOR = ChatColor.LIGHT_PURPLE;
-	
+
 	/**
 	 * The color that standard text should appear in.
 	 */
 	public static final ChatColor TEXTCOLOR = ChatColor.AQUA;
-	
+
 	/**
 	 * The color that player's and command's names should appear in.
 	 */
 	public static final ChatColor NAMECOLOR = ChatColor.WHITE;
-	
+
 	/**
 	 * The color that error messages should appear in.
 	 */
 	public static final ChatColor ERRORCOLOR = ChatColor.RED;
-	
+
 	/**
 	 * The color that location coordinates should appear in.
 	 */
 	public static final ChatColor LOCATIONCOLOR = ChatColor.GREEN;
 
-	
+
 	/**
 	 * The message that is sent to players when they do not have permission to use a
 	 * given command.
 	 */
 	public static final String ERROR_NOT_OP_MESSAGE = "You must be an OP to use this command";
-	
+
 	/**
 	 * The message that is sent to players when a command they have submitted did not
 	 * have enough arguments sent with it.
 	 */
 	public static final String ERROR_TOO_FEW_ARGS_MESSAGE = "Not enough arguments!";
-	
+
 	/**
 	 * The message that is sent to players when a command they have submitted had too many
 	 * arguments sent with it.
 	 */
 	public static final String ERROR_TOO_MANY_ARGS_MESSAGE = "Too many arguments!";
-	
+
 	/**
 	 * The message that is sent to players when the target player they have specified as
 	 * a command argument is not a valid player.
@@ -82,31 +82,37 @@ public class StringUtil {
 			+ " doesn't exist.";
 	
 	/**
+	 * The message that is sent to the conosle when the console sends a command that can
+	 * only be used by an in-game player
+	 */
+	public static final String ERROR_PLAYER_ONLY_MESSAGE = "This command is only usable as a player";
+
+	/**
 	 * The message that is sent to players when they try to use a command that only the
 	 * admin can use.
 	 */
 	public static final String ERROR_ADMIN_ONLY_MESSAGE = "Only the all-powerful "
 			+ "%admin may use this command!\nOverlord %admin has been notified of your futile attempt!";
-	
+
 	/**
 	 * The message that is sent to admins to inform them of a misuse of a command.
 	 */
 	public static final String ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION = "%s has tried to use %c on %gt";
-	
+
 	/**
 	 * The message that is sent to players when they try to target the admin with a command
 	 * that the admin is protected against.
 	 */
 	public static final String ERROR_ADMIN_PROTECTED_MESSAGE = "You cannot use this command on"
 			+ " the all-powerful %admin!\nOverlord %admin has been notified of your futile attempt!";
-	
+
 	/**
 	 * The message that is sent to admins to inform them of a misuse of a command.
 	 */
 	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use %c on "
 			+ "overlord %admin!";
 
-	
+
 	/**
 	 * Gets nicely formatted String with the coordinates of the given location.
 	 * @param loc the location to be formatted into a String.
@@ -154,7 +160,13 @@ public class StringUtil {
 				{"%s", source.getSenderName()},
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
-				{"%c", "/" + source.getName()}
+				{"%c", "/" + source.getName()},
+				{"%sloc", source.isFromPlayer() ?
+						getLocationString(source.getSenderPlayer().getLocation())
+						: "[no location]"},
+				{"%tloc", source.hasTarget() ?
+						getLocationString(source.getTargetPlayer().getLocation())
+						: "[no location]"}
 		};
 
 		message = color + message;
