@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 
 /**
  * A {@code CommandInstance} object represents a single invocation of any command that is
- * registered to this plugin. The object stores relevant information about the command, such
+ * registered to a plugin. The object stores relevant information about the command, such
  * as the player or console that sent the command, the player that was targeted by the command
  * (if applicable), as well as any additional arguments that were sent with the command.
  * 
@@ -48,6 +48,12 @@ public class CommandInstance {
 	 * The general, non-instance-specific format and properties of the sent command.
 	 */
 	private CommandRules rules;
+	
+	/**
+	 * The {@code Implementation} object that contains an implementation for the
+	 * command.
+	 */
+	private Implementation commandImplementation;
 	
 	
 	/**
@@ -88,11 +94,15 @@ public class CommandInstance {
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
+	 * @param ruleSet the {@code Class} object from the applicable {@code CommandRules} enumeration.
+	 * @param exeSet the {@code Class} object from the applicable {@code CommandExecutables} enumeration.
 	 */
-	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args, Class<? extends CommandRules> ruleSet) {
+	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
+			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {
 		this.name = rawCommand.getName().toLowerCase();
 		this.arguments = args;
-		this.rules = rulesFromString(name, ruleSet);
+		this.rules = rulesFromString(this.name, ruleSet);
+		this.commandImplementation = implementFromString(this.name, exeSet);
 		this.initializeSender(rawSender);		
 		this.initializeSenderName();
 		this.initializeTarget();
@@ -233,6 +243,15 @@ public class CommandInstance {
 	}
 	
 	/**
+	 * Executes the 'main procedure' of the command after its conditions have been
+	 * fully verified.
+	 * @see {@link Implementation#doCommand(CommandInstance) Implementation.doCommand(CommandInstance)}
+	 */
+	public void executeCommand() {
+		this.commandImplementation.doCommand(this);
+	}
+	
+	/**
 	 * Sends a given message to the target player specified by this command. The message
 	 * will be formatted and colored before it is sent. If there is no valid target player
 	 * attached to this command, a {@code NullPointerException} will be thrown.
@@ -355,16 +374,33 @@ public class CommandInstance {
 	}
 	
 	/**
-	 * Gets the {@code CommandRules} constant corresponding to a given name of a command.
+	 * Gets the {@code CommandRules} constant corresponding to the command with the
+	 * given name.
 	 * @param label the name of the requested command.
-	 * @param ruleSet the {@code Class} object of the specific set of rules
-	 * @return
+	 * @param ruleSet the {@code Class} object of the specific set of command rules.
+	 * @return the {@code CommandRules} object corresponding to the given command name.
 	 */
 	private static CommandRules rulesFromString(String label, Class<? extends CommandRules> ruleSet) {
 		CommandRules[] allCommands = ruleSet.getEnumConstants();
 		for (CommandRules c : allCommands) {
 			if (c.getName().equals(label))
 				return c;
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets the {@code Executable} object corresponding to the command with the given name.
+	 * @param name the name of the command that should be returned.
+	 * @param exeSet the {@code Class} object of the specific set of command executables.
+	 * @return an {@code Implementation} object that contains the main procedure for the
+	 * given command.
+	 */
+	private static Implementation implementFromString(String name, Class<? extends CommandExecutables> exeSet) {
+		CommandExecutables[] all = exeSet.getEnumConstants();
+		for (CommandExecutables exe : all) {
+			if (exe.getImplementation().getName().equals(name))
+				return exe.getImplementation();
 		}
 		return null;
 	}
