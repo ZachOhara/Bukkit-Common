@@ -1,0 +1,4 @@
+name: BukkitCommon
+main: io.github.zachohara.bukkit.common.plugin.DummyPluginMain
+version: 1.0.1
+commands:
