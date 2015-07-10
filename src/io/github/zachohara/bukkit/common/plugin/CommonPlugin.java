@@ -48,26 +48,27 @@ public abstract class CommonPlugin extends JavaPlugin {
 	/**
 	 * Gets the enumeration of {@code CommandRules} that represents the set of commands
 	 * that are specific to a plugin.
-	 * @return the enumeration of {@code CommandRules} that represents the set of commands
-	 * that are specific to a plugin.
+	 * 
+	 * @return the {@code CommandRules} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandRules> getCommandRuleSet();
 	
 	/**
 	 * Gets the enumeration of {@code CommandExecutables} that represents the set of commands
 	 * that are specific to a plugin.
-	 * @return the enumeration of {@code CommandExecutables} that represents the set of
-	 * commands that are specific to a plugin.
+	 * 
+	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
 	
 	/**
 	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a java app.
+	 * 
 	 * @param args the command line arguments passed to the program.
 	 */
 	public static void main(String[] args) {
 		System.out.println("This is not a normal java app! This is a plugin for a Bukkit server!\n"
-				+ "To use it, you have to install Bukkit.");
+				+ "To use it, you have to install Bukkit, then install this plugin.");
 	}
 
 }

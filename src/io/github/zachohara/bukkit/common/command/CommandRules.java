@@ -17,11 +17,11 @@
 package io.github.zachohara.bukkit.common.command;
 
 /**
- * The {@code CommandRules} interface is designed to be implemented by an enumeration
- * class that represents the set of commands that a plugin supports, including
- * additional information for each command such as the range of expected amounts of
- * arguments, the required permission level necessary to use a command, and if the
- * command should require a target player.
+ * The {@code CommandRules} interface is designed to be implemented by an
+ * enumeration class that represents the set of commands that a plugin supports. The
+ * enumeration should contain information for each command, such as the range of expected
+ * amounts of arguments, the required permission level necessary to use a command, and if
+ * the command should require a target player.
  * <p>
  * The resulting enumeration is one of two enumerations that represent the set of commands
  * supported by a plugin. Any single command will have two enumerable constants that

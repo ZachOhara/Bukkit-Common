@@ -18,7 +18,7 @@ package io.github.zachohara.bukkit.common.command;
 
 /**
  * The {@code Implementation} class acts as a superclass for implementations of specific
- * commands. Each command that this plugin supports has a corresponding
+ * commands. Each command that a plugin supports has a corresponding
  * {@code Implementation} object that contains its main procedure.
  *
  * @author Zach Ohara
@@ -26,7 +26,8 @@ package io.github.zachohara.bukkit.common.command;
 public abstract class Implementation {
 	
 	/**
-	 * Returns the name of the command that is represented by this object.
+	 * Gets the name of the command.
+	 * 
 	 * @return the name of the command.
 	 */
 	public abstract String getName();
@@ -34,6 +35,7 @@ public abstract class Implementation {
 	/**
 	 * Executes the main procedure of the command with a given context, and return the
 	 * success of the operation.
+	 * 
 	 * @param instance the context of the command that is being executed.
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 * @see {@link #doPlayerCommand(CommandInstance)}
@@ -53,10 +55,11 @@ public abstract class Implementation {
 	 * to be implemented once in this method. If the code here is not compatible with a
 	 * command sent from the console, then the {@link #doConsoleCommand(CommandInstance)}
 	 * method must be overridden.
+	 * 
 	 * @param instance the context of the command that is being executed.
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 */
-	public abstract boolean doPlayerCommand(CommandInstance instance);
+	protected abstract boolean doPlayerCommand(CommandInstance instance);
 	
 	/**
 	 * Executes the main procedure of a console-issued command with a given context, and
@@ -65,10 +68,11 @@ public abstract class Implementation {
 	 * not work when the command is sent from a console. By default, this method will
 	 * use the same procedure outlined in the {@link #doPlayerCommand(CommandInstance)}
 	 * method.
+	 * 
 	 * @param instance the context of the command that is being executed
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 */
-	public boolean doConsoleCommand(CommandInstance instance) {
+	protected boolean doConsoleCommand(CommandInstance instance) {
 		return this.doPlayerCommand(instance);
 	}
 

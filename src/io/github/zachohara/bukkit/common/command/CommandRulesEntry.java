@@ -1,8 +1,36 @@
+/* Copyright (C) 2015 Zach Ohara
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package io.github.zachohara.bukkit.common.command;
 
 import io.github.zachohara.bukkit.common.command.CommandRules.Source;
 import io.github.zachohara.bukkit.common.command.CommandRules.Target;
 
+/**
+ * A {@code CommandRulesEntry} object represents the rules and conditions for a command.
+ * All of the conditions outlined in this object need to be verified before attempting to
+ * execute the command.
+ * <p>
+ * This class contians rules for a command such as minimum and maximum expected amounts
+ * of arguments, the required permissions and conditions of any entity trying to use the
+ * command, and the type(s) of players that can be targeted by the command under certain
+ * situations.
+ * 
+ * @author Zach Ohara
+ */
 public class CommandRulesEntry {
 	
 	/**
@@ -26,12 +54,13 @@ public class CommandRulesEntry {
 	private Source accessible;
 	
 	/**
-	 * The type or range of target players that should be allowed to use this command.
+	 * The type or range of players that can be targeted by this command.
 	 */
 	private Target targetable;
 	
 	/**
-	 * Constructs a new {@code Rules} object based on the required information.
+	 * Constructs a new {@code Rules} object from the required information.
+	 * 
 	 * @param name see instance variable {@link #name}
 	 * @param minArgs see instance variable {@link #minArgs}
 	 * @param maxArgs see instance variable {@link #maxArgs}
@@ -49,9 +78,9 @@ public class CommandRulesEntry {
 	/**
 	 * Constructs a new {@code CommandRulesEntry} object that should exactly mimic the
 	 * properties of a different command.
-	 * @param name the name of this command.
-	 * @param alias the {@code Command} object that this object should mimic the
-	 * properties of.
+	 * 
+	 * @param name the (unique) name of this command.
+	 * @param alias the command that this command should exactly mimic the properties of.
 	 */
 	public CommandRulesEntry(String name, CommandRulesEntry alias) {
 		this.name = name;
@@ -63,8 +92,8 @@ public class CommandRulesEntry {
 
 	/**
 	 * Gets the name of the command, as it would be typed in the game or from a console.
-	 * @return the name of the command, as it would be typed in the game or from a
-	 * console.
+	 * 
+	 * @return the name of the command.
 	 */
 	public String getName() {
 		return this.name;
@@ -72,7 +101,8 @@ public class CommandRulesEntry {
 	
 	/**
 	 * Gets the minimum amount of arguments that should be allowed for the command.
-	 * @return the minimum amount of arguments that should be allowed for the command.
+	 * 
+	 * @return the minimum amount of arguments allowed.
 	 */
 	public int getMinArgs() {
 		return minArgs;
@@ -80,7 +110,8 @@ public class CommandRulesEntry {
 	
 	/**
 	 * Gets the maximum amount of arguments that should be allowed for the command.
-	 * @return the maximum amount of arguments that should be allowed for the command.
+	 * 
+	 * @return the maximum amount of arguments allowed.
 	 */
 	public int getMaxArgs() {
 		return maxArgs;
@@ -88,6 +119,7 @@ public class CommandRulesEntry {
 	
 	/**
 	 * Gets the type or range of sources that are allowed to use the command.
+	 * 
 	 * @return the type or range of sources that are allowed to use the command.
 	 * @see {@link #Commands.Source Commands.Source}
 	 */
@@ -96,9 +128,9 @@ public class CommandRulesEntry {
 	}
 	
 	/**
-	 * Gets the type or range of target players that should be allowed to use this command.
-	 * @return the type or range of target players that should be allowed to use this
-	 * command.
+	 * Gets the type or range of target players that can be targeted by this command.
+	 * 
+	 * @return the type of players that are targetable by this command.
 	 * @see {@link #Commands.Target Commands.Target}
 	 */
 	public Target getTargetable() {

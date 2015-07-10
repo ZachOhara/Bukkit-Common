@@ -50,7 +50,7 @@ public class CommandInstance {
 	private CommandRulesEntry rules;
 
 	/**
-	 * The {@code Implementation} object that contains an implementation for the
+	 * The executable object that contains an implementation for the
 	 * command.
 	 */
 	private Implementation commandImplementation;
@@ -83,19 +83,22 @@ public class CommandInstance {
 	private String targetName;
 
 	/**
-	 * The name that was supplied as a target, regardless of whether or not the name is a
-	 * valid target.
+	 * The name that was supplied as a target, regardless of whether or not that name is
+	 * a valid target.
 	 */
 	private String givenTarget;
 
 
 	/**
-	 * Constructs a new {@code CommandInstance} based on availble information about the command.
+	 * Constructs a new {@code CommandInstance} based on availble information about the
+	 * command.
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
-	 * @param ruleSet the {@code Class} object from the applicable {@code CommandRules} enumeration.
-	 * @param exeSet the {@code Class} object from the applicable {@code CommandExecutables} enumeration.
+	 * @param ruleSet the {@code Class} object from the applicable
+	 * {@code {@link CommandRules } enumeration.
+	 * @param exeSet the {@code Class} object from the applicable
+	 * {@code {@link CommandExecutables} enumeration.
 	 */
 	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
 			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {
@@ -111,6 +114,7 @@ public class CommandInstance {
 	/**
 	 * Returns {@code true} if an in-game player sent the command, or {@code false} if the
 	 * command was sent by the server console.
+	 * 
 	 * @return {@code true} if the command was sent by a player; {@code false} otherwise.
 	 * @see {@link #isFromConsole()}
 	 */
@@ -121,6 +125,7 @@ public class CommandInstance {
 	/**
 	 * Returns {@code true} if the server console sent the command, or {@code false} if an
 	 * in-game player sent the command.
+	 * 
 	 * @return {@code true} if the command was sent by the console; {@code false} otherwise.
 	 * @see {@link #isFromPlayer()}
 	 */
@@ -129,8 +134,9 @@ public class CommandInstance {
 	}
 
 	/**
-	 * Returns {@code true} if and only if this command was send with a valid
-	 * specified target player.
+	 * Returns {@code true} if and only if this command was send with a valid, online
+	 * player as a target.
+	 * 
 	 * @return {@code true} if there is a valid target player attached to this command;
 	 * {@code false} otherwise.
 	 */
@@ -148,7 +154,8 @@ public class CommandInstance {
 	 * <li>The entity that sent the command has permission to use the specific command.</li>
 	 * </ol>
 	 * If all the above conditions are met given the circumstances, the command has been
-	 * successfully verified, and this method will return {@code true}.  
+	 * successfully verified, and this method will return {@code true}.
+	 * 
 	 * @return {@code true} if and only if all prerequisite conditions for the command are
 	 * met; {@code false} otherwise.
 	 * @see {@link #verifyArguments()}
@@ -165,6 +172,7 @@ public class CommandInstance {
 	 * Verifies that the command was sent with an appropriate amount of arguments. If the
 	 * amount of arguments is not valid, this method will return an appropriate response
 	 * to the player or console that sent the command.
+	 * 
 	 * @return {@code true} if and only if the amount of arguments that were sent with
 	 * the command match the expected conditions for the command; {@code false} otherwise.
 	 * @see {@link #verifyCommand()}
@@ -183,10 +191,11 @@ public class CommandInstance {
 	}
 
 	/**
-	 * Verifies that the specified target player is a valid, online, player that is not
-	 * especially protected from this command. If the specified target player is not valid,
+	 * Verifies that the specified target player is a valid target player that is not
+	 * specially protected from this command. If the specified target player is not valid,
 	 * this method will return an appropriate response to the player or console that sent
 	 * the command.
+	 * 
 	 * @return {@code true} if and only if the specified target player is a valid target
 	 * for this command;  {@code false} otherwise.
 	 * @see {@link #verifyCommand()}
@@ -210,7 +219,7 @@ public class CommandInstance {
 			}
 		case IF_SENDER_OP:
 			if (this.hasTarget() && this.isFromPlayer() && !this.getSenderPlayer().isOp()) {
-				this.sendError(StringUtil.ERROR_TARGET_IF_OP);
+				this.sendError(StringUtil.ERROR_TARGET_ONLY_IF_OP);
 				return false;
 			} else {
 				return true;
@@ -225,6 +234,7 @@ public class CommandInstance {
 	 * Verifies that the entity that sent this command has permission to do so. If the
 	 * sender does not have the required permission to use this command, this method will
 	 * return an appropriate response to the player or console that sent this command.
+	 * 
 	 * @return {@code true} if and only if the entity that sent this command has the
 	 * required permission and ability to do so; {@code false} otherwise.
 	 * @see {@link #verifyCommand()}
@@ -270,7 +280,8 @@ public class CommandInstance {
 	/**
 	 * Executes the 'main procedure' of the command after its conditions have been
 	 * fully verified.
-	 * @see {@link Implementation#doCommand(CommandInstance) Implementation.doCommand(CommandInstance)}
+	 * 
+	 * @see {@link Implementation#doCommand(CommandInstance)}
 	 */
 	public void executeCommand() {
 		this.commandImplementation.doCommand(this);
@@ -280,6 +291,7 @@ public class CommandInstance {
 	 * Sends a given message to the target player specified by this command. The message
 	 * will be formatted and colored before it is sent. If there is no valid target player
 	 * attached to this command, a {@code NullPointerException} will be thrown.
+	 * 
 	 * @param message the message to be sent.
 	 */
 	public void sendTargetMessage(String message) {
@@ -289,6 +301,7 @@ public class CommandInstance {
 	/**
 	 * Sends a given message to all players and consoles on the server. The message will
 	 * be formatted and colored before it is sent.
+	 * 
 	 * @param message the message to be sent.
 	 */
 	public void broadcastMessage(String message) {
@@ -298,6 +311,7 @@ public class CommandInstance {
 	/**
 	 * Sends a given message to the player or console that sent this command. The message
 	 * will be formatted before and colored it is sent.
+	 * 
 	 * @param message the message to be sent.
 	 */
 	public void sendMessage(String message) {
@@ -307,6 +321,7 @@ public class CommandInstance {
 	/**
 	 * Sends a given error message to the player or console that sent this command. The
 	 * error message will be formatted and colored before it is sent.
+	 * 
 	 * @param message the error message to be sent.
 	 */
 	public void sendError(String message) {
@@ -316,6 +331,7 @@ public class CommandInstance {
 	/**
 	 * Sends a given message to the console and to the admin of the server. The message
 	 * will be formatted and colored before it is sent.
+	 * 
 	 * @param message the message to be sent.
 	 */
 	public void reportToAdmins(String message) {
@@ -325,7 +341,10 @@ public class CommandInstance {
 	}
 
 	/**
-	 * Gets the name of the command that was sent.
+	 * Gets the name of the command that was sent. If a command alias was sent instead of
+	 * an actual command, the name of the command represented by the alias will be
+	 * returned instead.
+	 * 
 	 * @return the name of the command that was sent.
 	 */
 	public String getName() {
@@ -334,6 +353,7 @@ public class CommandInstance {
 
 	/**
 	 * Gets the arguments that were sent with this command.
+	 * 
 	 * @return the arguments that were sent with this command.
 	 */
 	public String[] getArguments() {
@@ -343,6 +363,7 @@ public class CommandInstance {
 	/**
 	 * Gets the {@code CommandSender} object that sent this command, regardless of
 	 * whether the command was sent by a player or console.
+	 * 
 	 * @return the entity that sent this command.
 	 */
 	public CommandSender getSender() {
@@ -352,8 +373,8 @@ public class CommandInstance {
 	/**
 	 * Gets the {@code Player} object that sent this command, if the command was sent
 	 * by a player. Returns {@code null} if the command was not sent by a player.
-	 * @return the {@code Player} object that sent this command, or {@code null} if the
-	 * command was not sent by a player.
+	 * 
+	 * @return the {@code Player} that sent this command.
 	 */
 	public Player getSenderPlayer() {
 		return this.senderPlayer;
@@ -362,7 +383,8 @@ public class CommandInstance {
 	/**
 	 * Gets the name of the player that sent this command or {@code "The Console"} if the
 	 * command was sent by the console.
-	 * @return the name of the player or console that sent this command.
+	 * 
+	 * @return the name of the entity that sent this command.
 	 */
 	public String getSenderName() {
 		return this.senderName;
@@ -371,6 +393,7 @@ public class CommandInstance {
 	/**
 	 * Gets the target player attached to this command, or {@code null} if no valid target
 	 * player was specified.
+	 * 
 	 * @return the target player attached to this command.
 	 */
 	public Player getTargetPlayer() {
@@ -378,8 +401,10 @@ public class CommandInstance {
 	}
 
 	/**
-	 * Gets the name of the target player attached to this command, or whatever was specified
-	 * as a target player if the target player is not valid.
+	 * Gets the name of the target player attached to this command. If the specified
+	 * target player is not a valid, online player, whatever was specified as the target
+	 * player will be returned.
+	 * 
 	 * @return the name of the target player attached to this command.
 	 */
 	public String getTargetName() {
@@ -392,6 +417,7 @@ public class CommandInstance {
 	/**
 	 * Gets the name of the player that was specified as the target of this command,
 	 * regardless of whether the specified player is valid.
+	 * 
 	 * @return the specified name of the target player.
 	 */
 	public String getGivenTarget() {
@@ -401,10 +427,10 @@ public class CommandInstance {
 	/**
 	 * Gets the {@code CommandRulesEntry} object corresponding to the command with the
 	 * given name.
+	 * 
 	 * @param label the name of the requested command.
 	 * @param ruleSet the {@code Class} object of the specific set of command rules.
-	 * @return the {@code CommandRulesEntry} object corresponding to the given command
-	 * name.
+	 * @return the rules for the given command.
 	 */
 	private static CommandRulesEntry rulesFromString(String label, Class<? extends CommandRules> ruleSet) {
 		CommandRules[] allCommands = ruleSet.getEnumConstants();
@@ -417,10 +443,10 @@ public class CommandInstance {
 
 	/**
 	 * Gets the {@code Implementation} object corresponding to the command with the given name.
+	 * 
 	 * @param name the name of the command that should be returned.
 	 * @param exeSet the {@code Class} object of the specific set of command executables.
-	 * @return an {@code Implementation} object that contains the main procedure for the
-	 * given command.
+	 * @return an {@code Implementation} for the given command.
 	 */
 	private static Implementation implementFromString(String name, Class<? extends CommandExecutables> exeSet) {
 		CommandExecutables[] all = exeSet.getEnumConstants();
@@ -434,6 +460,7 @@ public class CommandInstance {
 	/**
 	 * Determines if the command was sent by a console or a player, and initializes this
 	 * {@code CommandInstance} object accordingly.
+	 * 
 	 * @param sender the raw {@code CommandSender} object that represents the source of
 	 * this command.
 	 */

@@ -24,16 +24,27 @@ import io.github.zachohara.bukkit.common.command.CommandRules;
  * on its own, and not through another plugin. It is essentially an empty implementation
  * of the {@code CommonPlugin} abstract class, which cannot be used as an entry point
  * because it is abstract.
- * 
+ * <p>
+ * This class could, in theory, also be used as the main class for a plugin that has no
+ * commands. The main class for this hypothetical plugin would need to extend this class,
+ * and add its own functionality through the {@code onEnable()} method, or similar methods
+ * that are provided through the Bukkit API.
+ *  
  * @author Zach Ohara
  */
-public class DummyPluginMain extends CommonPlugin {
+public class EmptyPlugin extends CommonPlugin {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Class<? extends CommandRules> getCommandRuleSet() {
 		return null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Class<? extends CommandExecutables> getCommandExecutableSet() {
 		return null;
