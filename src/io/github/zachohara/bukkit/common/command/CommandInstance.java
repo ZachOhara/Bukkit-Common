@@ -201,13 +201,22 @@ public class CommandInstance {
 				this.reportToAdmins(StringUtil.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
 				return false;
 			}
-		case ALL:
+		case ALL_ONLINE:
 			if (this.hasTarget() || this.arguments.length == 0) {
 				return true;
 			} else {
-				this.sendError(StringUtil.ERROR_TARGET_OFFLINE);
+				this.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
 				return false;
 			}
+		case IF_SENDER_OP:
+			if (this.hasTarget() && this.isFromPlayer() && !this.getSenderPlayer().isOp()) {
+				this.sendError(StringUtil.ERROR_TARGET_IF_OP);
+				return false;
+			} else {
+				return true;
+			}
+		case ALLOW_OFFLINE:
+			return true;
 		}
 		return false;
 	}
@@ -230,6 +239,7 @@ public class CommandInstance {
 			} else {
 				this.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
 			}
+			break;
 		case OP_ONLY:
 			if (this.isFromConsole() || this.senderPlayer.isOp())
 				return true;
@@ -281,7 +291,7 @@ public class CommandInstance {
 	 * be formatted and colored before it is sent.
 	 * @param message the message to be sent.
 	 */
-	public void broadcaseMessage(String message) {
+	public void broadcastMessage(String message) {
 		Bukkit.getServer().broadcastMessage(StringUtil.parseString(message, this));
 	}
 

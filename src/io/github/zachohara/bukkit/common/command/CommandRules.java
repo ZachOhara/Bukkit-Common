@@ -59,7 +59,9 @@ public interface CommandRules {
 	 */
 	public static enum Target {
 		NONE,
-		ALL,
+		ALL_ONLINE,
+		ALLOW_OFFLINE,
+		IF_SENDER_OP,
 		RESTRICT_ADMIN
 	}
 

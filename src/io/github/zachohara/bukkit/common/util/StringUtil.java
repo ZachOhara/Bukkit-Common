@@ -59,31 +59,39 @@ public class StringUtil {
 	/**
 	 * The message that is sent to players when they do not have permission to use a
 	 * given command.
-	 */
+	 */ 
 	public static final String ERROR_NOT_OP_MESSAGE = "You must be an OP to use this command";
 
 	/**
 	 * The message that is sent to players when a command they have submitted did not
 	 * have enough arguments sent with it.
 	 */
-	public static final String ERROR_TOO_FEW_ARGS_MESSAGE = "Not enough arguments!";
+	public static final String ERROR_TOO_FEW_ARGS_MESSAGE = "Not enough arguments! Try using @name/help @text%c";
 
 	/**
 	 * The message that is sent to players when a command they have submitted had too many
 	 * arguments sent with it.
 	 */
-	public static final String ERROR_TOO_MANY_ARGS_MESSAGE = "Too many arguments!";
+	public static final String ERROR_TOO_MANY_ARGS_MESSAGE = "Too many arguments! Try using @name/help @text%c";
 
 	/**
 	 * The message that is sent to players when the target player they have specified as
 	 * a command argument is not a valid player.
 	 */
-	public static final String ERROR_TARGET_OFFLINE = "%gt either is not online right now or"
+	public static final String ERROR_TARGET_OFFLINE_MESSAGE = "%gt either is not online right now or"
 			+ " doesn't exist.";
 	
 	/**
+	 * The message that is sent to players when the target they have selected was not found
+	 * in any way.
+	 */
+	public static final String ERROR_TARGET_DNE_MESSAGE = "No records were found for %gt";
+	
+	public static final String ERROR_TARGET_IF_OP = "You must be an OP to use this command on someone else";
+
+	/**
 	 * The message that is sent to the conosle when the console sends a command that can
-	 * only be used by an in-game player
+	 * only be used by an in-game player.
 	 */
 	public static final String ERROR_PLAYER_ONLY_MESSAGE = "This command is only usable as a player";
 
@@ -97,7 +105,7 @@ public class StringUtil {
 	/**
 	 * The message that is sent to admins to inform them of a misuse of a command.
 	 */
-	public static final String ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION = "%s has tried to use %c on %gt";
+	public static final String ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on %gt";
 
 	/**
 	 * The message that is sent to players when they try to target the admin with a command
@@ -109,7 +117,7 @@ public class StringUtil {
 	/**
 	 * The message that is sent to admins to inform them of a misuse of a command.
 	 */
-	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use %c on "
+	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on "
 			+ "overlord %admin!";
 
 
@@ -119,9 +127,20 @@ public class StringUtil {
 	 * @return a formatted String with the coordinates of the given location.
 	 */
 	public static String getLocationString(Location loc) {
-		return LOCATIONCOLOR + "(" + loc.getBlockX() + ", "
+		String locString = LOCATIONCOLOR + "(" + loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
-				+ loc.getBlockZ() + ")";
+				+ loc.getBlockZ() + ")"
+				+ TEXTCOLOR + " in " + LOCATIONCOLOR;
+		String worldName = loc.getWorld().getName();
+		boolean isNether = worldName.endsWith("_nether");
+		boolean isTheEnd = worldName.endsWith("_the_end");
+		if (isNether)
+			locString += "the nether";
+		else if (isTheEnd)
+			locString += "the end";
+		else
+			locString += "the overworld";
+		return locString;
 	}
 
 	/**
@@ -154,29 +173,52 @@ public class StringUtil {
 	 * @param source the {@code CommandInstance} object that this message is attached to.
 	 * @return a colored and formatted version of the given message.
 	 */
-	private static String parseText(String message, ChatColor color, CommandInstance source) {		
+	private static String parseText(String message, ChatColor color, CommandInstance source) {
+		
+		// TODO: line-wrapping
+		
 		final String[][] parsingKeys = {
 				{"%admin", ADMINCOLOR + PlayerUtil.getAdminName()},
-				{"%s", source.getSenderName()},
-				{"%t", source.getTargetName()},
-				{"%gt", source.getGivenTarget()},
-				{"%c", "/" + source.getName()},
 				{"%sloc", source.isFromPlayer() ?
 						getLocationString(source.getSenderPlayer().getLocation())
 						: "[no location]"},
 				{"%tloc", source.hasTarget() ?
 						getLocationString(source.getTargetPlayer().getLocation())
-						: "[no location]"}
+						: "[no location]"},
+				{"%s", source.getSenderName()},
+				{"%t", source.getTargetName()},
+				{"%gt", source.getGivenTarget()},
+				{"%c", source.getName()},
+		};
+		
+		final String[][] colorKeys = {
+				{"@admin", ADMINCOLOR.toString()},
+				{"@name", NAMECOLOR.toString()},
+				{"@text", TEXTCOLOR.toString()},
+				{"@error", ERRORCOLOR.toString()},
+				{"@location", LOCATIONCOLOR.toString()}
 		};
 
 		message = color + message;
 
+		// parse the message for information substitutions
 		for (String[] parseKey : parsingKeys) {
 			String substitute = NAMECOLOR + parseKey[1] + color;
 			while (message.indexOf(parseKey[0]) != -1) {
 				int index = message.indexOf(parseKey[0]);
 				String a = message.substring(0, index);
 				String b = message.substring(index + parseKey[0].length());
+				message = a + substitute + b;
+			}
+		}
+
+		// parse the message again for styling
+		for (String[] colorKey : colorKeys) {
+			String substitute = colorKey[1];
+			while (message.indexOf(colorKey[0]) != -1) {
+				int index = message.indexOf(colorKey[0]);
+				String a = message.substring(0, index);
+				String b = message.substring(index + colorKey[0].length());
 				message = a + substitute + b;
 			}
 		}

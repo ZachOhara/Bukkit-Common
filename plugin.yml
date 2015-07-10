@@ -1,4 +1,7 @@
 name: BukkitCommon
+version: 1.6.2
 main: io.github.zachohara.bukkit.common.plugin.DummyPluginMain
-version: 1.1
+prefix: Bukkit Common Library
+description: A library for simplifying the creation of Bukkit plugins
+author: Zach Ohara
 commands:
