@@ -31,6 +31,16 @@ import org.bukkit.Location;
 public class StringUtil {
 
 	/**
+	 * The width, in characters, of the default player-side chat box.
+	 */
+	public static final int PLAYER_CHAT_WIDTH = 53;
+
+	/**
+	 * The width, in characters, of the default console window.
+	 */
+	public static final int CONSOLE_WIDTH = 63;
+
+	/**
 	 * The color that the server admin's name should appear in.
 	 */
 	public static final ChatColor ADMINCOLOR = ChatColor.LIGHT_PURPLE;
@@ -54,7 +64,7 @@ public class StringUtil {
 	 * The color that location coordinates should appear in.
 	 */
 	public static final ChatColor LOCATIONCOLOR = ChatColor.GREEN;
-	
+
 
 	/**
 	 * The message that is sent to players when a command they have submitted did not
@@ -68,19 +78,19 @@ public class StringUtil {
 	 */
 	public static final String ERROR_TOO_MANY_ARGS_MESSAGE = "Too many arguments! Try using @name/help %c";
 
-	
+
 	/**
 	 * The message that is sent to players when the target player they have specified as
 	 * a command argument is not a valid, currently online player.
 	 */
 	public static final String ERROR_TARGET_OFFLINE_MESSAGE = "%gt either is not online right now or doesn't exist.";
-	
+
 	/**
 	 * The message that is sent to players when the target player they have specified as
 	 * a command argument is not online, and could not be found in any offline records.
 	 */
 	public static final String ERROR_TARGET_DNE_MESSAGE = "No records were found for %gt";
-	
+
 	/**
 	 * The message that is sent to players when they send a command with an attached target
 	 * player, and a target player can only be used with the command if the sender has
@@ -149,11 +159,10 @@ public class StringUtil {
 		else
 			locString += "the overworld";
 		return locString;
-		//TODO: replace color constants with @keys and call parse
 	}
 
 	/**
-	 * Parse and color a message, and substitute any of the supported shortcuts.
+	 * Parses and colors a message, and substitutes any of the supported shortcuts.
 	 * 
 	 * @param message the message to be parsed.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
@@ -165,7 +174,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * Parse and color an error message, and substitute any of the supported shortcuts.
+	 * Parses and colors an error message, and substitutes any of the supported shortcuts.
 	 * 
 	 * @param message the error message to be parsed.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
@@ -177,41 +186,106 @@ public class StringUtil {
 	}
 
 	/**
-	 * Parse a given message, substitute any of the supported shortcuts, and color the
-	 * message to be the given color.
+	 * Parses a given message, substitutes any of the supported shortcuts, and colors the
+	 * message to be the given color. If the message only needs to be parsed for color,
+	 * but not for instance information, then the {@code CommandInstance} parameter can
+	 * be {@code null}.
 	 * 
 	 * @param message the message to parse.
-	 * @param color the color that the message should appear in.
+	 * @param color the color that the plain text of this message should appear in.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
+	 * {@code null} if the message is not attached to any specific instance of a command.
 	 * @return a colored and formatted version of the given message.
+	 * @see {@link #parseStringForColor(String, ChatColor)}
 	 */
 	private static String parseText(String message, ChatColor color, CommandInstance source) {
-		
-		// TODO: line-wrapping
-		// TODO: support null source
-		// TODO: support @color key 'functions'
-		
-		// TODO: also, review this plugin for code and clean it up
-		// TODO: also, add docs for this pluign
-		// TODO: also, add a build for this plugin
-		// TODO: also, clean up readme/gitignore
-		
+		message = color + message;
+		if (source != null) {
+			message = parseStringForInstance(message, color, source);
+		}
+		message = parseStringForColor(message, color);
+		return message;
+	}
+
+	/**
+	 * Parses a given message for supported shortcuts, and substitutes in relevant information
+	 * from the source and context of a command.
+	 * 
+	 * @param message the message to parse.
+	 * @param color the color that the plain text of this message should appear in.
+	 * @param source the {@code CommandInstance} that this message is attached to. Cannot
+	 * be {@code null}.
+	 * @return the message with expanded instance information.
+	 * @see {@link #parseText(String, ChatColor, CommandInstance)}
+	 */
+	private static String parseStringForInstance(String message, ChatColor color, CommandInstance source) {		
 		final String[][] parsingKeys = {
-				{"%admin", ADMINCOLOR + PlayerUtil.getAdminName()},
-				{"%sloc", source.isFromPlayer() ?
-						getLocationString(source.getSenderPlayer().getLocation())
-						: "[no location]"},
-				{"%tloc", source.hasTarget() ?
-						getLocationString(source.getTargetPlayer().getLocation())
-						: "[no location]"},
+				{"%admin", "@admin" + PlayerUtil.getAdminName()},
+				{"%sloc", getSenderLocation(source)},
+				{"%tloc", getTargetLocation(source)},
 				{"%s", source.getSenderName()},
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
-				{"/%c", "@name/%c"},
+				{"/%c", "@name(/)%c"},
 				{"%c", source.getName()},
 		};
-		
+
+		for (String[] parseKey : parsingKeys) {
+			String substitute = NAMECOLOR + parseKey[1] + color;
+			while (message.indexOf(parseKey[0]) != -1) {
+				int index = message.indexOf(parseKey[0]);
+				String head = message.substring(0, index);
+				String tail = message.substring(index + parseKey[0].length());
+				message = head + substitute + tail;
+			}
+		}
+		return message;
+	}
+
+	/**
+	 * Gets a colored, formatted string representing the location of the sender of a
+	 * command. If the command was not sent by a player, the string
+	 * {@code "[no location]"} will be returned. The returned string will be colored
+	 * an appropriate color. 
+	 * 
+	 * @param source the {@code CommandInstance} of the given command.
+	 * @return a formatted string for the location of the command sender.
+	 */
+	private static String getSenderLocation(CommandInstance source) {
+		if (source.isFromPlayer()) {
+			return getLocationString(source.getSenderPlayer().getLocation());
+		} else {
+			return "@location[no location]";
+		}
+	}
+
+	/**
+	 * Gets a colored, formatted string representing the location of the player targeted 
+	 * by a command. If the command has no attached target player, the string
+	 * {@code "[no location]"} will be returned. The returned string will be colored
+	 * an appropriate color. 
+	 * 
+	 * @param source the {@code CommandInstance} of the given command.
+	 * @return a formatted string for the location of the command sender.
+	 */
+	private static String getTargetLocation(CommandInstance source) {
+		if (source.hasTarget()) {
+			return getLocationString(source.getTargetPlayer().getLocation());
+		} else {
+			return "@location[no location]";
+		}
+	}
+
+	/**
+	 * Parse a given message for color keys, and color the message appropriately.
+	 * 
+	 * @param message the message to be parsed.
+	 * @param color the color that the "@default" tag should be expanded to.
+	 * @return the recolored message.
+	 */
+	private static String parseStringForColor(String message, ChatColor color) {
 		final String[][] colorKeys = {
+				{"@default", color.toString()},
 				{"@admin", ADMINCOLOR.toString()},
 				{"@name", NAMECOLOR.toString()},
 				{"@text", TEXTCOLOR.toString()},
@@ -219,30 +293,25 @@ public class StringUtil {
 				{"@location", LOCATIONCOLOR.toString()}
 		};
 
-		message = color + message;
-
-		// parse the message for information substitutions
-		for (String[] parseKey : parsingKeys) {
-			String substitute = NAMECOLOR + parseKey[1] + color;
-			while (message.indexOf(parseKey[0]) != -1) {
-				int index = message.indexOf(parseKey[0]);
-				String a = message.substring(0, index);
-				String b = message.substring(index + parseKey[0].length());
-				message = a + substitute + b;
-			}
-		}
-
-		// parse the message again for styling
 		for (String[] colorKey : colorKeys) {
 			String substitute = colorKey[1];
 			while (message.indexOf(colorKey[0]) != -1) {
 				int index = message.indexOf(colorKey[0]);
-				String a = message.substring(0, index);
-				String b = message.substring(index + colorKey[0].length());
-				message = a + substitute + b;
+				String head = message.substring(0, index);
+				if (message.indexOf(colorKey[0] + "(") == index) {
+					int endIndex = message.indexOf(")", index);
+					String body = message.substring(index + colorKey[0].length() + 1, endIndex);
+					String tail = message.substring(endIndex + 1);
+					message = head + substitute + body + color + tail;
+				} else {
+					String tail = message.substring(index + colorKey[0].length());
+					message = head + substitute + tail;
+				}
 			}
 		}
 		return message;
 	}
+
+	// TODO: Add word wrap (successfully)
 
 }
