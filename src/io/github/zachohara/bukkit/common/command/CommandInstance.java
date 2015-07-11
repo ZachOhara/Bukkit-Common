@@ -96,9 +96,9 @@ public class CommandInstance {
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
 	 * @param ruleSet the {@code Class} object from the applicable
-	 * {@code {@link CommandRules } enumeration.
+	 * {@code {@link CommandRules}} enumeration.
 	 * @param exeSet the {@code Class} object from the applicable
-	 * {@code {@link CommandExecutables} enumeration.
+	 * {@code {@link CommandExecutables}} enumeration.
 	 */
 	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
 			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {
@@ -116,7 +116,7 @@ public class CommandInstance {
 	 * command was sent by the server console.
 	 * 
 	 * @return {@code true} if the command was sent by a player; {@code false} otherwise.
-	 * @see {@link #isFromConsole()}
+	 * @see #isFromConsole()
 	 */
 	public boolean isFromPlayer() {
 		return this.senderPlayer != null;
@@ -127,7 +127,7 @@ public class CommandInstance {
 	 * in-game player sent the command.
 	 * 
 	 * @return {@code true} if the command was sent by the console; {@code false} otherwise.
-	 * @see {@link #isFromPlayer()}
+	 * @see #isFromPlayer()
 	 */
 	public boolean isFromConsole() {
 		return this.senderPlayer == null;
@@ -158,9 +158,9 @@ public class CommandInstance {
 	 * 
 	 * @return {@code true} if and only if all prerequisite conditions for the command are
 	 * met; {@code false} otherwise.
-	 * @see {@link #verifyArguments()}
-	 * @see {@link #verifyValidTarget()}
-	 * @see {@link #verifyValidSource()}
+	 * @see #verifyArguments()
+	 * @see #verifyValidTarget()
+	 * @see #verifyValidSource()
 	 */
 	public boolean verifyCommand() {
 		return this.verifyArguments()
@@ -175,7 +175,7 @@ public class CommandInstance {
 	 * 
 	 * @return {@code true} if and only if the amount of arguments that were sent with
 	 * the command match the expected conditions for the command; {@code false} otherwise.
-	 * @see {@link #verifyCommand()}
+	 * @see #verifyCommand()
 	 */
 	private boolean verifyArguments() {
 		if (this.arguments.length < this.rules.getMinArgs()) {
@@ -198,7 +198,7 @@ public class CommandInstance {
 	 * 
 	 * @return {@code true} if and only if the specified target player is a valid target
 	 * for this command;  {@code false} otherwise.
-	 * @see {@link #verifyCommand()}
+	 * @see #verifyCommand()
 	 */
 	private boolean verifyValidTarget() {
 		switch (this.rules.getTargetable()) {
@@ -241,7 +241,7 @@ public class CommandInstance {
 	 * 
 	 * @return {@code true} if and only if the entity that sent this command has the
 	 * required permission and ability to do so; {@code false} otherwise.
-	 * @see {@link #verifyCommand()}
+	 * @see #verifyCommand()
 	 */
 	private boolean verifyValidSource() {
 		switch(this.rules.getAccessible()) {
@@ -289,7 +289,7 @@ public class CommandInstance {
 	 * Executes the 'main procedure' of the command after its conditions have been
 	 * fully verified.
 	 * 
-	 * @see {@link Implementation#doCommand(CommandInstance)}
+	 * @see Implementation#doCommand(CommandInstance)
 	 */
 	public void executeCommand() {
 		this.commandImplementation.doCommand(this);

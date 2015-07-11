@@ -39,7 +39,7 @@ public interface CommandExecutables {
 	 * command.
 	 * 
 	 * @return the {@code Implementation} of the command.
-	 * @see {@link Implementation}
+	 * @see Implementation
 	 */
 	public Implementation getImplementation();
 

@@ -38,8 +38,8 @@ public abstract class Implementation {
 	 * 
 	 * @param instance the context of the command that is being executed.
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
-	 * @see {@link #doPlayerCommand(CommandInstance)}
-	 * @see {@link #doConsoleCommand(CommandInstance)}
+	 * @see #doPlayerCommand(CommandInstance)
+	 * @see #doConsoleCommand(CommandInstance)
 	 */
 	public boolean doCommand(CommandInstance instance) {
 		if (instance.isFromPlayer())

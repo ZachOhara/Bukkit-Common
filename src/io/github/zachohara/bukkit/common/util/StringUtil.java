@@ -173,7 +173,7 @@ public class StringUtil {
 	 * @param message the message to be parsed.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
 	 * @return a colored and formatted version of the given message.
-	 * @see {@link #parseText(String, ChatColor, CommandInstance)}
+	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseString(String message, CommandInstance source) {
 		return parseText(message, TEXTCOLOR, source);
@@ -185,7 +185,7 @@ public class StringUtil {
 	 * @param message the error message to be parsed.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
 	 * @return a colored and formatted version of the given error message.
-	 * @see {@link #parseText(String, ChatColor, CommandInstance)}
+	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseError(String message, CommandInstance source) {
 		return parseText(message, ERRORCOLOR, source);
@@ -202,7 +202,7 @@ public class StringUtil {
 	 * @param source the {@code CommandInstance} object that this message is attached to.
 	 * {@code null} if the message is not attached to any specific instance of a command.
 	 * @return a colored and formatted version of the given message.
-	 * @see {@link #parseStringForColor(String, ChatColor)}
+	 * @see #parseStringForColor(String, ChatColor)
 	 */
 	private static String parseText(String message, ChatColor color, CommandInstance source) {
 		message = color + message;
@@ -223,7 +223,7 @@ public class StringUtil {
 	 * @param source the {@code CommandInstance} that this message is attached to. Cannot
 	 * be {@code null}.
 	 * @return the message with expanded instance information.
-	 * @see {@link #parseText(String, ChatColor, CommandInstance)}
+	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	private static String parseStringForInstance(String message, ChatColor color, CommandInstance source) {		
 		final String[][] parsingKeys = {

@@ -123,7 +123,7 @@ public class CommandRulesEntry {
 	 * Gets the type or range of sources that are allowed to use the command.
 	 * 
 	 * @return the type or range of sources that are allowed to use the command.
-	 * @see {@link #Commands.Source Commands.Source}
+	 * @see CommandRules.Source
 	 */
 	public Source getAccessible() {
 		return accessible;
@@ -133,7 +133,7 @@ public class CommandRulesEntry {
 	 * Gets the type or range of target players that can be targeted by this command.
 	 * 
 	 * @return the type of players that are targetable by this command.
-	 * @see {@link #Commands.Target Commands.Target}
+	 * @see CommandRules.Target
 	 */
 	public Target getTargetable() {
 		return targetable;
