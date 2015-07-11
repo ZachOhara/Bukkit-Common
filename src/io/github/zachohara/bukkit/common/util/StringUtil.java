@@ -210,7 +210,6 @@ public class StringUtil {
 			message = parseStringForInstance(message, color, source);
 		}
 		message = parseStringForColor(message, color);
-		// TODO: Add word wrap
 		return message;
 	}
 
