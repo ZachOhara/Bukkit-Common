@@ -139,13 +139,19 @@ public class StringUtil {
 
 
 	/**
-	 * Gets nicely-formatted String with the coordinates and world name for a given location.
+	 * Gets nicely-formatted String with the coordinates and world name for a given
+	 * location. This method assumes the default naming scheme for bukkit worlds, which
+	 * is that the overworld will be named some arbitrary, user-defined name, that its
+	 * corresponding nether world will be named that same arbitrary name suffixed by
+	 * "_nether", and that its corresponding end world will be named the arbitrary name
+	 * suffixed by "_the_end".
 	 * 
 	 * @param loc the location to be formatted into a String.
 	 * @return a formatted String of the location.
 	 */
 	public static String getLocationString(Location loc) {
-		String locString = LOCATIONCOLOR + "(" + loc.getBlockX() + ", "
+		String locString = LOCATIONCOLOR + "("
+				+ loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
 				+ loc.getBlockZ() + ")"
 				+ TEXTCOLOR + " in " + LOCATIONCOLOR;
@@ -204,6 +210,7 @@ public class StringUtil {
 			message = parseStringForInstance(message, color, source);
 		}
 		message = parseStringForColor(message, color);
+		// TODO: Add word wrap
 		return message;
 	}
 
@@ -311,7 +318,5 @@ public class StringUtil {
 		}
 		return message;
 	}
-
-	// TODO: Add word wrap (successfully)
 
 }

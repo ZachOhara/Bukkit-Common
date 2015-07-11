@@ -33,7 +33,7 @@ package io.github.zachohara.bukkit.common.command;
  * @author Zach Ohara
  */
 public interface CommandExecutables {
-	
+
 	/**
 	 * Gets the subclass of {@code Implementation} that contains an implementation for the
 	 * command.

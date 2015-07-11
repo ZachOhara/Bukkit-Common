@@ -209,13 +209,8 @@ public class CommandInstance {
 				this.sendMessage(StringUtil.ERROR_ADMIN_PROTECTED_MESSAGE);
 				this.reportToAdmins(StringUtil.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
 				return false;
-			}
-		case ALL_ONLINE:
-			if (this.hasTarget() || this.arguments.length == 0) {
-				return true;
 			} else {
-				this.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
-				return false;
+				return true;
 			}
 		case IF_SENDER_OP:
 			if (this.hasTarget() && this.isFromPlayer() && !this.getSenderPlayer().isOp()) {
@@ -224,10 +219,19 @@ public class CommandInstance {
 			} else {
 				return true;
 			}
+		case ALL_ONLINE:
+			if (this.hasTarget() || this.arguments.length == 0) {
+				return true;
+			} else {
+				this.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
+				return false;
+			}
 		case ALLOW_OFFLINE:
 			return true;
+		default:
+			this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
+			throw new UnsupportedOperationException("An unexpected value of CommandRules.Target was found.");
 		}
-		return false;
 	}
 
 	/**
@@ -248,33 +252,37 @@ public class CommandInstance {
 				return true;
 			} else {
 				this.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
+				return false;
 			}
-			break;
 		case OP_ONLY:
-			if (this.isFromConsole() || this.senderPlayer.isOp())
+			if (this.isFromConsole() || this.senderPlayer.isOp()) {
 				return true;
-			else 
+			} else {
 				this.sendError(StringUtil.ERROR_NOT_OP_MESSAGE);
-			break;
+				return false;
+			}
 		case ADMIN_ONLY:
 			if (this.isFromConsole() || PlayerUtil.playerIsAdmin(this.senderPlayer)) {
 				return true;
 			} else {
 				this.sendMessage(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
 				this.reportToAdmins(StringUtil.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
+				return false;
 			}
-			break;
 		case ADMIN_PLAYER_ONLY:
 			if (this.isFromPlayer() && PlayerUtil.playerIsAdmin(this.senderPlayer)) {
 				return true;
 			} else if (!this.isFromPlayer()) {
 				this.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
+				return false;
 			} else {
 				this.sendError(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
+				return false;
 			}
-			break;
+		default:
+			this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
+			throw new UnsupportedOperationException("An unexpected value of CommandRules.Source was found.");
 		}
-		return false;
 	}
 
 	/**
@@ -338,6 +346,16 @@ public class CommandInstance {
 		String formattedMessage = StringUtil.parseString(message, this);
 		Bukkit.getConsoleSender().sendMessage(formattedMessage);
 		PlayerUtil.sendAdmin(formattedMessage);
+	}
+
+	/**
+	 * Sends a given error message to the console of the server. The error message will
+	 * be formatted and colored before it is sent.
+	 * 
+	 * @param message the error message to be sent.
+	 */
+	public void logConsoleError(String message) {
+		Bukkit.getConsoleSender().sendMessage(StringUtil.parseError(message, this));
 	}
 
 	/**

@@ -24,14 +24,14 @@ package io.github.zachohara.bukkit.common.command;
  * @author Zach Ohara
  */
 public abstract class Implementation {
-	
+
 	/**
 	 * Gets the name of the command.
 	 * 
 	 * @return the name of the command.
 	 */
 	public abstract String getName();
-	
+
 	/**
 	 * Executes the main procedure of the command with a given context, and return the
 	 * success of the operation.
@@ -47,7 +47,7 @@ public abstract class Implementation {
 		else 
 			return this.doConsoleCommand(instance);
 	}
-	
+
 	/**
 	 * Executes the main procedure of a player-issued command with a given context, and
 	 * return the success of the operation. Ideally, the code in this method should work
@@ -60,7 +60,7 @@ public abstract class Implementation {
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 */
 	protected abstract boolean doPlayerCommand(CommandInstance instance);
-	
+
 	/**
 	 * Executes the main procedure of a console-issued command with a given context, and
 	 * return the success of the operation. This method should only be overridden by a

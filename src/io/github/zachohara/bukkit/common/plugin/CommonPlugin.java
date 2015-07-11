@@ -31,9 +31,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public abstract class CommonPlugin extends JavaPlugin {
 
-    /**
-     * {@inheritDoc}
-     */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label,
 			String[] args) {
@@ -44,7 +44,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Gets the enumeration of {@code CommandRules} that represents the set of commands
 	 * that are specific to a plugin.
@@ -52,7 +52,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * @return the {@code CommandRules} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandRules> getCommandRuleSet();
-	
+
 	/**
 	 * Gets the enumeration of {@code CommandExecutables} that represents the set of commands
 	 * that are specific to a plugin.
@@ -60,7 +60,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
-	
+
 	/**
 	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a java app.
 	 * 

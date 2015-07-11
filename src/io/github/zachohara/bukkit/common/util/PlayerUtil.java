@@ -28,14 +28,14 @@ import org.bukkit.entity.Player;
  * @author Zach Ohara
  */
 public class PlayerUtil {
-	
+
 	/**
 	 * The UUID of the player that is the acting admin for the server that this library
 	 * (and its plugins) are running on. If the library ever needs to run on another
 	 * server, this should be changed to reflect the admin of the new server.
 	 */
 	public static final UUID adminUUID = UUID.fromString("5420ca86-36f0-4d54-8096-4352555fd1d6");
-	
+
 	/**
 	 * The in-game name of the player that is the acting admin for the server that this
 	 * library (and its plugins) are running on. If the library ever needs to run on
@@ -44,7 +44,7 @@ public class PlayerUtil {
 	 * adjusted to reflect the admin's new name.
 	 */
 	public static final String adminName = "Chezburgr";
-	
+
 	/**
 	 * Determines if a given player is the admin of this server by comparing UUID values.
 	 * 
@@ -54,7 +54,7 @@ public class PlayerUtil {
 	public static boolean playerIsAdmin(Player other) {
 		return other.getUniqueId().equals(adminUUID);
 	}
-	
+
 	/**
 	 * Determines if the local admin is online.
 	 * 
@@ -63,7 +63,7 @@ public class PlayerUtil {
 	public static boolean adminIsOnline() {
 		return getAdmin() != null;
 	}
-	
+
 	/**
 	 * Gets a {@code Player} object representing the admin of this server. {@code null}
 	 * is returned if the admin is currently offline.
@@ -73,7 +73,7 @@ public class PlayerUtil {
 	public static Player getAdmin() {
 		return Bukkit.getPlayer(adminUUID);
 	}
-	
+
 	/**
 	 * Gets the in-game display name of the admin of this server, regardless of whether
 	 * the admin is currently online.
@@ -83,7 +83,7 @@ public class PlayerUtil {
 	public static String getAdminName() {
 		return adminName;
 	}
-	
+
 	/**
 	 * Sends a given message to the admin of this server, if and only if the admin is
 	 * currently online.

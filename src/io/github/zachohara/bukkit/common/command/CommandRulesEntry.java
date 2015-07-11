@@ -32,32 +32,33 @@ import io.github.zachohara.bukkit.common.command.CommandRules.Target;
  * @author Zach Ohara
  */
 public class CommandRulesEntry {
-	
+
 	/**
 	 * The name of the command, as it would be typed in the game or from a console.
 	 */
 	private String name;
-	
+
 	/**
 	 * The minimum amount of arguments that should be allowed for the command.
 	 */
 	private int minArgs;
-	
+
 	/**
-	 * The maximum amount of arguments that should be allowed for the command.
+	 * The maximum amount of arguments that should be allowed for the command, or
+	 * {@code -1} if there is no maximum amount of arguments.
 	 */
 	private int maxArgs;
-	
+
 	/**
 	 * The type or range of sources that are allowed to use the command.
 	 */
 	private Source accessible;
-	
+
 	/**
 	 * The type or range of players that can be targeted by this command.
 	 */
 	private Target targetable;
-	
+
 	/**
 	 * Constructs a new {@code Rules} object from the required information.
 	 * 
@@ -74,7 +75,7 @@ public class CommandRulesEntry {
 		this.accessible = access;
 		this.targetable = target;
 	}
-	
+
 	/**
 	 * Constructs a new {@code CommandRulesEntry} object that should exactly mimic the
 	 * properties of a different command.
@@ -98,7 +99,7 @@ public class CommandRulesEntry {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Gets the minimum amount of arguments that should be allowed for the command.
 	 * 
@@ -107,16 +108,17 @@ public class CommandRulesEntry {
 	public int getMinArgs() {
 		return minArgs;
 	}
-	
+
 	/**
-	 * Gets the maximum amount of arguments that should be allowed for the command.
+	 * Gets the maximum amount of arguments that should be allowed for the command, or
+	 * {@code -1} if this command has no maximum amount of arguments.
 	 * 
 	 * @return the maximum amount of arguments allowed.
 	 */
 	public int getMaxArgs() {
 		return maxArgs;
 	}
-	
+
 	/**
 	 * Gets the type or range of sources that are allowed to use the command.
 	 * 
@@ -126,7 +128,7 @@ public class CommandRulesEntry {
 	public Source getAccessible() {
 		return accessible;
 	}
-	
+
 	/**
 	 * Gets the type or range of target players that can be targeted by this command.
 	 * 

@@ -52,17 +52,17 @@ public interface CommandRules {
 		ADMIN_ONLY,
 		ADMIN_PLAYER_ONLY
 	}
-	
+
 	/**
 	 * Represents the set of possible targets, or ranges of targets, that may be allowed
 	 * to be targeted by any single command.
 	 */
 	public static enum Target {
 		NONE,
-		ALL_ONLINE,
-		ALLOW_OFFLINE,
+		RESTRICT_ADMIN,
 		IF_SENDER_OP,
-		RESTRICT_ADMIN
+		ALL_ONLINE,
+		ALLOW_OFFLINE
 	}
 
 }
