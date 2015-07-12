@@ -36,8 +36,8 @@ package io.github.zachohara.bukkit.common.command;
 public interface CommandRules {
 
 	/**
-	 * Gets the {@code CommandRulesEntry} object associated with this comand.
-	 * @return the {@code CommandRulesEntry} object associated with this comand.
+	 * Gets the {@code CommandRulesEntry} associated with this comand.
+	 * @return the {@code CommandRulesEntry} associated with this comand.
 	 */
 	public CommandRulesEntry getRulesEntry();
 
