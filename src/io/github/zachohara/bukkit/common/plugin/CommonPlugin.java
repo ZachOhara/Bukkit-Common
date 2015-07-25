@@ -35,20 +35,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public abstract class CommonPlugin extends JavaPlugin {
-
+	
 	/**
 	 * The list of all {@code PersistentData} objects that have been registered to this
 	 * plugin.
 	 */
 	private List<PersistentObject> persistentData;
-
+	
 	/**
-	 * Constructs a new {@code CommonPlugin}, using an empty list of {@code PersistentObject}s.
+	 * {@inheritDoc}
 	 */
-	public CommonPlugin() {
+	@Override
+	public void onEnable() {
 		persistentData = new LinkedList<PersistentObject>();
 	}
-
+	
 	/**
 	 * Safely closes the plugin. This method is called anytime before the plugin is
 	 * disabled on the server, including during the server shutdown procedure. This
@@ -67,7 +68,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 			}
 		}
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -81,7 +82,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 		}
 		return true;
 	}
-
+	
 	/**
 	 * Gets the enumeration of {@code CommandRules} that represents the set of commands
 	 * that are specific to a plugin.
@@ -89,7 +90,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * @return the {@code CommandRules} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandRules> getCommandRuleSet();
-
+	
 	/**
 	 * Gets the enumeration of {@code CommandExecutables} that represents the set of commands
 	 * that are specific to a plugin.
@@ -97,7 +98,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
-
+	
 	/**
 	 * Register the given {@code PersistentObject} with this plugin.
 	 * 
@@ -106,7 +107,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	public void regiserPersistentObject(PersistentObject data) {
 		this.persistentData.add(data);
 	}
-
+	
 	/**
 	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a java app.
 	 * 
@@ -116,5 +117,5 @@ public abstract class CommonPlugin extends JavaPlugin {
 		System.out.println("This is not a normal java app! This is a plugin for a Bukkit server!\n"
 				+ "To use it, you have to install Bukkit, then install this plugin.");
 	}
-
+	
 }
