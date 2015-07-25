@@ -16,6 +16,7 @@
 
 package io.github.zachohara.bukkit.common.persistence;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,20 +33,21 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
  * 
  * @author Zach Ohara
  */
-public class PersistentMap<K, V> extends PersistentObject {
-
+public class PersistentMap<K extends Serializable, V extends Serializable>
+extends PersistentObject {
+	
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the
 	 * data to store, and the filename to store that data to.
 	 * 
 	 * @param owner the plugin that created this object.
-	 * @param data the {@code HashMap} that should be stored in an external file.
+	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public PersistentMap(CommonPlugin owner, HashMap<K, V> data, String filename) {
+	public <T extends Map<K, V> & Serializable> PersistentMap(CommonPlugin owner, T data, String filename) {
 		super(owner, data, filename);
 	}
-
+	
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, and the
 	 * filename to store that data to. This constructor will create a new {@code HashMap}
@@ -57,7 +59,7 @@ public class PersistentMap<K, V> extends PersistentObject {
 	public PersistentMap(CommonPlugin owner, String filename) {
 		this(owner, new HashMap<K, V>(), filename);
 	}
-
+	
 	/**
 	 * Adds a new (Key, Value) entry pair to this map.
 	 * 
@@ -68,7 +70,7 @@ public class PersistentMap<K, V> extends PersistentObject {
 	public void put(K key, V value) {
 		this.mapdata().put(key, value);
 	}
-
+	
 	/**
 	 * Gets the value corresponding to the given key of this map.
 	 * 
@@ -79,7 +81,7 @@ public class PersistentMap<K, V> extends PersistentObject {
 	public V get(K key) {
 		return this.mapdata().get(key);
 	}
-
+	
 	/**
 	 * Gets the {@code Map} that is stored by this {@code PersistentMap}.
 	 * 
@@ -93,5 +95,5 @@ public class PersistentMap<K, V> extends PersistentObject {
 			return null;
 		}
 	}
-
+	
 }

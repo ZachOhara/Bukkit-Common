@@ -16,6 +16,7 @@
 
 package io.github.zachohara.bukkit.common.persistence;
 
+import java.io.Serializable;
 import java.util.List;
 
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
@@ -33,8 +34,8 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
  * 
  * @author Zach Ohara
  */
-public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> {
-
+public abstract class PersistentKeyedMap<K, D extends Serializable> extends PersistentMap<String, D> {
+	
 	/**
 	 * Constructs a new {@code PersistentPlayerData} with the given plugin as an owner,
 	 * and the filename to store that data to. This constructor will create a new
@@ -46,7 +47,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	public PersistentKeyedMap(CommonPlugin owner, String filename) {
 		super(owner, filename);
 	}
-
+	
 	/**
 	 * Returns the data corresponding to the map key that is generated for the given key
 	 * object.
@@ -59,7 +60,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	public D getKeyData(K key) {
 		return this.getKeyData(this.generateMapKey(key));
 	}
-
+	
 	/**
 	 * Returns the data corresponding to the given map key.
 	 * 
@@ -70,7 +71,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	public D getKeyData(String key) {
 		return this.get(key);
 	}
-
+	
 	/**
 	 * Saves the relevant value for the given key to this map.
 	 * 
@@ -84,7 +85,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 		}
 		this.mapdata().put(mapkey, this.calculateDataValue(key));
 	}
-
+	
 	/**
 	 * Saves the relevant values for all the keys given in the list.
 	 * 
@@ -95,7 +96,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 			this.saveKeyedData(key);
 		}
 	}
-
+	
 	/**
 	 * Saves the relevant values for all the keys given in the array.
 	 * 
@@ -106,7 +107,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 			this.saveKeyedData(key);
 		}
 	}
-
+	
 	/**
 	 * Determines if a value for the given key exists in this map.
 	 * 
@@ -118,7 +119,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 		String mapkey = this.generateMapKey(key);
 		return this.keyDataExists(mapkey);
 	}
-
+	
 	/**
 	 * Determines if a value for the given map key exists in this map.
 	 * 
@@ -129,7 +130,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	public boolean keyDataExists(String key) {
 		return this.mapdata().get(key) != null;
 	}
-
+	
 	/**
 	 * Calculates and returns the relavant data value for the given key. Overriding
 	 * this method allows sub-classes to have complete control over what data is stored
@@ -139,7 +140,7 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	 * @return the information for this map that is specific to the given key.
 	 */
 	public abstract D calculateDataValue(K key);
-
+	
 	/**
 	 * Generate a key {@code String} that is specific to the given key object. This key
 	 * will be used to store information in the map for the given object. Overriding this
@@ -154,5 +155,5 @@ public abstract class PersistentKeyedMap<K, D> extends PersistentMap<String, D> 
 	public String generateMapKey(K key) {
 		return key.toString();
 	}
-
+	
 }

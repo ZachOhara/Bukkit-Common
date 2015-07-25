@@ -36,18 +36,18 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public class PersistentObject {
-
+	
 	/**
 	 * The {@code File} location that the file should be stored in.
 	 */
 	private File dataFile;
-
+	
 	/**
 	 * The {@code Serializable} object that will be stored. After registering the object
 	 * here, the object can still be modified by other classes.
 	 */
 	private Serializable data;
-
+	
 	/**
 	 * Constructs a new {@code PersistentObject} with the given plugin as an owner, the
 	 * data to store, and the filename to store that data to.
@@ -62,7 +62,7 @@ public class PersistentObject {
 		this.createDataFile(owner);
 		this.attemptLoadFile(owner);
 	}
-
+	
 	/**
 	 * Returns a reference to the {@code Serializable} object that is stored by this
 	 * {@code PersistentObject}.
@@ -72,7 +72,7 @@ public class PersistentObject {
 	public Serializable getObject() {
 		return this.data;
 	}
-
+	
 	/**
 	 * Loads previously-stored persistent data from an external file, so that it can be
 	 * reconstructed into a usable object form.
@@ -90,7 +90,7 @@ public class PersistentObject {
 		else
 			throw new IOException("Object found was not of the correct type");
 	}
-
+	
 	/**
 	 * Saves all the stored persistent data into an external file, so that it can be
 	 * reconstructed later even if the server is shut down.
@@ -102,7 +102,7 @@ public class PersistentObject {
 		out.writeObject(this.data);
 		out.close();
 	}
-
+	
 	/**
 	 * Creates a new file for persistent data, if and only if there is not already stored
 	 * persistent data under the same filename.
@@ -119,7 +119,7 @@ public class PersistentObject {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Attempts to load currently-existant persistent data from a file.
 	 * 
@@ -135,7 +135,7 @@ public class PersistentObject {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Returns a {@code String} representation of this object. The string is generated
 	 * using the abstract name of the output file.
@@ -145,5 +145,5 @@ public class PersistentObject {
 	public String toString() {
 		return this.dataFile.getName();
 	}
-
+	
 }
