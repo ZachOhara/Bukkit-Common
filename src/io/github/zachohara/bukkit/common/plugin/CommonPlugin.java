@@ -16,9 +16,14 @@
 
 package io.github.zachohara.bukkit.common.plugin;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
 import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.CommandRules;
+import io.github.zachohara.bukkit.common.persistence.PersistentObject;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,6 +35,38 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public abstract class CommonPlugin extends JavaPlugin {
+
+	/**
+	 * The list of all {@code PersistentData} objects that have been registered to this
+	 * plugin.
+	 */
+	private List<PersistentObject> persistentData;
+
+	/**
+	 * Constructs a new {@code CommonPlugin}, using an empty list of {@code PersistentObject}s.
+	 */
+	public CommonPlugin() {
+		persistentData = new LinkedList<PersistentObject>();
+	}
+
+	/**
+	 * Safely closes the plugin. This method is called anytime before the plugin is
+	 * disabled on the server, including during the server shutdown procedure. This
+	 * method will close and save all of the registered {@code PersistentData} objects
+	 * registered to this plugin.
+	 */
+	@Override
+	public void onDisable() {
+		super.onDisable();
+		for (PersistentObject obj : this.persistentData) {
+			try {
+				obj.saveToFile();
+			} catch (IOException e) {
+				this.getLogger().warning("Unable to save offline persitent data: " + obj);
+				e.printStackTrace();
+			}
+		}
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -60,6 +97,15 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
+
+	/**
+	 * Register the given {@code PersistentObject} with this plugin.
+	 * 
+	 * @param data the {@code PersistentObject} to register.
+	 */
+	public void regiserPersistentObject(PersistentObject data) {
+		this.persistentData.add(data);
+	}
 
 	/**
 	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a java app.
