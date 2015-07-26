@@ -14,7 +14,7 @@ This entire repository is made available under the GNU General Public License v3
 
 ### Installing the library on a server
 
-This entire library works as a Bukkit plugin. Simply download the "Bukkit Common v___.jar" file from the root folder of this repository, and drop it into the 'plugins' folder in your server.
+This entire library works as a self-contained Bukkit plugin. Simply download the "Bukkit Common v___.jar" file from the root folder of this repository, and drop it into the 'plugins' folder in your server.
 
 ### Using the library for your plugin
 
