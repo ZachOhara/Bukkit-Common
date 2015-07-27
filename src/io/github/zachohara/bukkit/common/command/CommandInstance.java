@@ -94,10 +94,10 @@ public class CommandInstance {
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
-	 * @param ruleSet the {@code Class} object from the applicable {@code
-	 * {@link CommandRules} enumeration.
-	 * @param exeSet the {@code Class} object from the applicable {@code
-	 * {@link CommandExecutables} enumeration.
+	 * @param ruleSet the {@code Class} object from the applicable {@link
+	 * CommandRules} enumeration.
+	 * @param exeSet the {@code Class} object from the applicable {@link
+	 * CommandExecutables} enumeration.
 	 */
 	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
 			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {
@@ -227,8 +227,7 @@ public class CommandInstance {
 				return true;
 			default:
 				this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException(
-						"An unexpected value of CommandRules.Target was found.");
+				throw new UnsupportedOperationException("An unexpected value of CommandRules.Target was found.");
 		}
 	}
 	
@@ -279,8 +278,7 @@ public class CommandInstance {
 				}
 			default:
 				this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException(
-						"An unexpected value of CommandRules.Source was found.");
+				throw new UnsupportedOperationException("An unexpected value of CommandRules.Source was found.");
 		}
 	}
 	
@@ -465,8 +463,7 @@ public class CommandInstance {
 	 * @param exeSet the {@code Class} object of the specific set of command executables.
 	 * @return an {@code Implementation} for the given command.
 	 */
-	private static Implementation
-			implementFromString(String name, Class<? extends CommandExecutables> exeSet) {
+	private static Implementation implementFromString(String name, Class<? extends CommandExecutables> exeSet) {
 		CommandExecutables[] all = exeSet.getEnumConstants();
 		for (CommandExecutables exe : all) {
 			if (exe.getImplementation().getName().equals(name))

@@ -73,9 +73,11 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	 * @param data the element to add.
 	 */
 	public void addSafe(E data) {
+		//@formatter:off
 		if (!this.listdata().contains(data)) {
 			this.add(data);
 		}
+		//@formatter:on
 	}
 	
 	/**

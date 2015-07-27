@@ -287,9 +287,14 @@ public class StringUtil {
 	 * @return the recolored message.
 	 */
 	private static String parseStringForColor(String message, ChatColor color) {
-		final String[][] colorKeys = { { "@default", color.toString()}, { "@admin", ADMINCOLOR.toString()}, { "@name", NAMECOLOR
-			.toString()}, { "@text", TEXTCOLOR.toString()}, { "@error", ERRORCOLOR.toString()}, { "@location", LOCATIONCOLOR
-				.toString()}};
+		final String[][] colorKeys = {
+				{"@default", color.toString()},
+				{"@admin", ADMINCOLOR.toString()},
+				{"@name", NAMECOLOR.toString()},
+				{"@text", TEXTCOLOR.toString()},
+				{"@error", ERRORCOLOR.toString()},
+				{"@location", LOCATIONCOLOR.toString()}
+		};
 		
 		for (String[] colorKey : colorKeys) {
 			String substitute = colorKey[1];
