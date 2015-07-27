@@ -49,7 +49,8 @@ public class PlayerUtil {
 	 * Determines if a given player is the admin of this server by comparing UUID values.
 	 * 
 	 * @param other the player to compare to the admin.
-	 * @return {@code true} if the given player is the local admin; {@code false} otherwise.
+	 * @return {@code true} if the given player is the local admin; {@code false}
+	 * otherwise.
 	 */
 	public static boolean playerIsAdmin(Player other) {
 		return other.getUniqueId().equals(adminUUID);
@@ -65,8 +66,8 @@ public class PlayerUtil {
 	}
 	
 	/**
-	 * Gets a {@code Player} object representing the admin of this server. {@code null}
-	 * is returned if the admin is currently offline.
+	 * Gets a {@code Player} object representing the admin of this server. {@code null} is
+	 * returned if the admin is currently offline.
 	 * 
 	 * @return the admin of this server.
 	 */
@@ -75,8 +76,8 @@ public class PlayerUtil {
 	}
 	
 	/**
-	 * Gets the in-game display name of the admin of this server, regardless of whether
-	 * the admin is currently online.
+	 * Gets the in-game display name of the admin of this server, regardless of whether the
+	 * admin is currently online.
 	 * 
 	 * @return the name of the admin.
 	 */

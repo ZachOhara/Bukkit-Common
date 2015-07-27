@@ -20,20 +20,20 @@ import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandRules;
 
 /**
- * This class only exists so that the Bukkit Common library can be loaded into Bukkit
- * on its own, and not through another plugin. It is essentially an empty implementation
- * of the {@code CommonPlugin} abstract class, which cannot be used as an entry point
- * because it is abstract.
+ * This class only exists so that the Bukkit Common library can be loaded into Bukkit on
+ * its own, and not through another plugin. It is essentially an empty implementation of
+ * the {@code CommonPlugin} abstract class, which cannot be used as an entry point because
+ * it is abstract.
  * <p>
  * This class could, in theory, also be used as the main class for a plugin that has no
  * commands. The main class for this hypothetical plugin would need to extend this class,
  * and add its own functionality through the {@code onEnable()} method, or similar methods
  * that are provided through the Bukkit API.
- *  
+ * 
  * @author Zach Ohara
  */
 public class EmptyPlugin extends CommonPlugin {
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -41,7 +41,7 @@ public class EmptyPlugin extends CommonPlugin {
 	public Class<? extends CommandRules> getCommandRuleSet() {
 		return null;
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -49,5 +49,5 @@ public class EmptyPlugin extends CommonPlugin {
 	public Class<? extends CommandExecutables> getCommandExecutableSet() {
 		return null;
 	}
-
+	
 }

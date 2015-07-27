@@ -23,22 +23,21 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 /**
  * A {@code PersistentKeyedMap} object is responsible for loading and storing any given
- * information that occurs in pairs as an external file, so that it remains
- * persistent through server restarts. At its core, a {@code PersistentKeyedMap} object
- * is essentially a {@code PersistentMap} with the map key being a String that is
- * generated for any given key.
+ * information that occurs in pairs as an external file, so that it remains persistent
+ * through server restarts. At its core, a {@code PersistentKeyedMap} object is essentially
+ * a {@code PersistentMap} with the map key being a String that is generated for any given
+ * key.
  * 
  * @param <K> the key type for this map.
  * @param <D> the data type for this map. A data object must be able to be generated for
  * any key object.
- * 
  * @author Zach Ohara
  */
 public abstract class PersistentKeyedMap<K, D extends Serializable> extends PersistentMap<String, D> {
 	
 	/**
-	 * Constructs a new {@code PersistentPlayerData} with the given plugin as an owner,
-	 * and the filename to store that data to. This constructor will create a new
+	 * Constructs a new {@code PersistentPlayerData} with the given plugin as an owner, and
+	 * the filename to store that data to. This constructor will create a new
 	 * {@code HashMap} object that will be contain the data.
 	 * 
 	 * @param owner the plugin that created this object.
@@ -52,8 +51,7 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	 * Returns the data corresponding to the map key that is generated for the given key
 	 * object.
 	 * 
-	 * @param key the key object to generate a map key for, and then to query the map
-	 * for.
+	 * @param key the key object to generate a map key for, and then to query the map for.
 	 * @return the data associated with the given key, or {@code null} if no data exists
 	 * for the given key.
 	 */
@@ -132,9 +130,9 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	}
 	
 	/**
-	 * Calculates and returns the relavant data value for the given key. Overriding
-	 * this method allows sub-classes to have complete control over what data is stored
-	 * for the specified key.
+	 * Calculates and returns the relavant data value for the given key. Overriding this
+	 * method allows sub-classes to have complete control over what data is stored for the
+	 * specified key.
 	 * 
 	 * @param key the key to calculate a data value for.
 	 * @return the information for this map that is specific to the given key.
@@ -145,9 +143,9 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	 * Generate a key {@code String} that is specific to the given key object. This key
 	 * will be used to store information in the map for the given object. Overriding this
 	 * method allows sub-classes to have complete control over how the data is stored in
-	 * the map, but the default implementation means that sub-classes are not
-	 * required to generate their own map keys. By default, this method will simply use
-	 * the {@code toString()} method of the key type. 
+	 * the map, but the default implementation means that sub-classes are not required to
+	 * generate their own map keys. By default, this method will simply use the
+	 * {@code toString()} method of the key type.
 	 * 
 	 * @param key the {@code K} key object to generate a map key for.
 	 * @return the generated map key for the given data.

@@ -30,8 +30,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * A {@code PersistentObject} is responsible for loading and storing any given
- * {@code Serializable} object as an external file, so that it remains persistent
- * through server restarts.
+ * {@code Serializable} object as an external file, so that it remains persistent through
+ * server restarts.
  * 
  * @author Zach Ohara
  */
@@ -96,8 +96,8 @@ public class PersistentObject {
 	 * reconstructed into a usable object form.
 	 * 
 	 * @throws IOException if the file read operation fails.
-	 * @throws ClassNotFoundException if the read is succesful, but the content is not
-	 * what was expected (this should be impossible).
+	 * @throws ClassNotFoundException if the read is succesful, but the content is not what
+	 * was expected (this should be impossible).
 	 */
 	public void loadFromFile() throws IOException, ClassNotFoundException {
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.dataFile));

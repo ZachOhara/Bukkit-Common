@@ -24,41 +24,41 @@ import io.github.zachohara.bukkit.common.command.CommandRules.Target;
  * All of the conditions outlined in this object need to be verified before attempting to
  * execute the command.
  * <p>
- * This class contians rules for a command such as minimum and maximum expected amounts
- * of arguments, the required permissions and conditions of any entity trying to use the
+ * This class contians rules for a command such as minimum and maximum expected amounts of
+ * arguments, the required permissions and conditions of any entity trying to use the
  * command, and the type(s) of players that can be targeted by the command under certain
  * situations.
  * 
  * @author Zach Ohara
  */
 public class CommandRulesEntry {
-
+	
 	/**
 	 * The name of the command, as it would be typed in the game or from a console.
 	 */
 	private String name;
-
+	
 	/**
 	 * The minimum amount of arguments that should be allowed for the command.
 	 */
 	private int minArgs;
-
+	
 	/**
 	 * The maximum amount of arguments that should be allowed for the command, or
 	 * {@code -1} if there is no maximum amount of arguments.
 	 */
 	private int maxArgs;
-
+	
 	/**
 	 * The type or range of sources that are allowed to use the command.
 	 */
 	private Source accessible;
-
+	
 	/**
 	 * The type or range of players that can be targeted by this command.
 	 */
 	private Target targetable;
-
+	
 	/**
 	 * Constructs a new {@code Rules} object from the required information.
 	 * 
@@ -75,7 +75,7 @@ public class CommandRulesEntry {
 		this.accessible = access;
 		this.targetable = target;
 	}
-
+	
 	/**
 	 * Constructs a new {@code CommandRulesEntry} object that should exactly mimic the
 	 * properties of a different command.
@@ -90,7 +90,7 @@ public class CommandRulesEntry {
 		this.accessible = alias.accessible;
 		this.targetable = alias.targetable;
 	}
-
+	
 	/**
 	 * Gets the name of the command, as it would be typed in the game or from a console.
 	 * 
@@ -99,7 +99,7 @@ public class CommandRulesEntry {
 	public String getName() {
 		return this.name;
 	}
-
+	
 	/**
 	 * Gets the minimum amount of arguments that should be allowed for the command.
 	 * 
@@ -108,7 +108,7 @@ public class CommandRulesEntry {
 	public int getMinArgs() {
 		return minArgs;
 	}
-
+	
 	/**
 	 * Gets the maximum amount of arguments that should be allowed for the command, or
 	 * {@code -1} if this command has no maximum amount of arguments.
@@ -118,7 +118,7 @@ public class CommandRulesEntry {
 	public int getMaxArgs() {
 		return maxArgs;
 	}
-
+	
 	/**
 	 * Gets the type or range of sources that are allowed to use the command.
 	 * 
@@ -128,7 +128,7 @@ public class CommandRulesEntry {
 	public Source getAccessible() {
 		return accessible;
 	}
-
+	
 	/**
 	 * Gets the type or range of target players that can be targeted by this command.
 	 * 
@@ -138,5 +138,5 @@ public class CommandRulesEntry {
 	public Target getTargetable() {
 		return targetable;
 	}
-
+	
 }

@@ -17,23 +17,23 @@
 package io.github.zachohara.bukkit.common.command;
 
 /**
- * The {@code CommandExecutables} interface is designed to be implemented by an
- * enumeration class that represents the set of commands that a plugin supports. The
- * enumeration should contain executable objects for each command that act as the main
- * procedure for that command.
+ * The {@code CommandExecutables} interface is designed to be implemented by an enumeration
+ * class that represents the set of commands that a plugin supports. The enumeration should
+ * contain executable objects for each command that act as the main procedure for that
+ * command.
  * <p>
  * The resulting enumeration is one of two enumerations that represent the set of commands
  * supported by a plugin. Any single command will have two enumerable constants that
  * correspond to it. A command's constant listed in this enumeration will contain an
- * executable object that holds the 'main method' for the command. A command's entry in
- * the other enumeration, which should be an implementation of {@code CommandRules}, will
+ * executable object that holds the 'main method' for the command. A command's entry in the
+ * other enumeration, which should be an implementation of {@code CommandRules}, will
  * contain information about the non-instance-specific details of the command, and its
  * expected context.
  * 
  * @author Zach Ohara
  */
 public interface CommandExecutables {
-
+	
 	/**
 	 * Gets the subclass of {@code Implementation} that contains an implementation for the
 	 * command.
@@ -42,5 +42,5 @@ public interface CommandExecutables {
 	 * @see Implementation
 	 */
 	public Implementation getImplementation();
-
+	
 }

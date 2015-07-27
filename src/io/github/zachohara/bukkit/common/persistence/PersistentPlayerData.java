@@ -26,13 +26,12 @@ import org.bukkit.entity.Player;
 
 /**
  * A {@code PersistentPlayerData} object is responsible for loading and storing any given
- * information about a specified player as an external file, so that it remains
- * persistent through server restarts. At its core, a {@code PersistentPlayerData} object
- * is essentially a {@code PersistentKeyedMap} with the map key being a Player, and the
- * map data being some object that is generated for a player.
+ * information about a specified player as an external file, so that it remains persistent
+ * through server restarts. At its core, a {@code PersistentPlayerData} object is
+ * essentially a {@code PersistentKeyedMap} with the map key being a Player, and the map
+ * data being some object that is generated for a player.
  *
  * @param <D> the data object that is generated for any player.
- * 
  * @author Zach Ohara
  */
 public abstract class PersistentPlayerData<D extends Serializable> extends PersistentKeyedMap<Player, D> {
@@ -75,8 +74,8 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	}
 	
 	/**
-	 * Generates a map key for a given player. If the {@code useUUID} instance variable
-	 * is true, the map key will be the player's UUID; otherwise, the map key will be the
+	 * Generates a map key for a given player. If the {@code useUUID} instance variable is
+	 * true, the map key will be the player's UUID; otherwise, the map key will be the
 	 * player's account name.
 	 * 
 	 * @param p the {@code Player} to generate a map key for.
@@ -100,9 +99,9 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	}
 	
 	/**
-	 * Calls the {@link #saveAllPlayerData()} method of this class before returning
-	 * control to the overridden method. This method ensures that all data will be
-	 * saved to the map before the map is saved to a file.
+	 * Calls the {@link #saveAllPlayerData()} method of this class before returning control
+	 * to the overridden method. This method ensures that all data will be saved to the map
+	 * before the map is saved to a file.
 	 */
 	@Override
 	public void saveToFile() throws IOException {

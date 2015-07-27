@@ -17,11 +17,11 @@
 package io.github.zachohara.bukkit.common.command;
 
 /**
- * The {@code CommandRules} interface is designed to be implemented by an
- * enumeration class that represents the set of commands that a plugin supports. The
- * enumeration should contain information for each command, such as the range of expected
- * amounts of arguments, the required permission level necessary to use a command, and if
- * the command should require a target player.
+ * The {@code CommandRules} interface is designed to be implemented by an enumeration class
+ * that represents the set of commands that a plugin supports. The enumeration should
+ * contain information for each command, such as the range of expected amounts of
+ * arguments, the required permission level necessary to use a command, and if the command
+ * should require a target player.
  * <p>
  * The resulting enumeration is one of two enumerations that represent the set of commands
  * supported by a plugin. Any single command will have two enumerable constants that
@@ -34,16 +34,17 @@ package io.github.zachohara.bukkit.common.command;
  * @author Zach Ohara
  */
 public interface CommandRules {
-
+	
 	/**
 	 * Gets the {@code CommandRulesEntry} associated with this comand.
+	 * 
 	 * @return the {@code CommandRulesEntry} associated with this comand.
 	 */
 	public CommandRulesEntry getRulesEntry();
-
+	
 	/**
-	 * Represents the set of possible sources, or ranges of sources, that may be allowed
-	 * to use any single command.
+	 * Represents the set of possible sources, or ranges of sources, that may be allowed to
+	 * use any single command.
 	 */
 	public static enum Source {
 		ALL,
@@ -52,10 +53,10 @@ public interface CommandRules {
 		ADMIN_ONLY,
 		ADMIN_PLAYER_ONLY
 	}
-
+	
 	/**
-	 * Represents the set of possible targets, or ranges of targets, that may be allowed
-	 * to be targeted by any single command.
+	 * Represents the set of possible targets, or ranges of targets, that may be allowed to
+	 * be targeted by any single command.
 	 */
 	public static enum Target {
 		NONE,
@@ -64,5 +65,5 @@ public interface CommandRules {
 		ALL_ONLINE,
 		ALLOW_OFFLINE
 	}
-
+	
 }

@@ -23,22 +23,19 @@ import java.util.Map;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 /**
- * A {@code PersistentMap} is responsible for loading and storing any given
- * {@code HashMap} object as an external file, so that it remains persistent
- * through server restarts.
+ * A {@code PersistentMap} is responsible for loading and storing any given {@code HashMap}
+ * object as an external file, so that it remains persistent through server restarts.
  * 
  * @param <K> the key type of the map
  * @param <V> the value type of the map
  * @see java.util.Map
- * 
  * @author Zach Ohara
  */
-public class PersistentMap<K extends Serializable, V extends Serializable>
-extends PersistentObject {
+public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject {
 	
 	/**
-	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the
-	 * data to store, and the filename to store that data to.
+	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
+	 * to store, and the filename to store that data to.
 	 * 
 	 * @param owner the plugin that created this object.
 	 * @param data the serializable {@code Map} that should be stored in an external file.
