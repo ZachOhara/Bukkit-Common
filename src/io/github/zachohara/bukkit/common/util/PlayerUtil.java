@@ -100,6 +100,8 @@ public class PlayerUtil {
 	/**
 	 * Sends a given message not only to the admin of the server, but also logs it in the
 	 * console.
+	 *
+	 * @param message the message that should be sent.
 	 */
 	public static void sendAllAdmins(String message) {
 		PlayerUtil.sendAdmin(message);

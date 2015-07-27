@@ -37,6 +37,7 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
 	 * to store, and the filename to store that data to.
 	 *
+	 * @param <T> any type that is a {@code Map<K, V>} and is {@code Serializable}.
 	 * @param owner the plugin that created this object.
 	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.

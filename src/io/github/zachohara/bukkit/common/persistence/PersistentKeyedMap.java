@@ -74,7 +74,7 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	 * Saves the relevant value for the given key to this map.
 	 *
 	 * @param key the key to save information for.
-	 * @see #calculateDataValue(D)
+	 * @see #calculateDataValue(Object)
 	 */
 	public void saveKeyedData(K key) {
 		String mapkey = this.generateMapKey(key);

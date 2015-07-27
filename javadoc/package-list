@@ -1,3 +1,4 @@
 io.github.zachohara.bukkit.common.command
+io.github.zachohara.bukkit.common.persistence
 io.github.zachohara.bukkit.common.plugin
 io.github.zachohara.bukkit.common.util
