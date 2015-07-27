@@ -24,20 +24,18 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A {@code PersistentList} is responsible for loading and storing any given
- * {@code List} as an external file, so that it remains persistent through server
- * restarts.
+ * A {@code PersistentList} is responsible for loading and storing any given {@code List}
+ * as an external file, so that it remains persistent through server restarts.
  * 
  * @param <E> the element type of the list
  * @see java.util.List
- * 
  * @author Zach Ohara
  */
 public class PersistentList<E extends Serializable> extends PersistentObject {
 	
 	/**
-	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the
-	 * data to store, and the filename to store that data to.
+	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the data
+	 * to store, and the filename to store that data to.
 	 * 
 	 * @param owner the plugin that created this object.
 	 * @param data the serializable {@code List} that should be stored in an external file.

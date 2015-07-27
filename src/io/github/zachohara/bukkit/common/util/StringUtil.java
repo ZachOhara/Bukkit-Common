@@ -65,10 +65,9 @@ public class StringUtil {
 	 */
 	public static final ChatColor LOCATIONCOLOR = ChatColor.GREEN;
 	
-	
 	/**
-	 * The message that is sent to players when a command they have submitted did not
-	 * have enough arguments sent with it.
+	 * The message that is sent to players when a command they have submitted did not have
+	 * enough arguments sent with it.
 	 */
 	public static final String ERROR_TOO_FEW_ARGS_MESSAGE = "Not enough arguments! Try using @name/help %c";
 	
@@ -78,23 +77,22 @@ public class StringUtil {
 	 */
 	public static final String ERROR_TOO_MANY_ARGS_MESSAGE = "Too many arguments! Try using @name/help %c";
 	
-	
 	/**
-	 * The message that is sent to players when the target player they have specified as
-	 * a command argument is not a valid, currently online player.
+	 * The message that is sent to players when the target player they have specified as a
+	 * command argument is not a valid, currently online player.
 	 */
 	public static final String ERROR_TARGET_OFFLINE_MESSAGE = "%gt either is not online right now or doesn't exist.";
 	
 	/**
-	 * The message that is sent to players when the target player they have specified as
-	 * a command argument is not online, and could not be found in any offline records.
+	 * The message that is sent to players when the target player they have specified as a
+	 * command argument is not online, and could not be found in any offline records.
 	 */
 	public static final String ERROR_TARGET_DNE_MESSAGE = "No records were found for %gt";
 	
 	/**
 	 * The message that is sent to players when they send a command with an attached target
 	 * player, and a target player can only be used with the command if the sender has
-	 * operator / moderator privialeges, but the sender does not have operator privialeges. 
+	 * operator / moderator privialeges, but the sender does not have operator privialeges.
 	 */
 	public static final String ERROR_TARGET_ONLY_IF_OP = "You must be an OP to use this command on someone else";
 	
@@ -102,20 +100,18 @@ public class StringUtil {
 	 * The message that is sent to players when they try to target the admin with a command
 	 * that the admin is protected against.
 	 */
-	public static final String ERROR_ADMIN_PROTECTED_MESSAGE = "You cannot use this command on"
-			+ " the all-powerful %admin!\nOverlord %admin has been notified of your futile attempt!";
+	public static final String ERROR_ADMIN_PROTECTED_MESSAGE = "You cannot use this command on" + " the all-powerful %admin!\nOverlord %admin has been notified of your futile attempt!";
 	
 	/**
-	 * The message that is sent to admins to inform them that a player has attempted to
-	 * a command on them, but that the admin was protected from the command.
+	 * The message that is sent to admins to inform them that a player has attempted to a
+	 * command on them, but that the admin was protected from the command.
 	 */
-	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on "
-			+ "overlord %admin!";
+	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on " + "overlord %admin!";
 	
 	/**
 	 * The message that is sent to players when they try to use a command that requires
 	 * operator / moderator priviages on the server, but the player is not an operator.
-	 */ 
+	 */
 	public static final String ERROR_NOT_OP_MESSAGE = "You must be an OP to use this command";
 	
 	/**
@@ -128,8 +124,7 @@ public class StringUtil {
 	 * The message that is sent to players when they try to use a command that only the
 	 * admin is allowed to use.
 	 */
-	public static final String ERROR_ADMIN_ONLY_MESSAGE = "Only the all-powerful "
-			+ "%admin may use this command!\nOverlord %admin has been notified of your futile attempt!";
+	public static final String ERROR_ADMIN_ONLY_MESSAGE = "Only the all-powerful " + "%admin may use this command!\nOverlord %admin has been notified of your futile attempt!";
 	
 	/**
 	 * The message that is sent to admins to inform them that a player has tried to use a
@@ -137,11 +132,10 @@ public class StringUtil {
 	 */
 	public static final String ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on %gt";
 	
-	
 	/**
 	 * Gets nicely-formatted String with the coordinates and world name for a given
-	 * location. This method assumes the default naming scheme for bukkit worlds, which
-	 * is that the overworld will be named some arbitrary, user-defined name, that its
+	 * location. This method assumes the default naming scheme for bukkit worlds, which is
+	 * that the overworld will be named some arbitrary, user-defined name, that its
 	 * corresponding nether world will be named that same arbitrary name suffixed by
 	 * "_nether", and that its corresponding end world will be named the arbitrary name
 	 * suffixed by "_the_end".
@@ -150,11 +144,13 @@ public class StringUtil {
 	 * @return a formatted String of the location.
 	 */
 	public static String getLocationString(Location loc) {
+		//@formatter:off
 		String locString = LOCATIONCOLOR + "("
 				+ loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
 				+ loc.getBlockZ() + ")"
 				+ TEXTCOLOR + " in " + LOCATIONCOLOR;
+		//@formatter:on
 		String worldName = loc.getWorld().getName();
 		boolean isNether = worldName.endsWith("_nether");
 		boolean isTheEnd = worldName.endsWith("_the_end");
@@ -193,9 +189,9 @@ public class StringUtil {
 	
 	/**
 	 * Parses a given message, substitutes any of the supported shortcuts, and colors the
-	 * message to be the given color. If the message only needs to be parsed for color,
-	 * but not for instance information, then the {@code CommandInstance} parameter can
-	 * be {@code null}.
+	 * message to be the given color. If the message only needs to be parsed for color, but
+	 * not for instance information, then the {@code CommandInstance} parameter can be
+	 * {@code null}.
 	 * 
 	 * @param message the message to parse.
 	 * @param color the color that the plain text of this message should appear in.
@@ -214,8 +210,8 @@ public class StringUtil {
 	}
 	
 	/**
-	 * Parses a given message for supported shortcuts, and substitutes in relevant information
-	 * from the source and context of a command.
+	 * Parses a given message for supported shortcuts, and substitutes in relevant
+	 * information from the source and context of a command.
 	 * 
 	 * @param message the message to parse.
 	 * @param color the color that the plain text of this message should appear in.
@@ -224,7 +220,8 @@ public class StringUtil {
 	 * @return the message with expanded instance information.
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
-	private static String parseStringForInstance(String message, ChatColor color, CommandInstance source) {		
+	private static String parseStringForInstance(String message, ChatColor color, CommandInstance source) {
+		//@formatter:off
 		final String[][] parsingKeys = {
 				{"%admin", "@admin" + PlayerUtil.getAdminName()},
 				{"%sloc", getSenderLocation(source)},
@@ -233,8 +230,9 @@ public class StringUtil {
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
 				{"/%c", "@name(/)%c"},
-				{"%c", source.getName()},
+				{"%c", source.getName()}
 		};
+		//@formatter:on
 		
 		for (String[] parseKey : parsingKeys) {
 			String substitute = NAMECOLOR + parseKey[1] + color;
@@ -250,9 +248,8 @@ public class StringUtil {
 	
 	/**
 	 * Gets a colored, formatted string representing the location of the sender of a
-	 * command. If the command was not sent by a player, the string
-	 * {@code "[no location]"} will be returned. The returned string will be colored
-	 * an appropriate color. 
+	 * command. If the command was not sent by a player, the string {@code "[no location]"}
+	 * will be returned. The returned string will be colored an appropriate color.
 	 * 
 	 * @param source the {@code CommandInstance} of the given command.
 	 * @return a formatted string for the location of the command sender.
@@ -266,10 +263,10 @@ public class StringUtil {
 	}
 	
 	/**
-	 * Gets a colored, formatted string representing the location of the player targeted 
-	 * by a command. If the command has no attached target player, the string
-	 * {@code "[no location]"} will be returned. The returned string will be colored
-	 * an appropriate color. 
+	 * Gets a colored, formatted string representing the location of the player targeted by
+	 * a command. If the command has no attached target player, the string
+	 * {@code "[no location]"} will be returned. The returned string will be colored an
+	 * appropriate color.
 	 * 
 	 * @param source the {@code CommandInstance} of the given command.
 	 * @return a formatted string for the location of the command sender.
@@ -290,14 +287,9 @@ public class StringUtil {
 	 * @return the recolored message.
 	 */
 	private static String parseStringForColor(String message, ChatColor color) {
-		final String[][] colorKeys = {
-				{"@default", color.toString()},
-				{"@admin", ADMINCOLOR.toString()},
-				{"@name", NAMECOLOR.toString()},
-				{"@text", TEXTCOLOR.toString()},
-				{"@error", ERRORCOLOR.toString()},
-				{"@location", LOCATIONCOLOR.toString()}
-		};
+		final String[][] colorKeys = { { "@default", color.toString()}, { "@admin", ADMINCOLOR.toString()}, { "@name", NAMECOLOR
+			.toString()}, { "@text", TEXTCOLOR.toString()}, { "@error", ERRORCOLOR.toString()}, { "@location", LOCATIONCOLOR
+				.toString()}};
 		
 		for (String[] colorKey : colorKeys) {
 			String substitute = colorKey[1];

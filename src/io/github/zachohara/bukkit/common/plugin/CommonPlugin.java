@@ -51,9 +51,9 @@ public abstract class CommonPlugin extends JavaPlugin {
 	
 	/**
 	 * Safely closes the plugin. This method is called anytime before the plugin is
-	 * disabled on the server, including during the server shutdown procedure. This
-	 * method will close and save all of the registered {@code PersistentData} objects
-	 * registered to this plugin.
+	 * disabled on the server, including during the server shutdown procedure. This method
+	 * will close and save all of the registered {@code PersistentData} objects registered
+	 * to this plugin.
 	 */
 	@Override
 	public void onDisable() {
@@ -67,10 +67,9 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label,
-			String[] args) {
-		CommandInstance instance = new CommandInstance(sender, command, args,
-				this.getCommandRuleSet(), this.getCommandExecutableSet());
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		CommandInstance instance = new CommandInstance(sender, command, args, this.getCommandRuleSet(),
+				this.getCommandExecutableSet());
 		if (instance.verifyCommand()) {
 			instance.executeCommand();
 		}
@@ -86,8 +85,8 @@ public abstract class CommonPlugin extends JavaPlugin {
 	public abstract Class<? extends CommandRules> getCommandRuleSet();
 	
 	/**
-	 * Gets the enumeration of {@code CommandExecutables} that represents the set of commands
-	 * that are specific to a plugin.
+	 * Gets the enumeration of {@code CommandExecutables} that represents the set of
+	 * commands that are specific to a plugin.
 	 * 
 	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
@@ -103,13 +102,16 @@ public abstract class CommonPlugin extends JavaPlugin {
 	}
 	
 	/**
-	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a java app.
+	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a
+	 * java app.
 	 * 
 	 * @param args the command line arguments passed to the program.
 	 */
 	public static void main(String[] args) {
+		//@formatter:off
 		System.out.println("This is not a normal java app! This is a plugin for a Bukkit server!\n"
 				+ "To use it, you have to install Bukkit, then install this plugin.");
+		//@formatter:on
 	}
 	
 }
