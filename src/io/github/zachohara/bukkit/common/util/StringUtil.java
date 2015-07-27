@@ -81,7 +81,8 @@ public class StringUtil {
 	 * The message that is sent to players when the target player they have specified as a
 	 * command argument is not a valid, currently online player.
 	 */
-	public static final String ERROR_TARGET_OFFLINE_MESSAGE = "%gt either is not online right now or doesn't exist.";
+	public static final String ERROR_TARGET_OFFLINE_MESSAGE =
+			"%gt either is not online right now or doesn't exist.";
 	
 	/**
 	 * The message that is sent to players when the target player they have specified as a
@@ -94,19 +95,22 @@ public class StringUtil {
 	 * player, and a target player can only be used with the command if the sender has
 	 * operator / moderator privialeges, but the sender does not have operator privialeges.
 	 */
-	public static final String ERROR_TARGET_ONLY_IF_OP = "You must be an OP to use this command on someone else";
+	public static final String ERROR_TARGET_ONLY_IF_OP =
+			"You must be an OP to use this command on someone else";
 	
 	/**
 	 * The message that is sent to players when they try to target the admin with a command
 	 * that the admin is protected against.
 	 */
-	public static final String ERROR_ADMIN_PROTECTED_MESSAGE = "You cannot use this command on" + " the all-powerful %admin!\nOverlord %admin has been notified of your futile attempt!";
+	public static final String ERROR_ADMIN_PROTECTED_MESSAGE = "You cannot use this command on"
+			+ " the all-powerful %admin!\nOverlord %admin has been notified of your futile attempt!";
 	
 	/**
 	 * The message that is sent to admins to inform them that a player has attempted to a
 	 * command on them, but that the admin was protected from the command.
 	 */
-	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on " + "overlord %admin!";
+	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION = "%s has tried to use @name/%c on "
+			+ "overlord %admin!";
 	
 	/**
 	 * The message that is sent to players when they try to use a command that requires
@@ -124,7 +128,8 @@ public class StringUtil {
 	 * The message that is sent to players when they try to use a command that only the
 	 * admin is allowed to use.
 	 */
-	public static final String ERROR_ADMIN_ONLY_MESSAGE = "Only the all-powerful " + "%admin may use this command!\nOverlord %admin has been notified of your futile attempt!";
+	public static final String ERROR_ADMIN_ONLY_MESSAGE = "Only the all-powerful "
+			+ "%admin may use this command!\nOverlord %admin has been notified of your futile attempt!";
 	
 	/**
 	 * The message that is sent to admins to inform them that a player has tried to use a
