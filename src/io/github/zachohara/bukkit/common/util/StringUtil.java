@@ -29,12 +29,12 @@ import org.bukkit.Location;
  * @author Zach Ohara
  */
 public final class StringUtil {
-	
+
 	/**
 	 * The {@code StringUtil} class should not be instantiable.
 	 */
 	private StringUtil() {
-		
+
 	}
 
 	/**

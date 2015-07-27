@@ -32,7 +32,7 @@ import java.util.List;
  * @author Zach Ohara
  */
 public class PersistentList<E extends Serializable> extends PersistentObject {
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the data
 	 * to store, and the filename to store that data to.
@@ -45,7 +45,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public <L extends List<E> & Serializable> PersistentList(CommonPlugin owner, L data, String filename) {
 		super(owner, data, filename);
 	}
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, and the
 	 * filename to store that data to. This constructor will create a new {@code ArrayList}
@@ -57,7 +57,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public PersistentList(CommonPlugin owner, String filename) {
 		super(owner, new ArrayList<E>(), filename);
 	}
-	
+
 	/**
 	 * Adds an element to the list.
 	 *
@@ -67,7 +67,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public void add(E data) {
 		this.listdata().add(data);
 	}
-	
+
 	/**
 	 * Adds an element to the list, if and only if it is not already in the list.
 	 *
@@ -80,18 +80,19 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 		}
 		//@formatter:on
 	}
-	
+
 	/**
 	 * Removes an element from the list, if and only if it was previously in the list.
-	 * 
+	 *
 	 * @param data the element to remove.
-	 * @return {@code true} if the element was removed sucessfully; {@code false} otherwise.
+	 * @return {@code true} if the element was removed sucessfully; {@code false}
+	 * otherwise.
 	 * @see java.util.List#remove(Object)
 	 */
 	public boolean remove(E data) {
 		return this.listdata().remove(data);
 	}
-	
+
 	/**
 	 * Adds all the given elements to the list.
 	 *
@@ -101,7 +102,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public void addAll(Collection<? extends E> data) {
 		this.listdata().addAll(data);
 	}
-	
+
 	/**
 	 * Gets the element at the given index in the list.
 	 *
@@ -112,7 +113,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public E get(int index) {
 		return null;
 	}
-	
+
 	/**
 	 * Determines if the list already contains the given data.
 	 *
@@ -123,7 +124,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public boolean contains(E data) {
 		return this.listdata().contains(data);
 	}
-	
+
 	/**
 	 * Returns the current size of the list.
 	 *
@@ -133,7 +134,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public int size() {
 		return this.listdata().size();
 	}
-	
+
 	/**
 	 * Gets the {@code List} that is stored by this {@code PersistentList}.
 	 *
@@ -147,5 +148,5 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 			return null;
 		}
 	}
-	
+
 }

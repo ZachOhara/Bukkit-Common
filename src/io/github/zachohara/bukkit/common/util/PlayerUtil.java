@@ -28,12 +28,12 @@ import org.bukkit.entity.Player;
  * @author Zach Ohara
  */
 public final class PlayerUtil {
-	
+
 	/**
 	 * The {@code PlayerUtil} class should not be instantiable.
 	 */
 	private PlayerUtil() {
-		
+
 	}
 
 	/**
