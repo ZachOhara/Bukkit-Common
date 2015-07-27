@@ -32,26 +32,26 @@ import org.bukkit.plugin.java.JavaPlugin;
  * A {@code PersistentObject} is responsible for loading and storing any given
  * {@code Serializable} object as an external file, so that it remains persistent through
  * server restarts.
- * 
+ *
  * @author Zach Ohara
  */
 public class PersistentObject {
-	
+
 	/**
 	 * The {@code File} location that the file should be stored in.
 	 */
 	private File dataFile;
-	
+
 	/**
 	 * The {@code Serializable} object that will be stored. After registering the object
 	 * here, the object can still be modified by other classes.
 	 */
 	private Serializable data;
-	
+
 	/**
 	 * Constructs a new {@code PersistentObject} with the given plugin as an owner, the
 	 * data to store, and the filename to store that data to.
-	 * 
+	 *
 	 * @param owner the plugin that created this object.
 	 * @param data the object that should be stored in an external file.
 	 * @param filename the filename to store the object as.
@@ -63,20 +63,20 @@ public class PersistentObject {
 		this.createDataFile(owner);
 		this.attemptLoadFile(owner);
 	}
-	
+
 	/**
 	 * Returns a reference to the {@code Serializable} object that is stored by this
 	 * {@code PersistentObject}.
-	 * 
+	 *
 	 * @return a reference to the stored data.
 	 */
 	public Serializable getObject() {
 		return this.data;
 	}
-	
+
 	/**
 	 * Attempts to load currently-existant persistent data from a file.
-	 * 
+	 *
 	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
 	 * operation.
 	 */
@@ -90,11 +90,11 @@ public class PersistentObject {
 			owner.getLogger().warning("The missing file is " + this.dataFile);
 		}
 	}
-	
+
 	/**
 	 * Loads previously-stored persistent data from an external file, so that it can be
 	 * reconstructed into a usable object form.
-	 * 
+	 *
 	 * @throws IOException if the file read operation fails.
 	 * @throws ClassNotFoundException if the read is succesful, but the content is not what
 	 * was expected (this should be impossible).
@@ -103,16 +103,17 @@ public class PersistentObject {
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.dataFile));
 		Object loadedData = in.readObject();
 		in.close();
-		if (loadedData instanceof Serializable)
+		if (loadedData instanceof Serializable) {
 			this.data = (Serializable) loadedData;
-		else
+		} else {
 			throw new IOException("Object found was not of the correct type");
+		}
 	}
-	
+
 	/**
 	 * Creates a new file for persistent data, if and only if there is not already stored
 	 * persistent data under the same filename.
-	 * 
+	 *
 	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
 	 * operation.
 	 */
@@ -126,11 +127,11 @@ public class PersistentObject {
 			owner.getLogger().warning("Error creating new persistent data file: " + this.dataFile);
 		}
 	}
-	
+
 	/**
 	 * Attempts to save the data in this object to an external file. If the operation
 	 * fails, it will also be handled here.
-	 * 
+	 *
 	 * @param owner the {@code JavaPlugin} to report failures to.
 	 */
 	public void attemptSaveToFile(JavaPlugin owner) {
@@ -142,11 +143,11 @@ public class PersistentObject {
 			owner.getLogger().warning("Persistent offline data will not be saved!");
 		}
 	}
-	
+
 	/**
 	 * Saves all the stored persistent data into an external file, so that it can be
 	 * reconstructed later even if the server is shut down.
-	 * 
+	 *
 	 * @throws IOException if the write operation fails.
 	 */
 	public void saveToFile() throws IOException {
@@ -154,15 +155,16 @@ public class PersistentObject {
 		out.writeObject(this.data);
 		out.close();
 	}
-	
+
 	/**
 	 * Returns a {@code String} representation of this object. The string is generated
 	 * using the abstract name of the output file.
-	 * 
+	 *
 	 * @return a {@code String} representation of this object.
 	 */
+	@Override
 	public String toString() {
 		return this.dataFile.getName();
 	}
-	
+
 }

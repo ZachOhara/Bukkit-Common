@@ -34,21 +34,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public abstract class CommonPlugin extends JavaPlugin {
-	
+
 	/**
 	 * The list of all {@code PersistentData} objects that have been registered to this
 	 * plugin.
 	 */
 	private List<PersistentObject> persistentData;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void onEnable() {
-		persistentData = new LinkedList<PersistentObject>();
+		this.persistentData = new LinkedList<PersistentObject>();
 	}
-	
+
 	/**
 	 * Safely closes the plugin. This method is called anytime before the plugin is
 	 * disabled on the server, including during the server shutdown procedure. This method
@@ -62,7 +62,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 			obj.attemptSaveToFile(this);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -76,36 +76,36 @@ public abstract class CommonPlugin extends JavaPlugin {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Gets the enumeration of {@code CommandRules} that represents the set of commands
 	 * that are specific to a plugin.
-	 * 
+	 *
 	 * @return the {@code CommandRules} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandRules> getCommandRuleSet();
-	
+
 	/**
 	 * Gets the enumeration of {@code CommandExecutables} that represents the set of
 	 * commands that are specific to a plugin.
-	 * 
+	 *
 	 * @return the {@code CommandExecutables} enumeration for this plugin.
 	 */
 	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
-	
+
 	/**
 	 * Register the given {@code PersistentObject} with this plugin.
-	 * 
+	 *
 	 * @param data the {@code PersistentObject} to register.
 	 */
 	public void regiserPersistentObject(PersistentObject data) {
 		this.persistentData.add(data);
 	}
-	
+
 	/**
 	 * Prints a console message that explains this file's nature as a Bukkit plugin, not a
 	 * java app.
-	 * 
+	 *
 	 * @param args the command line arguments passed to the program.
 	 */
 	public static void main(String[] args) {
@@ -114,5 +114,5 @@ public abstract class CommonPlugin extends JavaPlugin {
 				+ "To use it, you have to install Bukkit, then install this plugin.");
 		//@formatter:on
 	}
-	
+
 }

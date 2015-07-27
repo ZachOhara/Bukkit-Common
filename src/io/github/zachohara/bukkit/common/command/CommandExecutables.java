@@ -29,18 +29,18 @@ package io.github.zachohara.bukkit.common.command;
  * other enumeration, which should be an implementation of {@code CommandRules}, will
  * contain information about the non-instance-specific details of the command, and its
  * expected context.
- * 
+ *
  * @author Zach Ohara
  */
 public interface CommandExecutables {
-	
+
 	/**
 	 * Gets the subclass of {@code Implementation} that contains an implementation for the
 	 * command.
-	 * 
+	 *
 	 * @return the {@code Implementation} of the command.
 	 * @see Implementation
 	 */
 	public Implementation getImplementation();
-	
+
 }

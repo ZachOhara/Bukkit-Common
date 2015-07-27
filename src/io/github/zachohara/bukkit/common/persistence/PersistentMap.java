@@ -16,27 +16,27 @@
 
 package io.github.zachohara.bukkit.common.persistence;
 
+import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
-
 /**
  * A {@code PersistentMap} is responsible for loading and storing any given {@code HashMap}
  * object as an external file, so that it remains persistent through server restarts.
- * 
+ *
  * @param <K> the key type of the map
  * @param <V> the value type of the map
  * @see java.util.Map
  * @author Zach Ohara
  */
 public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject {
-	
+
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
 	 * to store, and the filename to store that data to.
-	 * 
+	 *
 	 * @param owner the plugin that created this object.
 	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
@@ -44,22 +44,22 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	public <T extends Map<K, V> & Serializable> PersistentMap(CommonPlugin owner, T data, String filename) {
 		super(owner, data, filename);
 	}
-	
+
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, and the
 	 * filename to store that data to. This constructor will create a new {@code HashMap}
 	 * object that will contain the data.
-	 * 
+	 *
 	 * @param owner the plugin that created this object.
 	 * @param filename the filename to store the object as.
 	 */
 	public PersistentMap(CommonPlugin owner, String filename) {
 		this(owner, new HashMap<K, V>(), filename);
 	}
-	
+
 	/**
 	 * Adds a new (Key, Value) entry pair to this map.
-	 * 
+	 *
 	 * @param key the key of this entry.
 	 * @param value the value of this entry.
 	 * @see java.util.Map#put(Object, Object)
@@ -67,10 +67,10 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	public void put(K key, V value) {
 		this.mapdata().put(key, value);
 	}
-	
+
 	/**
 	 * Gets the value corresponding to the given key of this map.
-	 * 
+	 *
 	 * @param key the key to query for.
 	 * @return the value associated with the given key.
 	 * @see java.util.Map#get(Object)
@@ -78,10 +78,10 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	public V get(K key) {
 		return this.mapdata().get(key);
 	}
-	
+
 	/**
 	 * Gets the {@code Map} that is stored by this {@code PersistentMap}.
-	 * 
+	 *
 	 * @return a reference to the underlying {@code Map}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -92,5 +92,5 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 			return null;
 		}
 	}
-	
+
 }

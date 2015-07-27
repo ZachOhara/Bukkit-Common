@@ -29,11 +29,11 @@ import io.github.zachohara.bukkit.common.command.CommandRules;
  * commands. The main class for this hypothetical plugin would need to extend this class,
  * and add its own functionality through the {@code onEnable()} method, or similar methods
  * that are provided through the Bukkit API.
- * 
+ *
  * @author Zach Ohara
  */
 public class EmptyPlugin extends CommonPlugin {
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -41,7 +41,7 @@ public class EmptyPlugin extends CommonPlugin {
 	public Class<? extends CommandRules> getCommandRuleSet() {
 		return null;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -49,5 +49,5 @@ public class EmptyPlugin extends CommonPlugin {
 	public Class<? extends CommandExecutables> getCommandExecutableSet() {
 		return null;
 	}
-	
+
 }

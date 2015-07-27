@@ -24,30 +24,31 @@ package io.github.zachohara.bukkit.common.command;
  * @author Zach Ohara
  */
 public abstract class Implementation {
-	
+
 	/**
 	 * Gets the name of the command.
-	 * 
+	 *
 	 * @return the name of the command.
 	 */
 	public abstract String getName();
-	
+
 	/**
 	 * Executes the main procedure of the command with a given context, and return the
 	 * success of the operation.
-	 * 
+	 *
 	 * @param instance the context of the command that is being executed.
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 * @see #doPlayerCommand(CommandInstance)
 	 * @see #doConsoleCommand(CommandInstance)
 	 */
 	public boolean doCommand(CommandInstance instance) {
-		if (instance.isFromPlayer())
+		if (instance.isFromPlayer()) {
 			return this.doPlayerCommand(instance);
-		else
+		} else {
 			return this.doConsoleCommand(instance);
+		}
 	}
-	
+
 	/**
 	 * Executes the main procedure of a player-issued command with a given context, and
 	 * return the success of the operation. Ideally, the code in this method should work
@@ -55,24 +56,24 @@ public abstract class Implementation {
 	 * be implemented once in this method. If the code here is not compatible with a
 	 * command sent from the console, then the {@link #doConsoleCommand(CommandInstance)}
 	 * method must be overridden.
-	 * 
+	 *
 	 * @param instance the context of the command that is being executed.
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 */
 	protected abstract boolean doPlayerCommand(CommandInstance instance);
-	
+
 	/**
 	 * Executes the main procedure of a console-issued command with a given context, and
 	 * return the success of the operation. This method should only be overridden by a
 	 * subclass if the {@link #doPlayerCommand(CommandInstance)} method does not work when
 	 * the command is sent from a console. By default, this method will use the same
 	 * procedure outlined in the {@link #doPlayerCommand(CommandInstance)} method.
-	 * 
+	 *
 	 * @param instance the context of the command that is being executed
 	 * @return {@code true} if the operation was successful; {@code false} otherwise.
 	 */
 	protected boolean doConsoleCommand(CommandInstance instance) {
 		return this.doPlayerCommand(instance);
 	}
-	
+
 }

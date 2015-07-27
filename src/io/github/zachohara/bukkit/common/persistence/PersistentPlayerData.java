@@ -16,10 +16,10 @@
 
 package io.github.zachohara.bukkit.common.persistence;
 
+import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+
 import java.io.IOException;
 import java.io.Serializable;
-
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -35,7 +35,7 @@ import org.bukkit.entity.Player;
  * @author Zach Ohara
  */
 public abstract class PersistentPlayerData<D extends Serializable> extends PersistentKeyedMap<Player, D> {
-	
+
 	/**
 	 * {@code true} if the data should be stored by a player's UUID, or {@code false} if
 	 * the data should be stored by a player's account name. Storing data by account name
@@ -44,16 +44,16 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	 * construction, all player data is immediately saved.
 	 */
 	private boolean useUUID;
-	
+
 	public PersistentPlayerData(CommonPlugin owner, String filename) {
 		super(owner, filename);
 		this.useUUID = false;
 		this.saveAllPlayerData();
 	}
-	
+
 	/**
 	 * Sets whether the data in this map is stored by player UUID.
-	 * 
+	 *
 	 * @param useUUID {@code true} if the data should be stored by a player's UUID, or
 	 * {@code false} if the data should be stored by a player's account name.
 	 * @see #useUUID
@@ -61,10 +61,10 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	public void useUUID(boolean useUUID) {
 		this.useUUID = useUUID;
 	}
-	
+
 	/**
 	 * Gets whether the data in this map is stored by player UUID.
-	 * 
+	 *
 	 * @return {@code true} if the data should be stored by a player's UUID, or
 	 * {@code false} if the data should be stored by a player's account name.
 	 * @see #useUUID
@@ -72,12 +72,12 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	public boolean getUseUUID() {
 		return this.useUUID;
 	}
-	
+
 	/**
 	 * Generates a map key for a given player. If the {@code useUUID} instance variable is
 	 * true, the map key will be the player's UUID; otherwise, the map key will be the
 	 * player's account name.
-	 * 
+	 *
 	 * @param p the {@code Player} to generate a map key for.
 	 * @return the generated map key for the given {@code Player}.
 	 * @see #useUUID
@@ -90,14 +90,14 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 			return p.getName();
 		}
 	}
-	
+
 	/**
 	 * Saves relevant data for all players currently connected to the server.
 	 */
 	public void saveAllPlayerData() {
 		this.saveAllKeyedData(Bukkit.getOnlinePlayers());
 	}
-	
+
 	/**
 	 * Calls the {@link #saveAllPlayerData()} method of this class before returning control
 	 * to the overridden method. This method ensures that all data will be saved to the map
@@ -108,5 +108,5 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 		this.saveAllPlayerData();
 		super.saveToFile();
 	}
-	
+
 }

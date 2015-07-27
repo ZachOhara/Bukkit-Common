@@ -26,17 +26,17 @@ import java.util.List;
 /**
  * A {@code PersistentList} is responsible for loading and storing any given {@code List}
  * as an external file, so that it remains persistent through server restarts.
- * 
+ *
  * @param <E> the element type of the list
  * @see java.util.List
  * @author Zach Ohara
  */
 public class PersistentList<E extends Serializable> extends PersistentObject {
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the data
 	 * to store, and the filename to store that data to.
-	 * 
+	 *
 	 * @param owner the plugin that created this object.
 	 * @param data the serializable {@code List} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
@@ -44,32 +44,32 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public <L extends List<E> & Serializable> PersistentList(CommonPlugin owner, L data, String filename) {
 		super(owner, data, filename);
 	}
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, and the
 	 * filename to store that data to. This constructor will create a new {@code ArrayList}
 	 * object that will contain the data.
-	 * 
+	 *
 	 * @param owner the plugin that created this object.
 	 * @param filename the filename to store the object as.
 	 */
 	public PersistentList(CommonPlugin owner, String filename) {
 		super(owner, new ArrayList<E>(), filename);
 	}
-	
+
 	/**
 	 * Adds an element to the list.
-	 * 
+	 *
 	 * @param data the element to add.
 	 * @see java.util.List#add(Object)
 	 */
 	public void add(E data) {
 		this.listdata().add(data);
 	}
-	
+
 	/**
 	 * Adds an element to the list, if and only if it is not already in the list.
-	 * 
+	 *
 	 * @param data the element to add.
 	 */
 	public void addSafe(E data) {
@@ -79,20 +79,20 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 		}
 		//@formatter:on
 	}
-	
+
 	/**
 	 * Adds all the given elements to the list.
-	 * 
+	 *
 	 * @param data the collection of elements to add.
 	 * @see java.util.List#addAll(Collection)
 	 */
 	public void addAll(Collection<? extends E> data) {
 		this.listdata().addAll(data);
 	}
-	
+
 	/**
 	 * Gets the element at the given index in the list.
-	 * 
+	 *
 	 * @param index the index to query for.
 	 * @return the element at the given index.
 	 * @see java.util.List#get(int)
@@ -100,10 +100,10 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public E get(int index) {
 		return null;
 	}
-	
+
 	/**
 	 * Determines if the list already contains the given data.
-	 * 
+	 *
 	 * @param data the data to query for.
 	 * @return {@code true} if and only if the list currently contains the givne data.
 	 * @see java.util.List#contains(Object)
@@ -111,20 +111,20 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	public boolean contains(E data) {
 		return this.listdata().contains(data);
 	}
-	
+
 	/**
 	 * Returns the current size of the list.
-	 * 
+	 *
 	 * @return the size of the list.
 	 * @see java.util.List#size()
 	 */
 	public int size() {
 		return this.listdata().size();
 	}
-	
+
 	/**
 	 * Gets the {@code List} that is stored by this {@code PersistentList}.
-	 * 
+	 *
 	 * @return a reference to the underlying {@code List}.
 	 */
 	@SuppressWarnings("unchecked")
@@ -135,5 +135,5 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 			return null;
 		}
 	}
-	
+
 }
