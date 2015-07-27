@@ -94,10 +94,10 @@ public class CommandInstance {
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
-	 * @param ruleSet the {@code Class} object from the applicable {@link
-	 * CommandRules} enumeration.
-	 * @param exeSet the {@code Class} object from the applicable {@link
-	 * CommandExecutables} enumeration.
+	 * @param ruleSet the {@code Class} object from the applicable {@link CommandRules}
+	 * enumeration.
+	 * @param exeSet the {@code Class} object from the applicable
+	 * {@link CommandExecutables} enumeration.
 	 */
 	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
 			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {

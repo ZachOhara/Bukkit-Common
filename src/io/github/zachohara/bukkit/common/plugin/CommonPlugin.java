@@ -68,8 +68,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CommandInstance instance = new CommandInstance(sender, command, args,
-				this.getCommandRuleSet(), this.getCommandExecutableSet());
+		CommandInstance instance = new CommandInstance(sender, command, args, this.getCommandRuleSet(), this.getCommandExecutableSet());
 		if (instance.verifyCommand()) {
 			instance.executeCommand();
 		}

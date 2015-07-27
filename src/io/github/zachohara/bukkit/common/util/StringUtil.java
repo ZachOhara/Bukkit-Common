@@ -287,6 +287,7 @@ public class StringUtil {
 	 * @return the recolored message.
 	 */
 	private static String parseStringForColor(String message, ChatColor color) {
+		//@formatter:off
 		final String[][] colorKeys = {
 				{"@default", color.toString()},
 				{"@admin", ADMINCOLOR.toString()},
@@ -295,6 +296,7 @@ public class StringUtil {
 				{"@error", ERRORCOLOR.toString()},
 				{"@location", LOCATIONCOLOR.toString()}
 		};
+		//@formatter:on
 		
 		for (String[] colorKey : colorKeys) {
 			String substitute = colorKey[1];
