@@ -1,5 +1,5 @@
 name: BukkitCommon
-version: 1.10
+version: 1.12
 main: io.github.zachohara.bukkit.common.plugin.EmptyPlugin
 prefix: Bukkit Common Library
 description: A library for simplifying the creation of Bukkit plugins

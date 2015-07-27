@@ -6,3 +6,4 @@
 * Add support for lists of player maps.
 * Add support for persistant lists
 * Remove 'useUUID' from the PersistentPlayerData class.
+* Add support for argument replacement in StringUtil

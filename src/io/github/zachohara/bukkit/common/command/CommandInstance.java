@@ -344,8 +344,7 @@ public class CommandInstance {
 	 */
 	public void reportToAdmins(String message) {
 		String formattedMessage = StringUtil.parseString(message, this);
-		Bukkit.getConsoleSender().sendMessage(formattedMessage);
-		PlayerUtil.sendAdmin(formattedMessage);
+		PlayerUtil.sendAllAdmins(formattedMessage);
 	}
 
 	/**

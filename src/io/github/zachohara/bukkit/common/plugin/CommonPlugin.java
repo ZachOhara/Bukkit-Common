@@ -16,14 +16,13 @@
 
 package io.github.zachohara.bukkit.common.plugin;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
 import io.github.zachohara.bukkit.common.command.CommandExecutables;
 import io.github.zachohara.bukkit.common.command.CommandInstance;
 import io.github.zachohara.bukkit.common.command.CommandRules;
 import io.github.zachohara.bukkit.common.persistence.PersistentObject;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -60,12 +59,7 @@ public abstract class CommonPlugin extends JavaPlugin {
 	public void onDisable() {
 		super.onDisable();
 		for (PersistentObject obj : this.persistentData) {
-			try {
-				obj.saveToFile();
-			} catch (IOException e) {
-				this.getLogger().warning("Unable to save offline persitent data: " + obj);
-				e.printStackTrace();
-			}
+			obj.attemptSaveToFile(this);
 		}
 	}
 	

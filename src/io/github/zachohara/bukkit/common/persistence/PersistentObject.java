@@ -57,6 +57,7 @@ public class PersistentObject {
 	 * @param filename the filename to store the object as.
 	 */
 	public PersistentObject(CommonPlugin owner, Serializable data, String filename) {
+		owner.regiserPersistentObject(this);
 		this.dataFile = new File(owner.getDataFolder(), filename);
 		this.data = data;
 		this.createDataFile(owner);
@@ -71,6 +72,23 @@ public class PersistentObject {
 	 */
 	public Serializable getObject() {
 		return this.data;
+	}
+	
+	/**
+	 * Attempts to load currently-existant persistent data from a file.
+	 * 
+	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
+	 * operation.
+	 */
+	private void attemptLoadFile(JavaPlugin owner) {
+		try {
+			this.loadFromFile();
+			owner.getLogger().info("File sucessfully loaded: " + this.dataFile);
+		} catch (ClassNotFoundException | IOException e) {
+			owner.getLogger().warning("Offline persistent data could not be read!");
+			owner.getLogger().warning("Is this the first time the plugin is being used?");
+			owner.getLogger().warning("The missing file is " + this.dataFile);
+		}
 	}
 	
 	/**
@@ -92,18 +110,6 @@ public class PersistentObject {
 	}
 	
 	/**
-	 * Saves all the stored persistent data into an external file, so that it can be
-	 * reconstructed later even if the server is shut down.
-	 * 
-	 * @throws IOException if the write operation fails.
-	 */
-	public void saveToFile() throws IOException {
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.dataFile));
-		out.writeObject(this.data);
-		out.close();
-	}
-	
-	/**
 	 * Creates a new file for persistent data, if and only if there is not already stored
 	 * persistent data under the same filename.
 	 * 
@@ -113,27 +119,40 @@ public class PersistentObject {
 	private void createDataFile(JavaPlugin owner) {
 		try {
 			this.dataFile.getParentFile().mkdirs();
-			this.dataFile.createNewFile();
+			if (this.dataFile.createNewFile()) {
+				owner.getLogger().info("New file sucessfully created: " + this.dataFile);
+			}
 		} catch (IOException e) {
-			owner.getLogger().warning("Error creating new offline persistent data file:");
-			e.printStackTrace();
+			owner.getLogger().warning("Error creating new persistent data file: " + this.dataFile);
 		}
 	}
 	
 	/**
-	 * Attempts to load currently-existant persistent data from a file.
+	 * Attempts to save the data in this object to an external file. If the operation
+	 * fails, it will also be handled here.
 	 * 
-	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
-	 * operation.
+	 * @param owner the {@code JavaPlugin} to report failures to.
 	 */
-	private void attemptLoadFile(JavaPlugin owner) {
+	public void attemptSaveToFile(JavaPlugin owner) {
 		try {
-			this.loadFromFile();
-		} catch (ClassNotFoundException | IOException e) {
-			owner.getLogger().warning("Offline persistent data could not be read!");
-			owner.getLogger().warning("Is this the first time the plugin is being used?");
-			e.printStackTrace();
+			this.saveToFile();
+			owner.getLogger().info("File sucessfully saved: " + this.dataFile);
+		} catch (IOException e) {
+			owner.getLogger().warning("Error saving persistent data file: " + this.dataFile);
+			owner.getLogger().warning("Persistent offline data will not be saved!");
 		}
+	}
+	
+	/**
+	 * Saves all the stored persistent data into an external file, so that it can be
+	 * reconstructed later even if the server is shut down.
+	 * 
+	 * @throws IOException if the write operation fails.
+	 */
+	public void saveToFile() throws IOException {
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.dataFile));
+		out.writeObject(this.data);
+		out.close();
 	}
 	
 	/**
