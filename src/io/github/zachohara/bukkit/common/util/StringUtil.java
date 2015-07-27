@@ -28,7 +28,14 @@ import org.bukkit.Location;
  *
  * @author Zach Ohara
  */
-public class StringUtil {
+public final class StringUtil {
+	
+	/**
+	 * The {@code StringUtil} class should not be instantiable.
+	 */
+	private StringUtil() {
+		
+	}
 
 	/**
 	 * The width, in characters, of the default player-side chat box.

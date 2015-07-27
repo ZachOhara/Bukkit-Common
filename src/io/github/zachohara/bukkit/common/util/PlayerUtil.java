@@ -27,7 +27,14 @@ import org.bukkit.entity.Player;
  *
  * @author Zach Ohara
  */
-public class PlayerUtil {
+public final class PlayerUtil {
+	
+	/**
+	 * The {@code PlayerUtil} class should not be instantiable.
+	 */
+	private PlayerUtil() {
+		
+	}
 
 	/**
 	 * The UUID of the player that is the acting admin for the server that this library
