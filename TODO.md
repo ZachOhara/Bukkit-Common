@@ -8,3 +8,4 @@
 * Make PersistentList implement List
 * Make PersistentMap implement Map
 * Add Lists of common things (materials, players, etc.)
+* Override toString() in all classes
