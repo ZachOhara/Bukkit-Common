@@ -36,28 +36,28 @@ public class CommandRulesEntry {
 	/**
 	 * The name of the command, as it would be typed in the game or from a console.
 	 */
-	private String name;
+	private final String name;
 
 	/**
 	 * The minimum amount of arguments that should be allowed for the command.
 	 */
-	private int minArgs;
+	private final int minArgs;
 
 	/**
 	 * The maximum amount of arguments that should be allowed for the command, or
 	 * {@code -1} if there is no maximum amount of arguments.
 	 */
-	private int maxArgs;
+	private final int maxArgs;
 
 	/**
 	 * The type or range of sources that are allowed to use the command.
 	 */
-	private Source accessible;
+	private final Source accessible;
 
 	/**
 	 * The type or range of players that can be targeted by this command.
 	 */
-	private Target targetable;
+	private final Target targetable;
 
 	/**
 	 * Constructs a new {@code Rules} object from the required information.

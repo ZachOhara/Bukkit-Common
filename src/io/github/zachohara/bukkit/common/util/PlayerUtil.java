@@ -41,7 +41,7 @@ public final class PlayerUtil {
 	 * (and its plugins) are running on. If the library ever needs to run on another
 	 * server, this should be changed to reflect the admin of the new server.
 	 */
-	public static final UUID adminUUID = UUID.fromString("5420ca86-36f0-4d54-8096-4352555fd1d6");
+	public static final UUID ADMIN_UUID = UUID.fromString("5420ca86-36f0-4d54-8096-4352555fd1d6");
 
 	/**
 	 * The in-game name of the player that is the acting admin for the server that this
@@ -50,7 +50,7 @@ public final class PlayerUtil {
 	 * Additionally, if the admin ever changes their in-game name, this string should be
 	 * adjusted to reflect the admin's new name.
 	 */
-	public static final String adminName = "Chezburgr";
+	public static final String ADMIN_NAME = "Chezburgr";
 
 	/**
 	 * Determines if a given player is the admin of this server by comparing UUID values.
@@ -60,7 +60,7 @@ public final class PlayerUtil {
 	 * otherwise.
 	 */
 	public static boolean playerIsAdmin(Player other) {
-		return other.getUniqueId().equals(PlayerUtil.adminUUID);
+		return other.getUniqueId().equals(PlayerUtil.ADMIN_UUID);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public final class PlayerUtil {
 	 * @return the admin of this server.
 	 */
 	public static Player getAdmin() {
-		return Bukkit.getPlayer(PlayerUtil.adminUUID);
+		return Bukkit.getPlayer(PlayerUtil.ADMIN_UUID);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public final class PlayerUtil {
 	 * @return the name of the admin.
 	 */
 	public static String getAdminName() {
-		return PlayerUtil.adminName;
+		return PlayerUtil.ADMIN_NAME;
 	}
 
 	/**

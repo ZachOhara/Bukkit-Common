@@ -38,22 +38,22 @@ public class CommandInstance {
 	/**
 	 * The name of the command that was called.
 	 */
-	private String name;
+	private final String name;
 
 	/**
 	 * The arguments (if any) that were sent along with the command.
 	 */
-	private String[] arguments;
+	private final String[] arguments;
 
 	/**
 	 * The general, non-instance-specific format and properties of the sent command.
 	 */
-	private CommandRulesEntry rules;
+	private final CommandRulesEntry rules;
 
 	/**
 	 * The executable object that contains an implementation for the command.
 	 */
-	private Implementation commandImplementation;
+	private final Implementation commandImplementation;
 
 	/**
 	 * The entity that sent the command. This may be a player or the console.
