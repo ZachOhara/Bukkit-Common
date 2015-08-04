@@ -21,7 +21,9 @@ import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * A {@code PersistentList} is responsible for loading and storing any given {@code List}
@@ -31,7 +33,7 @@ import java.util.List;
  * @see java.util.List
  * @author Zach Ohara
  */
-public class PersistentList<E extends Serializable> extends PersistentObject {
+public class PersistentList<E extends Serializable> extends PersistentObject implements List<E> {
 
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the data
@@ -59,16 +61,6 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	}
 
 	/**
-	 * Adds an element to the list.
-	 *
-	 * @param data the element to add.
-	 * @see java.util.List#add(Object)
-	 */
-	public void add(E data) {
-		this.listdata().add(data);
-	}
-
-	/**
 	 * Adds an element to the list, if and only if it is not already in the list.
 	 *
 	 * @param data the element to add.
@@ -82,71 +74,202 @@ public class PersistentList<E extends Serializable> extends PersistentObject {
 	}
 
 	/**
-	 * Removes an element from the list, if and only if it was previously in the list.
-	 *
-	 * @param data the element to remove.
-	 * @return {@code true} if the element was removed sucessfully; {@code false}
-	 * otherwise.
-	 * @see java.util.List#remove(Object)
-	 */
-	public boolean remove(E data) {
-		return this.listdata().remove(data);
-	}
-
-	/**
-	 * Adds all the given elements to the list.
-	 *
-	 * @param data the collection of elements to add.
-	 * @see java.util.List#addAll(Collection)
-	 */
-	public void addAll(Collection<? extends E> data) {
-		this.listdata().addAll(data);
-	}
-
-	/**
-	 * Gets the element at the given index in the list.
-	 *
-	 * @param index the index to query for.
-	 * @return the element at the given index.
-	 * @see java.util.List#get(int)
-	 */
-	public E get(int index) {
-		return null;
-	}
-
-	/**
-	 * Determines if the list already contains the given data.
-	 *
-	 * @param data the data to query for.
-	 * @return {@code true} if and only if the list currently contains the givne data.
-	 * @see java.util.List#contains(Object)
-	 */
-	public boolean contains(E data) {
-		return this.listdata().contains(data);
-	}
-
-	/**
-	 * Returns the current size of the list.
-	 *
-	 * @return the size of the list.
-	 * @see java.util.List#size()
-	 */
-	public int size() {
-		return this.listdata().size();
-	}
-
-	/**
 	 * Gets the {@code List} that is stored by this {@code PersistentList}.
 	 *
 	 * @return a reference to the underlying {@code List}.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<E> listdata() {
+	private List<E> listdata() {
 		if (this.getObject() instanceof List<?>) {
 			return (List<E>) this.getObject();
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean add(E arg0) {
+		return this.listdata().add(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void add(int arg0, E arg1) {
+		this.listdata().add(arg0, arg1);
+		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean addAll(Collection<? extends E> arg0) {
+		return this.listdata().addAll(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean addAll(int arg0, Collection<? extends E> arg1) {
+		return this.listdata().addAll(arg0, arg1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void clear() {
+		this.listdata().clear();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean contains(Object arg0) {
+		return this.listdata().contains(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean containsAll(Collection<?> arg0) {
+		return this.listdata().containsAll(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E get(int arg0) {
+		return this.listdata().get(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int indexOf(Object arg0) {
+		return this.listdata().indexOf(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isEmpty() {
+		return this.listdata().isEmpty();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Iterator<E> iterator() {
+		return this.listdata().iterator();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int lastIndexOf(Object arg0) {
+		return this.listdata().lastIndexOf(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ListIterator<E> listIterator() {
+		return this.listdata().listIterator();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ListIterator<E> listIterator(int arg0) {
+		return this.listdata().listIterator(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean remove(Object arg0) {
+		return this.listdata().remove(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E remove(int arg0) {
+		return this.listdata().remove(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean removeAll(Collection<?> arg0) {
+		return this.listdata().removeAll(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean retainAll(Collection<?> arg0) {
+		return this.listdata().retainAll(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E set(int arg0, E arg1) {
+		return this.listdata().set(arg0, arg1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int size() {
+		return this.listdata().size();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<E> subList(int arg0, int arg1) {
+		return this.listdata().subList(arg0, arg1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object[] toArray() {
+		return this.listdata().toArray();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public <T> T[] toArray(T[] arg0) {
+		return this.listdata().toArray(arg0);
 	}
 
 }
