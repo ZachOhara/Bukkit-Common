@@ -1,7 +1,6 @@
-name: BukkitCommon
-version: 1.13
-main: io.github.zachohara.bukkit.common.plugin.EmptyPlugin
-prefix: Bukkit Common Library
+name: SimplePlugin
+version: 2.0-pre0
+main: io.github.zachohara.bukkit.simpleplugin.standalone
 description: A library for simplifying the creation of Bukkit plugins
 author: Zach Ohara
 commands:
