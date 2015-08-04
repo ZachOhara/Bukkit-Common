@@ -19,8 +19,10 @@ package io.github.zachohara.bukkit.common.persistence;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A {@code PersistentMap} is responsible for loading and storing any given {@code HashMap}
@@ -31,7 +33,7 @@ import java.util.Map;
  * @see java.util.Map
  * @author Zach Ohara
  */
-public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject {
+public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject implements Map<K, V> {
 
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
@@ -59,39 +61,113 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	}
 
 	/**
-	 * Adds a new (Key, Value) entry pair to this map.
-	 *
-	 * @param key the key of this entry.
-	 * @param value the value of this entry.
-	 * @see java.util.Map#put(Object, Object)
-	 */
-	public void put(K key, V value) {
-		this.mapdata().put(key, value);
-	}
-
-	/**
-	 * Gets the value corresponding to the given key of this map.
-	 *
-	 * @param key the key to query for.
-	 * @return the value associated with the given key.
-	 * @see java.util.Map#get(Object)
-	 */
-	public V get(K key) {
-		return this.mapdata().get(key);
-	}
-
-	/**
 	 * Gets the {@code Map} that is stored by this {@code PersistentMap}.
 	 *
 	 * @return a reference to the underlying {@code Map}.
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<K, V> mapdata() {
+	private Map<K, V> mapdata() {
 		if (this.getObject() instanceof Map<?, ?>) {
 			return (Map<K, V>) this.getObject();
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void clear() {
+		this.mapdata().clear();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean containsKey(Object arg0) {
+		return this.mapdata().containsKey(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean containsValue(Object arg0) {
+		return this.mapdata().containsValue(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<java.util.Map.Entry<K, V>> entrySet() {
+		return this.mapdata().entrySet();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public V get(Object arg0) {
+		return this.mapdata().get(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isEmpty() {
+		return this.mapdata().isEmpty();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<K> keySet() {
+		return this.mapdata().keySet();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public V put(K arg0, V arg1) {
+		return this.mapdata().put(arg0, arg1);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void putAll(Map<? extends K, ? extends V> arg0) {
+		this.mapdata().putAll(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public V remove(Object arg0) {
+		return this.mapdata().remove(arg0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int size() {
+		return this.mapdata().size();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Collection<V> values() {
+		return this.mapdata().values();
 	}
 
 }
