@@ -85,9 +85,7 @@ public class PersistentObject {
 			this.loadFromFile();
 			owner.getLogger().info("File sucessfully loaded: " + this.dataFile);
 		} catch (ClassNotFoundException | IOException e) {
-			owner.getLogger().warning("Offline persistent data could not be read!");
-			owner.getLogger().warning("Is this the first time the plugin is being used?");
-			owner.getLogger().warning("The missing file is " + this.dataFile);
+			owner.getLogger().warning(this.dataFile + " not found; attempting to create.");
 		}
 	}
 
@@ -124,7 +122,7 @@ public class PersistentObject {
 				owner.getLogger().info("New file sucessfully created: " + this.dataFile);
 			}
 		} catch (IOException e) {
-			owner.getLogger().warning("Error creating new persistent data file: " + this.dataFile);
+			owner.getLogger().warning("Error creating new file: " + this.dataFile);
 		}
 	}
 
@@ -139,8 +137,7 @@ public class PersistentObject {
 			this.saveToFile();
 			owner.getLogger().info("File sucessfully saved: " + this.dataFile);
 		} catch (IOException e) {
-			owner.getLogger().warning("Error saving persistent data file: " + this.dataFile);
-			owner.getLogger().warning("Persistent offline data will not be saved!");
+			owner.getLogger().warning("Error saving file: " + this.dataFile);
 		}
 	}
 
