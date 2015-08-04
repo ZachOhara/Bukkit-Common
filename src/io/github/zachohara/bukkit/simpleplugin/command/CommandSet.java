@@ -14,26 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.simpleplugin.plugin;
+package io.github.zachohara.bukkit.simpleplugin.command;
 
-import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
-
-/** 
- * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin
- * that uses the SimplePlugin library, but does not add any additional commands. All
- * non-command functionality must be added by overriding the {@code onEnable() method},
- * or a similar method that is provided through the Bukkit API.
+/**
+ * The {@code CommandSet} interface is designed to be implemented by an enumeration
+ * that represents the set of commands supported by a plugin. The enumeration should
+ * contain a {@code Properties} object for each command, with appropriate information.
  *
  * @author Zach Ohara
+ * @see Properties
  */
-public class EmptyPlugin extends SimplePlugin {
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Class<? extends CommandSet> getCommandSet() {
-		return null;
-	}
-
+public interface CommandSet {
+	
+	public Properties getProperties();
+	
 }

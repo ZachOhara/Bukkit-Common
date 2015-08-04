@@ -16,9 +16,8 @@
 
 package io.github.zachohara.bukkit.simpleplugin.plugin;
 
-import io.github.zachohara.bukkit.simpleplugin.command.CommandExecutables;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
-import io.github.zachohara.bukkit.simpleplugin.command.CommandRules;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
 import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
 
 import java.util.LinkedList;
@@ -70,9 +69,7 @@ public abstract class SimplePlugin extends JavaPlugin {
 	 */
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		CommandInstance instance =
-				new CommandInstance(sender, command, args, this.getCommandRuleSet(),
-						this.getCommandExecutableSet());
+		CommandInstance instance = new CommandInstance(sender, command, args, this.getCommandSet());
 		if (instance.verifyCommand()) {
 			instance.executeCommand();
 		}
@@ -80,20 +77,12 @@ public abstract class SimplePlugin extends JavaPlugin {
 	}
 
 	/**
-	 * Gets the enumeration of {@code CommandRules} that represents the set of commands
+	 * Gets the enumeration of {@code CommandSet} that represents the set of commands
 	 * that are specific to a plugin.
 	 *
-	 * @return the {@code CommandRules} enumeration for this plugin.
+	 * @return the {@code CommandSet} enumeration for this plugin.
 	 */
-	public abstract Class<? extends CommandRules> getCommandRuleSet();
-
-	/**
-	 * Gets the enumeration of {@code CommandExecutables} that represents the set of
-	 * commands that are specific to a plugin.
-	 *
-	 * @return the {@code CommandExecutables} enumeration for this plugin.
-	 */
-	public abstract Class<? extends CommandExecutables> getCommandExecutableSet();
+	public abstract Class<? extends CommandSet> getCommandSet();
 
 	/**
 	 * Register the given {@code PersistentObject} with this plugin.

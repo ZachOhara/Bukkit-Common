@@ -26,13 +26,6 @@ package io.github.zachohara.bukkit.simpleplugin.command;
 public abstract class Implementation {
 
 	/**
-	 * Gets the name of the command.
-	 *
-	 * @return the name of the command.
-	 */
-	public abstract String getName();
-
-	/**
 	 * Executes the main procedure of the command with a given context, and return the
 	 * success of the operation.
 	 *

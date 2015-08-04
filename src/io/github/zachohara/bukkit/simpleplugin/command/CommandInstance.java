@@ -46,14 +46,9 @@ public class CommandInstance {
 	private final String[] arguments;
 
 	/**
-	 * The general, non-instance-specific format and properties of the sent command.
+	 * The {@code Properties} of the command.
 	 */
-	private final CommandRulesEntry rules;
-
-	/**
-	 * The executable object that contains an implementation for the command.
-	 */
-	private final Implementation commandImplementation;
+	private final Properties properties;
 
 	/**
 	 * The entity that sent the command. This may be a player or the console.
@@ -94,17 +89,16 @@ public class CommandInstance {
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
-	 * @param ruleSet the {@code Class} object from the applicable {@link CommandRules}
+	 * @param commandSet the {@code Class} object from the applicable {@link CommandRules}
 	 * enumeration.
 	 * @param exeSet the {@code Class} object from the applicable
 	 * {@link CommandExecutables} enumeration.
 	 */
-	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
-			Class<? extends CommandRules> ruleSet, Class<? extends CommandExecutables> exeSet) {
+	public <T extends CommandSet> CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
+			Class<T> commandSet) {
 		this.name = rawCommand.getName().toLowerCase();
 		this.arguments = args;
-		this.rules = CommandInstance.rulesFromString(this.name, ruleSet);
-		this.commandImplementation = CommandInstance.implementFromString(this.name, exeSet);
+		this.properties = CommandInstance.propertiesFromString(this.name, commandSet);
 		this.initializeSender(rawSender);
 		this.initializeSenderName();
 		this.initializeTarget();
@@ -143,145 +137,9 @@ public class CommandInstance {
 	public boolean hasTarget() {
 		return this.targetPlayer != null;
 	}
-
-	/**
-	 * Checks the validity of the conditions that this command was sent with. The method
-	 * will verify the following things about the conditions of the command:
-	 * <ol>
-	 * <li>An appropriate number of arguments were sent with the command.</li>
-	 * <li>The target player that was specified with the command (if applicable) is a valid
-	 * player given the conditions of the specific command.</li>
-	 * <li>The entity that sent the command has permission to use the specific command.</li>
-	 * </ol>
-	 * If all the above conditions are met given the circumstances, the command has been
-	 * successfully verified, and this method will return {@code true}.
-	 *
-	 * @return {@code true} if and only if all prerequisite conditions for the command are
-	 * met; {@code false} otherwise.
-	 * @see #verifyArguments()
-	 * @see #verifyValidTarget()
-	 * @see #verifyValidSource()
-	 */
+	
 	public boolean verifyCommand() {
-		return this.verifyArguments() && this.verifyValidTarget() && this.verifyValidSource();
-	}
-
-	/**
-	 * Verifies that the command was sent with an appropriate amount of arguments. If the
-	 * amount of arguments is not valid, this method will return an appropriate response to
-	 * the player or console that sent the command.
-	 *
-	 * @return {@code true} if and only if the amount of arguments that were sent with the
-	 * command match the expected conditions for the command; {@code false} otherwise.
-	 * @see #verifyCommand()
-	 */
-	private boolean verifyArguments() {
-		if (this.arguments.length < this.rules.getMinArgs()) {
-			this.sendError(StringUtil.ERROR_TOO_FEW_ARGS_MESSAGE);
-			return false;
-		}
-		if (this.rules.getMaxArgs() != -1 && this.arguments.length > this.rules.getMaxArgs()) {
-			this.sendError(StringUtil.ERROR_TOO_MANY_ARGS_MESSAGE);
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Verifies that the specified target player is a valid target player that is not
-	 * specially protected from this command. If the specified target player is not valid,
-	 * this method will return an appropriate response to the player or console that sent
-	 * the command.
-	 *
-	 * @return {@code true} if and only if the specified target player is a valid target
-	 * for this command; {@code false} otherwise.
-	 * @see #verifyCommand()
-	 */
-	private boolean verifyValidTarget() {
-		switch (this.rules.getTargetable()) {
-			case NONE:
-				return true;
-			case RESTRICT_ADMIN:
-				if (this.givenTarget.equalsIgnoreCase(PlayerUtil.getAdminName())) {
-					this.sendMessage(StringUtil.ERROR_ADMIN_PROTECTED_MESSAGE);
-					this.reportToAdmins(StringUtil.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
-					return false;
-				} else {
-					return true;
-				}
-			case IF_SENDER_OP:
-				if (this.hasTarget() && this.isFromPlayer() && !this.getSenderPlayer().isOp()) {
-					this.sendError(StringUtil.ERROR_TARGET_ONLY_IF_OP);
-					return false;
-				} else {
-					return true;
-				}
-			case ALL_ONLINE:
-				if (this.hasTarget() || this.arguments.length == 0) {
-					return true;
-				} else {
-					this.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
-					return false;
-				}
-			case ALLOW_OFFLINE:
-				return true;
-			default:
-				this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException(
-						"An unexpected value of CommandRules.Target was found.");
-		}
-	}
-
-	/**
-	 * Verifies that the entity that sent this command has permission to do so. If the
-	 * sender does not have the required permission to use this command, this method will
-	 * return an appropriate response to the player or console that sent this command.
-	 *
-	 * @return {@code true} if and only if the entity that sent this command has the
-	 * required permission and ability to do so; {@code false} otherwise.
-	 * @see #verifyCommand()
-	 */
-	private boolean verifyValidSource() {
-		switch (this.rules.getAccessible()) {
-			case ALL:
-				return true;
-			case PLAYER_ONLY:
-				if (this.isFromPlayer()) {
-					return true;
-				} else {
-					this.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
-					return false;
-				}
-			case OP_ONLY:
-				if (this.isFromConsole() || this.senderPlayer.isOp()) {
-					return true;
-				} else {
-					this.sendError(StringUtil.ERROR_NOT_OP_MESSAGE);
-					return false;
-				}
-			case ADMIN_ONLY:
-				if (this.isFromConsole() || PlayerUtil.playerIsAdmin(this.senderPlayer)) {
-					return true;
-				} else {
-					this.sendMessage(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
-					this.reportToAdmins(StringUtil.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
-					return false;
-				}
-			case ADMIN_PLAYER_ONLY:
-				if (this.isFromPlayer() && PlayerUtil.playerIsAdmin(this.senderPlayer)) {
-					return true;
-				} else if ( !this.isFromPlayer()) {
-					this.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
-					return false;
-				} else {
-					this.sendError(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
-					return false;
-				}
-			default:
-				this.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException(
-						"An unexpected value of CommandRules.Source was found.");
-		}
+		return this.properties.verifyCommand(this);
 	}
 
 	/**
@@ -291,7 +149,7 @@ public class CommandInstance {
 	 * @see Implementation#doCommand(CommandInstance)
 	 */
 	public void executeCommand() {
-		this.commandImplementation.doCommand(this);
+		this.properties.getImplementation().doCommand(this);
 	}
 
 	/**
@@ -442,36 +300,20 @@ public class CommandInstance {
 	}
 
 	/**
-	 * Gets the {@code CommandRulesEntry} object corresponding to the command with the
+	 * Gets the {@code Properties} object corresponding to the command with the
 	 * given name.
 	 *
-	 * @param label the name of the requested command.
+	 * @param name the name of the requested command.
 	 * @param ruleSet the {@code Class} object of the specific set of command rules.
 	 * @return the rules for the given command.
 	 */
-	private static CommandRulesEntry rulesFromString(String label, Class<? extends CommandRules> ruleSet) {
-		CommandRules[] allCommands = ruleSet.getEnumConstants();
-		for (CommandRules c : allCommands) {
-			if (c.getRulesEntry().getName().equals(label)) {
-				return c.getRulesEntry();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the {@code Implementation} object corresponding to the command with the given
-	 * name.
-	 *
-	 * @param name the name of the command that should be returned.
-	 * @param exeSet the {@code Class} object of the specific set of command executables.
-	 * @return an {@code Implementation} for the given command.
-	 */
-	private static Implementation implementFromString(String name, Class<? extends CommandExecutables> exeSet) {
-		CommandExecutables[] all = exeSet.getEnumConstants();
-		for (CommandExecutables exe : all) {
-			if (exe.getImplementation().getName().equals(name)) {
-				return exe.getImplementation();
+	@SuppressWarnings("unchecked")
+	private static Properties propertiesFromString(String name, Class<? extends CommandSet> ruleSet) {
+		CommandSet[] allCommands = ruleSet.getEnumConstants();
+		for (CommandSet command : allCommands) {
+			Enum<? extends CommandSet> enumConst = (Enum<? extends CommandSet>) command;
+			if (enumConst.name().equalsIgnoreCase(name)) {
+				return command.getProperties();
 			}
 		}
 		return null;
@@ -514,7 +356,7 @@ public class CommandInstance {
 		} else {
 			this.givenTarget = "";
 		}
-		if (this.rules.getTargetable() != CommandRules.Target.NONE && this.givenTarget != "") {
+		if (this.properties.useTarget() && this.givenTarget != "") {
 			this.targetPlayer = Bukkit.getPlayer(this.givenTarget);
 		}
 		if (this.hasTarget()) {
