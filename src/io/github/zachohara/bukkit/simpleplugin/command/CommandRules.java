@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.command;
+package io.github.zachohara.bukkit.simpleplugin.command;
 
 /**
  * The {@code CommandRules} interface is designed to be implemented by an enumeration class

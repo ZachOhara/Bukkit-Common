@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.command;
+package io.github.zachohara.bukkit.simpleplugin.command;
 
-import io.github.zachohara.bukkit.common.command.CommandRules.Source;
-import io.github.zachohara.bukkit.common.command.CommandRules.Target;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandRules.Source;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandRules.Target;
 
 /**
  * A {@code CommandRulesEntry} object represents the rules and conditions for a command.

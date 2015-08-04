@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.util;
+package io.github.zachohara.bukkit.simpleplugin.util;
 
 import java.util.UUID;
 

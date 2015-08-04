@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.plugin;
+package io.github.zachohara.bukkit.simpleplugin.plugin;
 
-import io.github.zachohara.bukkit.common.command.CommandExecutables;
-import io.github.zachohara.bukkit.common.command.CommandRules;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandExecutables;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandRules;
 
 /**
  * This class only exists so that the Bukkit Common library can be loaded into Bukkit on

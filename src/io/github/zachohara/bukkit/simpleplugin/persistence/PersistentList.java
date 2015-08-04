@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.persistence;
+package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
 
 import java.io.Serializable;
 import java.util.ArrayList;

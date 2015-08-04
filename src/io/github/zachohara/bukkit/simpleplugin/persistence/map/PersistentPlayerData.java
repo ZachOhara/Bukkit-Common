@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.persistence.map;
+package io.github.zachohara.bukkit.simpleplugin.persistence.map;
 
-import io.github.zachohara.bukkit.common.persistence.PersistentKeyedMap;
-import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentKeyedMap;
+import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
 
 import java.io.IOException;
 import java.io.Serializable;

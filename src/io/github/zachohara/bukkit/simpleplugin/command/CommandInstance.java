@@ -14,10 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.command;
+package io.github.zachohara.bukkit.simpleplugin.command;
 
-import io.github.zachohara.bukkit.common.util.PlayerUtil;
-import io.github.zachohara.bukkit.common.util.StringUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

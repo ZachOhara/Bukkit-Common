@@ -14,9 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.util;
+package io.github.zachohara.bukkit.simpleplugin.util;
 
-import io.github.zachohara.bukkit.common.command.CommandInstance;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.command;
+package io.github.zachohara.bukkit.simpleplugin.command;
 
 /**
  * The {@code Implementation} class acts as a superclass for implementations of specific

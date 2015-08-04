@@ -14,12 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.plugin;
+package io.github.zachohara.bukkit.simpleplugin.plugin;
 
-import io.github.zachohara.bukkit.common.command.CommandExecutables;
-import io.github.zachohara.bukkit.common.command.CommandInstance;
-import io.github.zachohara.bukkit.common.command.CommandRules;
-import io.github.zachohara.bukkit.common.persistence.PersistentObject;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandExecutables;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandRules;
+import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
 
 import java.util.LinkedList;
 import java.util.List;
