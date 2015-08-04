@@ -29,20 +29,22 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * The supertype for all plugins that use the common system.
+ * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin
+ * that uses the SimplePlugin library.
  *
  * @author Zach Ohara
  */
-public abstract class CommonPlugin extends JavaPlugin {
+public abstract class SimplePlugin extends JavaPlugin {
 
 	/**
-	 * The list of all {@code PersistentData} objects that have been registered to this
+	 * The list of all {@code PersistentObject}s that have been registered to this
 	 * plugin.
 	 */
 	private List<PersistentObject> persistentData;
 
 	/**
-	 * {@inheritDoc}
+	 * Starts the plugin and initializes functionality. This method is called anytime before
+	 * the plugin is enabled on the server, including during server startup procedure.
 	 */
 	@Override
 	public void onEnable() {
