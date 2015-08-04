@@ -19,7 +19,7 @@ package io.github.zachohara.bukkit.common.persistence;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * A {@code PersistentKeyedMap} object is responsible for loading and storing any given
@@ -79,18 +79,18 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	public void saveKeyedData(K key) {
 		String mapkey = this.generateMapKey(key);
 		if (this.keyDataExists(key)) {
-			this.mapdata().remove(mapkey);
+			this.remove(mapkey);
 		}
-		this.mapdata().put(mapkey, this.calculateDataValue(key));
+		this.put(mapkey, this.calculateDataValue(key));
 	}
 
 	/**
 	 * Saves the relevant values for all the keys given in the list.
 	 *
-	 * @param keylist the list of keys to save data for.
+	 * @param collection the list of keys to save data for.
 	 */
-	public void saveAllKeyedData(List<K> keylist) {
-		for (K key : keylist) {
+	public void saveAllKeyedData(Collection<? extends K> collection) {
+		for (K key : collection) {
 			this.saveKeyedData(key);
 		}
 	}
@@ -126,7 +126,7 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	 * {@code false} otherwise.
 	 */
 	public boolean keyDataExists(String key) {
-		return this.mapdata().get(key) != null;
+		return this.get(key) != null;
 	}
 
 	/**
