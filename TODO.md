@@ -6,3 +6,6 @@
 * Override toString() in all classes
 * Simplify `CommandInstance.verifyValidTarget()` and `CommandInstance.verifyValidSource()`
 * Improve cohesion in `CommandInstance`
+* Add support for standalone commands or subcommands
+* Add package-info.java for all packages
+* Split `StringUtil` into other classes
