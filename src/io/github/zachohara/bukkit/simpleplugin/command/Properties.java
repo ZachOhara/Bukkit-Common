@@ -78,18 +78,20 @@ public class Properties {
 	 * Constructs a new {@code Properties} that exactly mimics the properties of the given command entry
 	 *
 	 * @param other the comand entry to mimic the properties of.
+	 * @param implement see instance variable {@link #implementation}
 	 */
-	public Properties(CommandSet other) {
-		this(other.getProperties());
+	public Properties(CommandSet other, Implementation implement) {
+		this(other.getProperties(), implement);
 	}
 	
 	/**
 	 * Constructs a new {@code Properties} that exactly mimics the given {@code Properties} object.
 	 *
 	 * @param other the {@code Properties} that this object should mimic.
+	 * @param implement see instance variable {@link #implementation}
 	 */
-	public Properties(Properties other) {
-		this(other.minArgs, other.maxArgs, other.permissionNode, other.accessible, other.targetable, other.implementation);
+	public Properties(Properties other, Implementation implement) {
+		this(other.minArgs, other.maxArgs, other.permissionNode, other.accessible, other.targetable, implement);
 	}
 	
 	/**
