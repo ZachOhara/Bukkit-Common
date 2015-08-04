@@ -16,7 +16,7 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,7 +56,7 @@ public class PersistentObject {
 	 * @param data the object that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public PersistentObject(CommonPlugin owner, Serializable data, String filename) {
+	public PersistentObject(SimplePlugin owner, Serializable data, String filename) {
 		owner.regiserPersistentObject(this);
 		this.dataFile = new File(owner.getDataFolder(), filename);
 		this.data = data;

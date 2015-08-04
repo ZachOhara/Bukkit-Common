@@ -16,7 +16,7 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 * @param data the serializable {@code List} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <L extends List<E> & Serializable> PersistentList(CommonPlugin owner, L data, String filename) {
+	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, L data, String filename) {
 		super(owner, data, filename);
 	}
 	
@@ -56,7 +56,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 * @param owner the plugin that created this object.
 	 * @param filename the filename to store the object as.
 	 */
-	public PersistentList(CommonPlugin owner, String filename) {
+	public PersistentList(SimplePlugin owner, String filename) {
 		super(owner, new ArrayList<E>(), filename);
 	}
 	

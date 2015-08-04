@@ -16,7 +16,7 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -44,7 +44,7 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <T extends Map<K, V> & Serializable> PersistentMap(CommonPlugin owner, T data, String filename) {
+	public <T extends Map<K, V> & Serializable> PersistentMap(SimplePlugin owner, T data, String filename) {
 		super(owner, data, filename);
 	}
 
@@ -56,7 +56,7 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 * @param owner the plugin that created this object.
 	 * @param filename the filename to store the object as.
 	 */
-	public PersistentMap(CommonPlugin owner, String filename) {
+	public PersistentMap(SimplePlugin owner, String filename) {
 		this(owner, new HashMap<K, V>(), filename);
 	}
 

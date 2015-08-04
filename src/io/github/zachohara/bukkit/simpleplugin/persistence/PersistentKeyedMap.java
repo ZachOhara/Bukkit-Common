@@ -16,7 +16,7 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -43,7 +43,7 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	 * @param owner the plugin that created this object.
 	 * @param filename the filename to store the object as.
 	 */
-	public PersistentKeyedMap(CommonPlugin owner, String filename) {
+	public PersistentKeyedMap(SimplePlugin owner, String filename) {
 		super(owner, filename);
 	}
 

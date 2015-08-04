@@ -17,7 +17,7 @@
 package io.github.zachohara.bukkit.simpleplugin.persistence.map;
 
 import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentKeyedMap;
-import io.github.zachohara.bukkit.simpleplugin.plugin.CommonPlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -46,7 +46,7 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	 */
 	private boolean useUUID;
 
-	public PersistentPlayerData(CommonPlugin owner, String filename) {
+	public PersistentPlayerData(SimplePlugin owner, String filename) {
 		super(owner, filename);
 		this.useUUID = false;
 		this.saveAllPlayerData();
