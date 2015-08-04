@@ -230,6 +230,11 @@ public class Properties {
 	 * @see #verifyCommand()
 	 */
 	private boolean verifyValidSource(CommandInstance command) {
+		if (this.permissionNode != null && this.permissionNode != "" && command.isFromPlayer()
+				&& !command.getSenderPlayer().hasPermission(this.permissionNode)) {
+			command.sendError(StringUtil.ERROR_NO_PERMISSION_MESSAGE);
+			return false;
+		}
 		switch (this.accessible) {
 			case ALL:
 				return true;

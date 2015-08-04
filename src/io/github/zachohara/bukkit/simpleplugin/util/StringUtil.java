@@ -120,6 +120,12 @@ public final class StringUtil {
 			+ "overlord %admin!";
 
 	/**
+	 * The message that is sent to players when they try to use a command that requires a
+	 * Bukkit permission node that they do not have.
+	 */
+	public static final String ERROR_NO_PERMISSION_MESSAGE = "You do not have permission to use this command";
+	
+	/**
 	 * The message that is sent to players when they try to use a command that requires
 	 * operator / moderator priviages on the server, but the player is not an operator.
 	 */
