@@ -2,7 +2,7 @@
 
 ### What is it?
 
-I started this project because I was trying to maintain a few different Bukkit plugins, and noticed that they used some very similar code. I moved all of the reusable code into it's own project, and that project became the Bukkit Common Library. The Library handles almost everything needed for adding command-line functionality to a Bukkit plugin. The current version is confirmed to work with CraftBukkit version 1.8.8, and will *maybe* work on later versions without modification.
+I started this project because I was trying to maintain a few different Bukkit plugins, and noticed that they used some very similar code. I moved all of the reusable code into it's own project, and that project became the Bukkit SimplePlugin Library. The Library handles almost everything needed for adding command-line functionality to a Bukkit plugin. The current version is confirmed to work with CraftBukkit version 1.8.8, and will *maybe* work on later versions without modification.
 
 Along with all of the sorce code, in the root folder of this repository, you'll also find [detailed documentation](javadoc) for all of the code, along with a compiled .jar version of the project.
 
