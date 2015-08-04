@@ -19,20 +19,15 @@ package io.github.zachohara.bukkit.simpleplugin.plugin;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandExecutables;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandRules;
 
-/**
- * This class only exists so that the Bukkit Common library can be loaded into Bukkit on
- * its own, and not through another plugin. It is essentially an empty implementation of
- * the {@code CommonPlugin} abstract class, which cannot be used as an entry point because
- * it is abstract.
- * <p>
- * This class could, in theory, also be used as the main class for a plugin that has no
- * commands. The main class for this hypothetical plugin would need to extend this class,
- * and add its own functionality through the {@code onEnable()} method, or similar methods
- * that are provided through the Bukkit API.
+/** 
+ * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin
+ * that uses the SimplePlugin library, but does not add any additional commands. All
+ * non-command functionality must be added by overriding the {@code onEnable() method},
+ * or a similar method that is provided through the Bukkit API.
  *
  * @author Zach Ohara
  */
-public class EmptyPlugin extends CommonPlugin {
+public class EmptyPlugin extends SimplePlugin {
 
 	/**
 	 * {@inheritDoc}
