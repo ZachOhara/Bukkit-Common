@@ -14,8 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.common.persistence;
+package io.github.zachohara.bukkit.common.persistence.map;
 
+import io.github.zachohara.bukkit.common.persistence.PersistentKeyedMap;
 import io.github.zachohara.bukkit.common.plugin.CommonPlugin;
 
 import java.io.IOException;
