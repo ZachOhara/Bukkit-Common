@@ -507,6 +507,7 @@ public class CommandInstance {
 	 * Determines if a target player was specified as an argument to this command, and
 	 * initializes instance variables accordingly.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initializeTarget() {
 		if (this.arguments.length > 0) {
 			this.givenTarget = this.arguments[0];
