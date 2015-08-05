@@ -26,6 +26,11 @@ package io.github.zachohara.bukkit.simpleplugin.command;
  */
 public interface CommandSet {
 	
+	/**
+	 * Gets the {@code Properties} object specific to a single command.
+	 *
+	 * @return the {@code Properties} for a command.
+	 */
 	public Properties getProperties();
 	
 }
