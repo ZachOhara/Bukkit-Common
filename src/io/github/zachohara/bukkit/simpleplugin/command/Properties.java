@@ -22,7 +22,8 @@ import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 /**
  * A {@code Properties} object is specific to a single command. It should contain information
  * about the expected context of a command, such as the allowed amount of arguments, and the
- * required permission level of the sender.
+ * required permission level of the sender. A {@code Properties} object is also responsible for
+ * verifying the conditions of any given command.
  *
  * @author Zach Ohara
  */

@@ -87,6 +87,12 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 		}
 	}
 	
+	/*
+	 * +-------------------------------------------------------------------------------------+
+	 * | All methods below this point are delegate methods extending this.listdata() to this |
+	 * +-------------------------------------------------------------------------------------+
+	 */
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -73,6 +73,12 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 			return null;
 		}
 	}
+	
+	/*
+	 * +------------------------------------------------------------------------------------+
+	 * | All methods below this point are delegate methods extending this.mapdata() to this |
+	 * +------------------------------------------------------------------------------------+
+	 */
 
 	/**
 	 * {@inheritDoc}

@@ -38,7 +38,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PersistentObject {
 
 	/**
-	 * The {@code File} location that the file should be stored in.
+	 * The {@code File} that the object should be stored in.
 	 */
 	private File dataFile;
 
@@ -77,7 +77,7 @@ public class PersistentObject {
 	/**
 	 * Attempts to load currently-existant persistent data from a file.
 	 *
-	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
+	 * @param owner the {@code JavaPlugin} that should be informed of the outcome of this
 	 * operation.
 	 */
 	private void attemptLoadFile(JavaPlugin owner) {
@@ -95,7 +95,7 @@ public class PersistentObject {
 	 *
 	 * @throws IOException if the file read operation fails.
 	 * @throws ClassNotFoundException if the read is succesful, but the content is not what
-	 * was expected (this should be impossible).
+	 * was expected. This could suggest incompatable versioning of plugins.
 	 */
 	public void loadFromFile() throws IOException, ClassNotFoundException {
 		ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.dataFile));
@@ -112,7 +112,7 @@ public class PersistentObject {
 	 * Creates a new file for persistent data, if and only if there is not already stored
 	 * persistent data under the same filename.
 	 *
-	 * @param owner the {@code JavaPlugin} that should be informed of errors in this
+	 * @param owner the {@code JavaPlugin} that should be informed of the outcome of this
 	 * operation.
 	 */
 	private void createDataFile(JavaPlugin owner) {
@@ -130,7 +130,8 @@ public class PersistentObject {
 	 * Attempts to save the data in this object to an external file. If the operation
 	 * fails, it will also be handled here.
 	 *
-	 * @param owner the {@code JavaPlugin} to report failures to.
+	 * @param owner the {@code JavaPlugin} that should be informed of the outcome of this
+	 * operation.
 	 */
 	public void attemptSaveToFile(JavaPlugin owner) {
 		try {
