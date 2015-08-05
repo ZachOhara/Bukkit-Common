@@ -86,7 +86,7 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	@Override
 	public String generateMapKey(Player p) {
 		if (this.useUUID) {
-			return p.getUniqueId().toString();
+			return p.getUniqueId().toString().toLowerCase();
 		} else {
 			return p.getName();
 		}
