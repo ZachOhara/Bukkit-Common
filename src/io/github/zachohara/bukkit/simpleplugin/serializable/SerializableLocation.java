@@ -59,5 +59,14 @@ public class SerializableLocation extends Location implements Serializable {
 	public SerializableLocation(World world, double x, double y, double z, float yaw, float pitch) {
 		super(world, x, y, z, yaw, pitch);
 	}
+
+	/**
+	 * Constructs a new {@code SerializableLocation} from another location.
+	 *
+	 * @param location
+	 */
+	public SerializableLocation(Location location) {
+		this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+	}
 	
 }
