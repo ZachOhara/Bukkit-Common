@@ -1,4 +1,6 @@
-io.github.zachohara.bukkit.common.command
-io.github.zachohara.bukkit.common.persistence
-io.github.zachohara.bukkit.common.plugin
-io.github.zachohara.bukkit.common.util
+io.github.zachohara.bukkit.simpleplugin.command
+io.github.zachohara.bukkit.simpleplugin.persistence
+io.github.zachohara.bukkit.simpleplugin.persistence.map
+io.github.zachohara.bukkit.simpleplugin.plugin
+io.github.zachohara.bukkit.simpleplugin.serializable
+io.github.zachohara.bukkit.simpleplugin.util

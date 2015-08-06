@@ -89,13 +89,11 @@ public class CommandInstance {
 	 * @param rawSender the entity that sent the command.
 	 * @param rawCommand a {@code Command} object representing the command.
 	 * @param args all additional arguments sent with the command.
-	 * @param commandSet the {@code Class} object from the applicable {@link CommandRules}
+	 * @param commandSet the {@code Class} object from the applicable {@link CommandSet}
 	 * enumeration.
-	 * @param exeSet the {@code Class} object from the applicable
-	 * {@link CommandExecutables} enumeration.
 	 */
-	public <T extends CommandSet> CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
-			Class<T> commandSet) {
+	public CommandInstance(CommandSender rawSender, Command rawCommand, String[] args,
+			Class<? extends CommandSet> commandSet) {
 		this.name = rawCommand.getName().toLowerCase();
 		this.arguments = args;
 		this.properties = CommandInstance.propertiesFromString(this.name, commandSet);

@@ -128,11 +128,13 @@ public class Properties {
 	 * If all the above conditions are met given the circumstances, the command has been
 	 * successfully verified, and this method will return {@code true}.
 	 *
+	 * @param command the {@code CommandInstance} that should be check against this set of
+	 * properties.
 	 * @return {@code true} if and only if all prerequisite conditions for the command are
 	 * met; {@code false} otherwise.
-	 * @see #verifyArguments()
-	 * @see #verifyValidTarget()
-	 * @see #verifyValidSource()
+	 * @see #verifyValidArguments(CommandInstance)
+	 * @see #verifyValidTarget(CommandInstance)
+	 * @see #verifyValidSource(CommandInstance)
 	 */
 	public boolean verifyCommand(CommandInstance command) {
 		return this.verifyValidArguments(command) && this.verifyValidTarget(command)
@@ -144,9 +146,11 @@ public class Properties {
 	 * the amount of arguments is not valid, this method will return an appropriate
 	 * response to the player or console that sent the command.
 	 *
+	 * @param command the {@code CommandInstance} that should be check against this set of
+	 * properties.
 	 * @return {@code true} if and only if the amount of arguments that were sent with the
 	 * command match the expected conditions for the command; {@code false} otherwise.
-	 * @see #verifyCommand()
+	 * @see #verifyCommand(CommandInstance)
 	 */
 	private boolean verifyValidArguments(CommandInstance command) {
 		if (command.getArguments().length < this.minArgs) {
@@ -166,9 +170,11 @@ public class Properties {
 	 * this method will return an appropriate response to the player or console that sent
 	 * the command.
 	 *
+	 * @param command the {@code CommandInstance} that should be check against this set of
+	 * properties.
 	 * @return {@code true} if and only if the specified target player is a valid target
 	 * for this command; {@code false} otherwise.
-	 * @see #verifyCommand()
+	 * @see #verifyCommand(CommandInstance)
 	 */
 	private boolean verifyValidTarget(CommandInstance command) {
 		switch (this.targetable) {
@@ -209,9 +215,11 @@ public class Properties {
 	 * sender does not have the required permission to use this command, this method will
 	 * return an appropriate response to the player or console that sent this command.
 	 *
+	 * @param command the {@code CommandInstance} that should be check against this set of
+	 * properties.
 	 * @return {@code true} if and only if the entity that sent this command has the
 	 * required permission and ability to do so; {@code false} otherwise.
-	 * @see #verifyCommand()
+	 * @see #verifyCommand(CommandInstance)
 	 */
 	private boolean verifyValidSource(CommandInstance command) {
 		switch (this.accessible) {
