@@ -2,11 +2,13 @@
 
 ### What is it?
 
-I started this project because I was trying to maintain a few different Bukkit plugins, and noticed that they used some very similar code. I moved all of the reusable code into it's own project, and that project became the Bukkit SimplePlugin Library. The Library handles almost everything needed for adding command-line functionality to a Bukkit plugin. The current version is confirmed to work with CraftBukkit version 1.8.8, and will *maybe* work on later versions without modification.
+I started this project because I was trying to maintain a few different Bukkit plugins, and noticed that they used some very similar code. I moved all of the reusable code into it's own project, and that project became the Bukkit SimplePlugin Library. The Library handles almost everything needed for adding command-line functionality to a Bukkit plugin. The current version is confirmed to work with Spigot-CraftBukkit version 1.8.8, and will maybe work on later versions without modification.
 
 Along with all of the sorce code, in the root folder of this repository, you'll also find [detailed documentation](javadoc) for all of the code, along with a compiled .jar version of the project.
 
 I may or may not support this software in the future, but feel free to send a pull request if you think you have a way to improve it. There is no warranty on this software, and I am not going to do full-time tech support for it, but I will try to be as helpful as I can if you're having problems. Send me an email, or create a new issue.
+
+If you're interested in using this library for your plugin, refer to the javadocs for the library, and the quick-start guide below. Plugin examples will be posted here soon!
 
 This entire repository is made available under the GNU General Public License v3.0. A full copy of this license is available as the [LICENSE](LICENSE) file in this repository, or at [gnu.org/licenses](http://www.gnu.org/licenses/).
 
@@ -16,10 +18,20 @@ This entire repository is made available under the GNU General Public License v3
 
 This entire library works as a self-contained Bukkit plugin. Simply download the "SimplePlugin v___.jar" file from the root folder of this repository, and drop it into the 'plugins' folder in your server.
 
+To use the admin identification functionality of this plugin, the process is a little more involved. Download the source code for the SimplePlugin library, and change the two fields in the `simpleplugin.util.PlayerUtil` class to reflect the admin of whatever server the library will be running on. Compile the code back into a .jar file, and add that to the 'plugins' folder in your server.
+
 ### Using the library for your plugin
 
-Download the "SimplePlugin v___.jar" file from the root folder of this repository, and add it to the build path of your project. This should be obvious. In the 'plugin.yml' file for your plugin, tell Bukkit that your plugin relies on this one by including the line "depend: [SimplePlugin]" in the file. The main class for your plugin, as defined in the 'plugin.yml', must be a subclass of `CommonPlugin`, which is defined in this library. If no extra commands will be added through your plugin, your main class can instead be a subclass of `EmptyPlugin`.
+Download the "SimplePlugin v___.jar" file from the root folder of this repository, and add it to the build path of your project. It should be set up only as a compile dependency, and not as a runtime dependency. In the 'plugin.yml' file for your plugin, tell Bukkit that your plugin relies on this one by including the line "depend: [SimplePlugin]" in the file. The main class for your plugin, as defined in the 'plugin.yml', must be a subclass of `SimplePlugin`, which is defined in this library. If no extra commands will be added through your plugin, your main class can instead be a subclass of `EmptyPlugin`.
 
-Your plugin must include two enumerations: one for command rules, and another for command executables. These enumerations should implement `CommandRules` and `CommandExecutables` respectively. Refer to the documentation for these two interfaces, as well as to the `CommandRulesEntry` and `Implementation` classes, to get started writing your commands.
+Your plugin must include an enumeration that represents the set of commands added by your plugin. The enumeration must implement `CommandSet`, which is defined in this library, and every element in the enumeration must be named identically to a command that your plugin supports. The names are not case-sensitive, but as a general rule, Java enumeration constants should be all upper-case.
+
+Every enumerable constant must have a `Properties` object associated with it. The Properties object includes information such as the minimum and maximum amount of arguments for a command, who can send the command, and who can / should be targeted by the command. Refer to the documentation for the `Properties` class for more information.
+
+Each Properties object must also contain an `Implementation` object that contains the "body" of the command. For each command, define a class that `extends Implementation`. Write the "body" of your command by overriding the `doPlayerCommand(CommandInstance)` method. By the time this method is called, the command has already been checked against all the requirements outlined in its Properties object, so it is not necessary to write any additional checks. By default, the command will go through the `doPlayerCommand(CommandInstance)` method regardless of weather it was sent by a player or by the console. If the command's behavior depends on the source of the command, then also override the `doConsoleCommand(CommandInstance)` in the same Implementation class. Now, the command will go through `doPlayerCommand` if and only if it was sent by a player, and will go through `doConsoleCommand` if it was sent by the server console.
+
+The `CommandInstance` class is used to contain all relevent information generated by a single sent command, but it also provides some methods used for returning information to some players. For example, `sendMessage(String)` can be used to send a message to the player or console that sent the command, or `sendTargetMessage(String)` can be used to send a message to the player targeted by a command. Refer to the documentation for CommandInstance for more information.
 
 Any plugin that adds functionality beyond basic command line interfaces needs to initialize that functionality by overriding the `onEnable` method of the main class. In the first line of the method, be sure to call `super.onEnable()` as well.
+
+If your plugin must override any other methods that are exposed by the Bukkit plugin API, be sure to also call the superclass implementation of the same method.
