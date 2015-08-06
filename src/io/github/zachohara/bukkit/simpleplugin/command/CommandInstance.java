@@ -324,7 +324,7 @@ public class CommandInstance {
 				return command.getProperties();
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("Nothing was found with a name matching " + name);
 	}
 	
 	/**
