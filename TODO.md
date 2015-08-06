@@ -8,3 +8,5 @@
 * Add package-info.java for all packages
 * Split `StringUtil` into other classes
 * Change persistentMap and persistentList to extend a Map List, and contain a reference to a PersistentObject
+* Add a link to example code in the readme
+* Add links to javadocs in the readme
