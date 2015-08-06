@@ -33,7 +33,8 @@ import java.util.Set;
  * @see java.util.Map
  * @author Zach Ohara
  */
-public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject implements Map<K, V> {
+public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject implements
+Map<K, V> {
 
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
@@ -73,12 +74,16 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 			return null;
 		}
 	}
-	
+
+	// @formatter:off
+
 	/*
 	 * +------------------------------------------------------------------------------------+
 	 * | All methods below this point are delegate methods extending this.mapdata() to this |
 	 * +------------------------------------------------------------------------------------+
 	 */
+
+	// @formatter:on
 
 	/**
 	 * {@inheritDoc}

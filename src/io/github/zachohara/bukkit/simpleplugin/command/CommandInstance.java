@@ -34,54 +34,54 @@ import org.bukkit.entity.Player;
  * @author Zach Ohara
  */
 public class CommandInstance {
-	
+
 	/**
 	 * The name of the command that was called.
 	 */
 	private final String name;
-	
+
 	/**
 	 * The arguments (if any) that were sent along with the command.
 	 */
 	private final String[] arguments;
-	
+
 	/**
 	 * The {@code Properties} of the command.
 	 */
 	private final Properties properties;
-	
+
 	/**
 	 * The entity that sent the command. This may be a player or the console.
 	 */
 	private CommandSender senderRaw;
-	
+
 	/**
 	 * The player that sent the command. {@code null} if the command was sent by the
 	 * console.
 	 */
 	private Player senderPlayer;
-	
+
 	/**
 	 * The name of the entity that sent the command.
 	 */
 	private String senderName;
-	
+
 	/**
 	 * The player that was targeted by the command (if applicable).
 	 */
 	private Player targetPlayer;
-	
+
 	/**
 	 * The name of the player that was targeted by the command (if applicable).
 	 */
 	private String targetName;
-	
+
 	/**
 	 * The name that was supplied as a target, regardless of whether or not that name is a
 	 * valid target.
 	 */
 	private String givenTarget;
-	
+
 	/**
 	 * Constructs a new {@code CommandInstance} based on availble information about the
 	 * command.
@@ -103,7 +103,7 @@ public class CommandInstance {
 		this.initializeSenderName();
 		this.initializeTarget();
 	}
-	
+
 	/**
 	 * Returns {@code true} if an in-game player sent the command, or {@code false} if the
 	 * command was sent by the server console.
@@ -114,7 +114,7 @@ public class CommandInstance {
 	public boolean isFromPlayer() {
 		return this.senderPlayer != null;
 	}
-	
+
 	/**
 	 * Returns {@code true} if the server console sent the command, or {@code false} if an
 	 * in-game player sent the command.
@@ -126,7 +126,7 @@ public class CommandInstance {
 	public boolean isFromConsole() {
 		return this.senderPlayer == null;
 	}
-	
+
 	/**
 	 * Returns {@code true} if and only if this command was send with a valid, online
 	 * player as a target.
@@ -137,7 +137,7 @@ public class CommandInstance {
 	public boolean hasTarget() {
 		return this.targetPlayer != null;
 	}
-	
+
 	/**
 	 * Gets the name of the command that was sent. If a command alias was sent instead of
 	 * an actual command, the name of the command represented by the alias will be returned
@@ -148,7 +148,7 @@ public class CommandInstance {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Gets the arguments that were sent with this command.
 	 *
@@ -157,7 +157,7 @@ public class CommandInstance {
 	public String[] getArguments() {
 		return this.arguments;
 	}
-	
+
 	/**
 	 * Gets the {@code CommandSender} object that sent this command, regardless of whether
 	 * the command was sent by a player or console.
@@ -167,7 +167,7 @@ public class CommandInstance {
 	public CommandSender getSender() {
 		return this.senderRaw;
 	}
-	
+
 	/**
 	 * Gets the {@code Player} object that sent this command, if the command was sent by a
 	 * player. Returns {@code null} if the command was not sent by a player.
@@ -177,7 +177,7 @@ public class CommandInstance {
 	public Player getSenderPlayer() {
 		return this.senderPlayer;
 	}
-	
+
 	/**
 	 * Gets the name of the player that sent this command or {@code "The Console"} if the
 	 * command was sent by the console.
@@ -187,7 +187,7 @@ public class CommandInstance {
 	public String getSenderName() {
 		return this.senderName;
 	}
-	
+
 	/**
 	 * Gets the target player attached to this command, or {@code null} if no valid target
 	 * player was specified.
@@ -197,7 +197,7 @@ public class CommandInstance {
 	public Player getTargetPlayer() {
 		return this.targetPlayer;
 	}
-	
+
 	/**
 	 * Gets the name of the target player attached to this command. If the specified target
 	 * player is not a valid, online player, whatever was specified as the target player
@@ -212,7 +212,7 @@ public class CommandInstance {
 			return this.givenTarget;
 		}
 	}
-	
+
 	/**
 	 * Gets the name of the player that was specified as the target of this command,
 	 * regardless of whether the specified player is valid.
@@ -222,11 +222,12 @@ public class CommandInstance {
 	public String getGivenTarget() {
 		return this.givenTarget;
 	}
-	
+
 	/**
 	 * Checks the validity of the conditions that this command was sent with. The
-	 * {@code Properties} class is ultimately responsible for this verification, so
-	 * this method calls and returns the value of {@link Properties#verifyCommand(CommandInstance)}
+	 * {@code Properties} class is ultimately responsible for this verification, so this
+	 * method calls and returns the value of
+	 * {@link Properties#verifyCommand(CommandInstance)}
 	 *
 	 * @return {@code true} if and only if all prerequisite conditions for the command are
 	 * met; {@code false} otherwise.
@@ -234,7 +235,7 @@ public class CommandInstance {
 	public boolean verifyCommand() {
 		return this.properties.verifyCommand(this);
 	}
-	
+
 	/**
 	 * Executes the 'main procedure' of the command after its conditions have been fully
 	 * verified.
@@ -244,7 +245,7 @@ public class CommandInstance {
 	public void executeCommand() {
 		this.properties.getImplementation().doCommand(this);
 	}
-	
+
 	/**
 	 * Sends a given message to all players and consoles on the server. The message will be
 	 * formatted and colored before it is sent.
@@ -254,7 +255,7 @@ public class CommandInstance {
 	public void broadcastMessage(String message) {
 		Bukkit.getServer().broadcastMessage(StringUtil.parseString(message, this));
 	}
-	
+
 	/**
 	 * Sends a given message to the target player specified by this command. The message
 	 * will be formatted and colored before it is sent. If there is no valid target player
@@ -265,7 +266,7 @@ public class CommandInstance {
 	public void sendTargetMessage(String message) {
 		this.targetPlayer.sendMessage(StringUtil.parseString(message, this));
 	}
-	
+
 	/**
 	 * Sends a given message to the player or console that sent this command. The message
 	 * will be formatted before and colored it is sent.
@@ -275,7 +276,7 @@ public class CommandInstance {
 	public void sendMessage(String message) {
 		this.senderRaw.sendMessage(StringUtil.parseString(message, this));
 	}
-	
+
 	/**
 	 * Sends a given error message to the player or console that sent this command. The
 	 * error message will be formatted and colored before it is sent.
@@ -285,7 +286,7 @@ public class CommandInstance {
 	public void sendError(String message) {
 		this.senderRaw.sendMessage(StringUtil.parseError(message, this));
 	}
-	
+
 	/**
 	 * Sends a given message to the console and to the admin of the server. The message
 	 * will be formatted and colored before it is sent.
@@ -296,7 +297,7 @@ public class CommandInstance {
 		String formattedMessage = StringUtil.parseString(message, this);
 		PlayerUtil.sendAllAdmins(formattedMessage);
 	}
-	
+
 	/**
 	 * Sends a given error message to the console of the server. The error message will be
 	 * formatted and colored before it is sent.
@@ -306,10 +307,9 @@ public class CommandInstance {
 	public void logConsoleError(String message) {
 		Bukkit.getConsoleSender().sendMessage(StringUtil.parseError(message, this));
 	}
-	
+
 	/**
-	 * Gets the {@code Properties} object corresponding to the command with the
-	 * given name.
+	 * Gets the {@code Properties} object corresponding to the command with the given name.
 	 *
 	 * @param name the name of the requested command.
 	 * @param ruleSet the {@code Class} object of the specific set of command rules.
@@ -326,7 +326,7 @@ public class CommandInstance {
 		}
 		throw new IllegalArgumentException("Nothing was found with a name matching " + name);
 	}
-	
+
 	/**
 	 * Determines if the command was sent by a console or a player, and initializes this
 	 * {@code CommandInstance} object accordingly.
@@ -340,7 +340,7 @@ public class CommandInstance {
 			this.senderPlayer = (Player) this.senderRaw;
 		}
 	}
-	
+
 	/**
 	 * Initializes instance variables according to the name of the player that sent this
 	 * command, or {@code "The Console"} if the command was sent by a console.
@@ -352,7 +352,7 @@ public class CommandInstance {
 			this.senderName = "The Console";
 		}
 	}
-	
+
 	/**
 	 * Determines if a target player was specified as an argument to this command, and
 	 * initializes instance variables accordingly.
@@ -373,5 +373,5 @@ public class CommandInstance {
 			this.targetName = "[No Target]";
 		}
 	}
-	
+
 }

@@ -21,7 +21,6 @@ import java.io.Serializable;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-
 /**
  * A {@code SerializableLocation} is a Bukkit {@code Location} that can be serialized using
  * Java's standard object IO system.
@@ -29,7 +28,7 @@ import org.bukkit.World;
  * @author Zach Ohara
  */
 public class SerializableLocation extends Location implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -44,7 +43,7 @@ public class SerializableLocation extends Location implements Serializable {
 	public SerializableLocation(World world, double x, double y, double z) {
 		super(world, x, y, z);
 	}
-	
+
 	/**
 	 * Constructs a new {@code SerializableLocation} with all the given information.
 	 *
@@ -66,7 +65,8 @@ public class SerializableLocation extends Location implements Serializable {
 	 * @param location
 	 */
 	public SerializableLocation(Location location) {
-		this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+		this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(),
+				location.getPitch());
 	}
-	
+
 }

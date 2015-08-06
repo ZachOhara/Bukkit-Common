@@ -17,20 +17,20 @@
 package io.github.zachohara.bukkit.simpleplugin.command;
 
 /**
- * The {@code CommandSet} interface is designed to be implemented by an enumeration
- * that represents the set of commands supported by a plugin. The enumeration should
- * contain a {@code Properties} object for each command, with appropriate information.
+ * The {@code CommandSet} interface is designed to be implemented by an enumeration that
+ * represents the set of commands supported by a plugin. The enumeration should contain a
+ * {@code Properties} object for each command, with appropriate information.
  *
  * @author Zach Ohara
  * @see Properties
  */
 public interface CommandSet {
-	
+
 	/**
 	 * Gets the {@code Properties} object specific to a single command.
 	 *
 	 * @return the {@code Properties} for a command.
 	 */
 	public Properties getProperties();
-	
+
 }

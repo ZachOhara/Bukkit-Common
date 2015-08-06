@@ -20,10 +20,10 @@ import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
 import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
 /**
- * A {@code Properties} object is specific to a single command. It should contain information
- * about the expected context of a command, such as the allowed amount of arguments, and the
- * required permission level of the sender. A {@code Properties} object is also responsible for
- * verifying the conditions of any given command.
+ * A {@code Properties} object is specific to a single command. It should contain
+ * information about the expected context of a command, such as the allowed amount of
+ * arguments, and the required permission level of the sender. A {@code Properties} object
+ * is also responsible for verifying the conditions of any given command.
  *
  * @author Zach Ohara
  */
@@ -49,15 +49,16 @@ public class Properties {
 	 * The type or range of players that can be targeted by the command.
 	 */
 	private final Properties.Target targetable;
-	
+
 	/**
 	 * The subclass of {@code Implementation} that contains an implementation for the
 	 * command.
 	 */
 	private final Implementation implementation;
-	
+
 	/**
-	 * Constructs a new {@code Properties} that exactly mimics the properties of the given command entry
+	 * Constructs a new {@code Properties} that exactly mimics the properties of the given
+	 * command entry
 	 *
 	 * @param other the comand entry to mimic the properties of.
 	 * @param implement see instance variable {@link #implementation}
@@ -65,9 +66,10 @@ public class Properties {
 	public Properties(CommandSet other, Implementation implement) {
 		this(other.getProperties(), implement);
 	}
-	
+
 	/**
-	 * Constructs a new {@code Properties} that exactly mimics the given {@code Properties} object.
+	 * Constructs a new {@code Properties} that exactly mimics the given {@code Properties}
+	 * object.
 	 *
 	 * @param other the {@code Properties} that this object should mimic.
 	 * @param implement see instance variable {@link #implementation}
@@ -75,7 +77,7 @@ public class Properties {
 	public Properties(Properties other, Implementation implement) {
 		this(other.minArgs, other.maxArgs, other.accessible, other.targetable, implement);
 	}
-	
+
 	/**
 	 * Constructs a new {@code Properties} with all the required information.
 	 *
@@ -85,18 +87,17 @@ public class Properties {
 	 * @param target see instance variable {@link #targetable}
 	 * @param implement see instance variable {@link #implementation}
 	 */
-	public Properties(int minArgs, int maxArgs, Source access,
-			Target target, Implementation implement) {
+	public Properties(int minArgs, int maxArgs, Source access, Target target, Implementation implement) {
 		this.minArgs = minArgs;
 		this.maxArgs = maxArgs;
 		this.accessible = access;
 		this.targetable = target;
 		this.implementation = implement;
 	}
-	
+
 	/**
-	 * Determines if the command represented by this {@code Properties} should use a target.
-	 * This is simply done by checking that the target setting is not {@code NONE};
+	 * Determines if the command represented by this {@code Properties} should use a
+	 * target. This is simply done by checking that the target setting is not {@code NONE};
 	 *
 	 * @return {@code true} if the command uses a target; {@code false} otherwise.
 	 */
@@ -134,13 +135,14 @@ public class Properties {
 	 * @see #verifyValidSource()
 	 */
 	public boolean verifyCommand(CommandInstance command) {
-		return this.verifyValidArguments(command) && this.verifyValidTarget(command) && this.verifyValidSource(command);
+		return this.verifyValidArguments(command) && this.verifyValidTarget(command)
+				&& this.verifyValidSource(command);
 	}
 
 	/**
-	 * Verifies that the given command was sent with an appropriate amount of arguments. If the
-	 * amount of arguments is not valid, this method will return an appropriate response to
-	 * the player or console that sent the command.
+	 * Verifies that the given command was sent with an appropriate amount of arguments. If
+	 * the amount of arguments is not valid, this method will return an appropriate
+	 * response to the player or console that sent the command.
 	 *
 	 * @return {@code true} if and only if the amount of arguments that were sent with the
 	 * command match the expected conditions for the command; {@code false} otherwise.
@@ -249,14 +251,13 @@ public class Properties {
 				}
 			default:
 				command.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException(
-						"An unexpected value of Properties.Source was found.");
+				throw new UnsupportedOperationException("An unexpected value of Properties.Source was found.");
 		}
 	}
 
 	/**
-	 * The set of possible sources, or ranges of sources, that may be allowed to
-	 * use any single command.
+	 * The set of possible sources, or ranges of sources, that may be allowed to use any
+	 * single command.
 	 */
 	public static enum Source {
 		ALL,
@@ -268,8 +269,8 @@ public class Properties {
 	}
 
 	/**
-	 * The set of possible targets, or ranges of targets, that may be allowed to
-	 * be targeted by any single command.
+	 * The set of possible targets, or ranges of targets, that may be allowed to be
+	 * targeted by any single command.
 	 */
 	public static enum Target {
 		NONE,
@@ -278,5 +279,5 @@ public class Properties {
 		ALL_ONLINE,
 		ALLOW_OFFLINE
 	}
-	
+
 }

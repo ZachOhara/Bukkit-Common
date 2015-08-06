@@ -34,7 +34,7 @@ import java.util.ListIterator;
  * @author Zach Ohara
  */
 public class PersistentList<E extends Serializable> extends PersistentObject implements List<E> {
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, the data
 	 * to store, and the filename to store that data to.
@@ -47,7 +47,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, L data, String filename) {
 		super(owner, data, filename);
 	}
-	
+
 	/**
 	 * Constructs a new {@code PersistentList} with the given plugin as an owner, and the
 	 * filename to store that data to. This constructor will create a new {@code ArrayList}
@@ -59,7 +59,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public PersistentList(SimplePlugin owner, String filename) {
 		super(owner, new ArrayList<E>(), filename);
 	}
-	
+
 	/**
 	 * Gets the {@code List} that is stored by this {@code PersistentList}.
 	 *
@@ -73,13 +73,15 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 			return null;
 		}
 	}
-	
+
 	/*
-	 * +-------------------------------------------------------------------------------------+
-	 * | All methods below this point are delegate methods extending this.listdata() to this |
-	 * +-------------------------------------------------------------------------------------+
+	 * +------------------------------------------------------------------------------------
+	 * -+ | All methods below this point are delegate methods extending this.listdata() to
+	 * this |
+	 * +------------------------------------------------------------------------------
+	 * -------+
 	 */
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -87,16 +89,16 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean add(E arg0) {
 		return this.listdata().add(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void add(int arg0, E arg1) {
 		this.listdata().add(arg0, arg1);
-		
+
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -104,7 +106,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean addAll(Collection<? extends E> arg0) {
 		return this.listdata().addAll(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -112,7 +114,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean addAll(int arg0, Collection<? extends E> arg1) {
 		return this.listdata().addAll(arg0, arg1);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -120,7 +122,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public void clear() {
 		this.listdata().clear();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -128,7 +130,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean contains(Object arg0) {
 		return this.listdata().contains(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -136,7 +138,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean containsAll(Collection<?> arg0) {
 		return this.listdata().containsAll(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -144,7 +146,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public E get(int arg0) {
 		return this.listdata().get(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -152,7 +154,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public int indexOf(Object arg0) {
 		return this.listdata().indexOf(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -160,7 +162,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean isEmpty() {
 		return this.listdata().isEmpty();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -168,7 +170,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public Iterator<E> iterator() {
 		return this.listdata().iterator();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -176,7 +178,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public int lastIndexOf(Object arg0) {
 		return this.listdata().lastIndexOf(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -184,7 +186,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public ListIterator<E> listIterator() {
 		return this.listdata().listIterator();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -192,7 +194,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public ListIterator<E> listIterator(int arg0) {
 		return this.listdata().listIterator(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -200,7 +202,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean remove(Object arg0) {
 		return this.listdata().remove(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -208,7 +210,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public E remove(int arg0) {
 		return this.listdata().remove(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -216,7 +218,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean removeAll(Collection<?> arg0) {
 		return this.listdata().removeAll(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -224,7 +226,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public boolean retainAll(Collection<?> arg0) {
 		return this.listdata().retainAll(arg0);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -232,7 +234,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public E set(int arg0, E arg1) {
 		return this.listdata().set(arg0, arg1);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -240,7 +242,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public int size() {
 		return this.listdata().size();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -248,7 +250,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public List<E> subList(int arg0, int arg1) {
 		return this.listdata().subList(arg0, arg1);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -256,7 +258,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public Object[] toArray() {
 		return this.listdata().toArray();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -264,5 +266,5 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public <T> T[] toArray(T[] arg0) {
 		return this.listdata().toArray(arg0);
 	}
-	
+
 }

@@ -18,11 +18,11 @@ package io.github.zachohara.bukkit.simpleplugin.plugin;
 
 import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
 
-/** 
- * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin
- * that uses the SimplePlugin library, but does not add any additional commands. All
- * non-command functionality must be added by overriding the {@code onEnable() method},
- * or a similar method that is provided through the Bukkit API.
+/**
+ * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin that
+ * uses the SimplePlugin library, but does not add any additional commands. All non-command
+ * functionality must be added by overriding the {@code onEnable() method}, or a similar
+ * method that is provided through the Bukkit API.
  *
  * @author Zach Ohara
  */
