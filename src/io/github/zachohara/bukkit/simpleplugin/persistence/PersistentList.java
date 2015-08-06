@@ -61,19 +61,6 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	}
 	
 	/**
-	 * Adds an element to the list, if and only if it is not already in the list.
-	 *
-	 * @param data the element to add.
-	 */
-	public void addSafe(E data) {
-		//@formatter:off
-		if (!this.contains(data)) {
-			this.add(data);
-		}
-		//@formatter:on
-	}
-	
-	/**
 	 * Gets the {@code List} that is stored by this {@code PersistentList}.
 	 *
 	 * @return a reference to the underlying {@code List}.
