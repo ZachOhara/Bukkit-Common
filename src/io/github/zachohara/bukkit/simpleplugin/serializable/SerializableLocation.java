@@ -62,7 +62,8 @@ public class SerializableLocation extends Location implements Serializable {
 	/**
 	 * Constructs a new {@code SerializableLocation} from another location.
 	 *
-	 * @param location the {@code Location} to initialize this {@code SerializableLocation} from. 
+	 * @param location the {@code Location} to initialize this {@code SerializableLocation}
+	 * from.
 	 */
 	public SerializableLocation(Location location) {
 		this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(),

@@ -250,7 +250,9 @@ public class Properties {
 			case ADMIN_PLAYER_ONLY:
 				if (command.isFromPlayer() && PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
 					return true;
+					// @formatter:off
 				} else if (!command.isFromPlayer()) {
+					// @formatter:on
 					command.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
 					return false;
 				} else {
