@@ -39,11 +39,6 @@ public class Properties {
 	 * {@code -1} if there is no maximum amount of arguments.
 	 */
 	private final int maxArgs;
-	
-	/**
-	 * The Bukkit permission node that is required to use the command. 
-	 */
-	private final String permissionNode;
 
 	/**
 	 * The type or range of sources that are allowed to use the command.
@@ -60,20 +55,6 @@ public class Properties {
 	 * command.
 	 */
 	private final Implementation implementation;
-
-	/**
-	 * Constructs a new {@code Properties} with the given information, and assumes that no specific Bukkit
-	 * permission node is required to use this command.
-	 *
-	 * @param minArgs see instance variable {@link #minArgs}
-	 * @param maxArgs see instance variable {@link #maxArgs}
-	 * @param access see instance variable {@link #accessible}
-	 * @param target see instance variable {@link #targetable}
-	 * @param implement see instance variable {@link #implementation}
-	 */
-	public Properties(int minArgs, int maxArgs, Source access, Target target, Implementation implement) {
-		this(minArgs, maxArgs, "", access, target, implement);
-	}
 	
 	/**
 	 * Constructs a new {@code Properties} that exactly mimics the properties of the given command entry
@@ -92,7 +73,7 @@ public class Properties {
 	 * @param implement see instance variable {@link #implementation}
 	 */
 	public Properties(Properties other, Implementation implement) {
-		this(other.minArgs, other.maxArgs, other.permissionNode, other.accessible, other.targetable, implement);
+		this(other.minArgs, other.maxArgs, other.accessible, other.targetable, implement);
 	}
 	
 	/**
@@ -100,16 +81,14 @@ public class Properties {
 	 *
 	 * @param minArgs see instance variable {@link #minArgs}
 	 * @param maxArgs see instance variable {@link #maxArgs}
-	 * @param permissionNode see instance variable {@link #permissionNode}
 	 * @param access see instance variable {@link #accessible}
 	 * @param target see instance variable {@link #targetable}
 	 * @param implement see instance variable {@link #implementation}
 	 */
-	public Properties(int minArgs, int maxArgs, String permissionNode, Source access,
+	public Properties(int minArgs, int maxArgs, Source access,
 			Target target, Implementation implement) {
 		this.minArgs = minArgs;
 		this.maxArgs = maxArgs;
-		this.permissionNode = permissionNode;
 		this.accessible = access;
 		this.targetable = target;
 		this.implementation = implement;
@@ -233,11 +212,6 @@ public class Properties {
 	 * @see #verifyCommand()
 	 */
 	private boolean verifyValidSource(CommandInstance command) {
-		if (this.permissionNode != null && this.permissionNode != "" && command.isFromPlayer()
-				&& !command.getSenderPlayer().hasPermission(this.permissionNode)) {
-			command.sendError(StringUtil.ERROR_NO_PERMISSION_MESSAGE);
-			return false;
-		}
 		switch (this.accessible) {
 			case ALL:
 				return true;
