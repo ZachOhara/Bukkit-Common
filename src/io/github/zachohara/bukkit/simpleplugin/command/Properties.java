@@ -17,7 +17,7 @@
 package io.github.zachohara.bukkit.simpleplugin.command;
 
 import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
-import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.Strings;
 
 /**
  * A {@code Properties} object is specific to a single command. It should contain
@@ -154,11 +154,11 @@ public class Properties {
 	 */
 	private boolean verifyValidArguments(CommandInstance command) {
 		if (command.getArguments().length < this.minArgs) {
-			command.sendError(StringUtil.ERROR_TOO_FEW_ARGS_MESSAGE);
+			command.sendError(Strings.ERROR_TOO_FEW_ARGS_MESSAGE);
 			return false;
 		}
 		if (this.maxArgs != -1 && command.getArguments().length > this.maxArgs) {
-			command.sendError(StringUtil.ERROR_TOO_MANY_ARGS_MESSAGE);
+			command.sendError(Strings.ERROR_TOO_MANY_ARGS_MESSAGE);
 			return false;
 		}
 		return true;
@@ -182,15 +182,15 @@ public class Properties {
 				return true;
 			case RESTRICT_ADMIN:
 				if (command.getGivenTarget().equalsIgnoreCase(PlayerUtil.getAdminName())) {
-					command.sendMessage(StringUtil.ERROR_ADMIN_PROTECTED_MESSAGE);
-					command.reportToAdmins(StringUtil.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
+					command.sendMessage(Strings.ERROR_ADMIN_PROTECTED_MESSAGE);
+					command.reportToAdmins(Strings.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
 					return false;
 				} else {
 					return true;
 				}
 			case IF_SENDER_OP:
 				if (command.hasTarget() && command.isFromPlayer() && !command.getSenderPlayer().isOp()) {
-					command.sendError(StringUtil.ERROR_TARGET_ONLY_IF_OP);
+					command.sendError(Strings.ERROR_TARGET_ONLY_IF_OP);
 					return false;
 				} else {
 					return true;
@@ -199,7 +199,7 @@ public class Properties {
 				if (command.hasTarget() || command.getArguments().length == 0) {
 					return true;
 				} else {
-					command.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
+					command.sendError(Strings.ERROR_TARGET_OFFLINE_MESSAGE);
 					return false;
 				}
 			case ALLOW_OFFLINE:
@@ -229,22 +229,22 @@ public class Properties {
 				if (command.isFromPlayer()) {
 					return true;
 				} else {
-					command.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
+					command.sendError(Strings.ERROR_PLAYER_ONLY_MESSAGE);
 					return false;
 				}
 			case OP_ONLY:
 				if (command.isFromConsole() || command.getSenderPlayer().isOp()) {
 					return true;
 				} else {
-					command.sendError(StringUtil.ERROR_NOT_OP_MESSAGE);
+					command.sendError(Strings.ERROR_NOT_OP_MESSAGE);
 					return false;
 				}
 			case ADMIN_ONLY:
 				if (command.isFromConsole() || PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
 					return true;
 				} else {
-					command.sendMessage(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
-					command.reportToAdmins(StringUtil.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
+					command.sendMessage(Strings.ERROR_ADMIN_ONLY_MESSAGE);
+					command.reportToAdmins(Strings.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
 					return false;
 				}
 			case ADMIN_PLAYER_ONLY:
@@ -253,10 +253,10 @@ public class Properties {
 					// @formatter:off
 				} else if (!command.isFromPlayer()) {
 					// @formatter:on
-					command.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
+					command.sendError(Strings.ERROR_PLAYER_ONLY_MESSAGE);
 					return false;
 				} else {
-					command.sendError(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
+					command.sendError(Strings.ERROR_ADMIN_ONLY_MESSAGE);
 					return false;
 				}
 			default:
