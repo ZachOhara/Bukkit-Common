@@ -22,17 +22,17 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
 /**
- * The {@code StringUtil} class provides static constants and methods that are useful in
+ * The {@code StringParser} class provides static constants and methods that are useful in
  * dealing with messages and other strings.
  *
  * @author Zach Ohara
  */
-public final class StringUtil {
+public final class StringParser {
 
 	/**
-	 * The {@code StringUtil} class should not be instantiable.
+	 * The {@code StringParser} class should not be instantiable.
 	 */
-	private StringUtil() {
+	private StringParser() {
 
 	}
 
@@ -77,7 +77,7 @@ public final class StringUtil {
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseString(String message, CommandInstance source) {
-		return StringUtil.parseText(message, Strings.TEXTCOLOR, source);
+		return StringParser.parseText(message, Strings.TEXTCOLOR, source);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public final class StringUtil {
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseError(String message, CommandInstance source) {
-		return StringUtil.parseText(message, Strings.ERRORCOLOR, source);
+		return StringParser.parseText(message, Strings.ERRORCOLOR, source);
 	}
 
 	/**
@@ -108,9 +108,9 @@ public final class StringUtil {
 	private static String parseText(String message, ChatColor color, CommandInstance source) {
 		message = color + message;
 		if (source != null) {
-			message = StringUtil.parseStringForInstance(message, color, source);
+			message = StringParser.parseStringForInstance(message, color, source);
 		}
-		message = StringUtil.parseStringForColor(message, color);
+		message = StringParser.parseStringForColor(message, color);
 		return message;
 	}
 
@@ -129,8 +129,8 @@ public final class StringUtil {
 		//@formatter:off
 		final String[][] parsingKeys = {
 				{"%admin", "@admin" + PlayerUtil.getAdminName()},
-				{"%sloc", StringUtil.getSenderLocation(source)},
-				{"%tloc", StringUtil.getTargetLocation(source)},
+				{"%sloc", StringParser.getSenderLocation(source)},
+				{"%tloc", StringParser.getTargetLocation(source)},
 				{"%s", source.getSenderName()},
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
@@ -161,7 +161,7 @@ public final class StringUtil {
 	 */
 	private static String getSenderLocation(CommandInstance source) {
 		if (source.isFromPlayer()) {
-			return StringUtil.getLocationString(source.getSenderPlayer().getLocation());
+			return StringParser.getLocationString(source.getSenderPlayer().getLocation());
 		} else {
 			return "@location[no location]";
 		}
@@ -178,7 +178,7 @@ public final class StringUtil {
 	 */
 	private static String getTargetLocation(CommandInstance source) {
 		if (source.hasTarget()) {
-			return StringUtil.getLocationString(source.getTargetPlayer().getLocation());
+			return StringParser.getLocationString(source.getTargetPlayer().getLocation());
 		} else {
 			return "@location[no location]";
 		}

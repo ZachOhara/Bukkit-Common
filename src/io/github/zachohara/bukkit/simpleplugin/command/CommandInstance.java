@@ -17,7 +17,7 @@
 package io.github.zachohara.bukkit.simpleplugin.command;
 
 import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
-import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -251,7 +251,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void broadcastMessage(String message) {
-		Bukkit.getServer().broadcastMessage(StringUtil.parseString(message, this));
+		Bukkit.getServer().broadcastMessage(StringParser.parseString(message, this));
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void sendTargetMessage(String message) {
-		this.targetPlayer.sendMessage(StringUtil.parseString(message, this));
+		this.targetPlayer.sendMessage(StringParser.parseString(message, this));
 	}
 
 	/**
@@ -272,7 +272,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void sendMessage(String message) {
-		this.senderRaw.sendMessage(StringUtil.parseString(message, this));
+		this.senderRaw.sendMessage(StringParser.parseString(message, this));
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class CommandInstance {
 	 * @param message the error message to be sent.
 	 */
 	public void sendError(String message) {
-		this.senderRaw.sendMessage(StringUtil.parseError(message, this));
+		this.senderRaw.sendMessage(StringParser.parseError(message, this));
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void reportToAdmins(String message) {
-		String formattedMessage = StringUtil.parseString(message, this);
+		String formattedMessage = StringParser.parseString(message, this);
 		PlayerUtil.sendAllAdmins(formattedMessage);
 	}
 
@@ -303,7 +303,7 @@ public class CommandInstance {
 	 * @param message the error message to be sent.
 	 */
 	public void logConsoleError(String message) {
-		Bukkit.getConsoleSender().sendMessage(StringUtil.parseError(message, this));
+		Bukkit.getConsoleSender().sendMessage(StringParser.parseError(message, this));
 	}
 
 	/**
