@@ -62,7 +62,8 @@ public class CommandInstance {
 	private Player senderPlayer;
 
 	/**
-	 * The name of the entity that sent the command.
+	 * The name of the entity that sent the command. This is either the name of a player, or {@code "The Console"}
+	 * if the command was sent by the console.
 	 */
 	private String senderName;
 
@@ -77,7 +78,7 @@ public class CommandInstance {
 	private String targetName;
 
 	/**
-	 * The name that was supplied as a target, regardless of whether or not that name is a
+	 * The name that was supplied as a target player, regardless of whether or not that name is a
 	 * valid target.
 	 */
 	private String givenTarget;

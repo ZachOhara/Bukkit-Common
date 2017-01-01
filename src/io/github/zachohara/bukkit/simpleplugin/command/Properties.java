@@ -17,7 +17,7 @@
 package io.github.zachohara.bukkit.simpleplugin.command;
 
 import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
-import io.github.zachohara.bukkit.simpleplugin.util.Strings;
+import io.github.zachohara.bukkit.simpleplugin.util.StringUtil;
 
 /**
  * A {@code Properties} object is specific to a single command. It should contain
@@ -137,8 +137,7 @@ public class Properties {
 	 * @see #verifyValidSource(CommandInstance)
 	 */
 	public boolean verifyCommand(CommandInstance command) {
-		return this.verifyValidArguments(command) && this.verifyValidTarget(command)
-				&& this.verifyValidSource(command);
+		return this.verifyValidSource(command) && this.verifyValidArguments(command) && this.verifyValidTarget(command);
 	}
 
 	/**
@@ -154,11 +153,11 @@ public class Properties {
 	 */
 	private boolean verifyValidArguments(CommandInstance command) {
 		if (command.getArguments().length < this.minArgs) {
-			command.sendError(Strings.ERROR_TOO_FEW_ARGS_MESSAGE);
+			command.sendError(StringUtil.ERROR_TOO_FEW_ARGS_MESSAGE);
 			return false;
 		}
 		if (this.maxArgs != -1 && command.getArguments().length > this.maxArgs) {
-			command.sendError(Strings.ERROR_TOO_MANY_ARGS_MESSAGE);
+			command.sendError(StringUtil.ERROR_TOO_MANY_ARGS_MESSAGE);
 			return false;
 		}
 		return true;
@@ -182,15 +181,15 @@ public class Properties {
 				return true;
 			case RESTRICT_ADMIN:
 				if (command.getGivenTarget().equalsIgnoreCase(PlayerUtil.getAdminName())) {
-					command.sendMessage(Strings.ERROR_ADMIN_PROTECTED_MESSAGE);
-					command.reportToAdmins(Strings.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
+					command.sendMessage(StringUtil.ERROR_ADMIN_PROTECTED_MESSAGE);
+					command.reportToAdmins(StringUtil.ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION);
 					return false;
 				} else {
 					return true;
 				}
 			case IF_SENDER_OP:
 				if (command.hasTarget() && command.isFromPlayer() && !command.getSenderPlayer().isOp()) {
-					command.sendError(Strings.ERROR_TARGET_ONLY_IF_OP);
+					command.sendError(StringUtil.ERROR_TARGET_ONLY_IF_OP);
 					return false;
 				} else {
 					return true;
@@ -199,12 +198,13 @@ public class Properties {
 				if (command.hasTarget() || command.getArguments().length == 0) {
 					return true;
 				} else {
-					command.sendError(Strings.ERROR_TARGET_OFFLINE_MESSAGE);
+					command.sendError(StringUtil.ERROR_TARGET_OFFLINE_MESSAGE);
 					return false;
 				}
 			case ALLOW_OFFLINE:
 				return true;
 			default:
+				command.sendError("An unexpected error occured. Please notify an admin.");
 				command.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
 				throw new UnsupportedOperationException("An unexpected value of Properties.Target was found.");
 		}
@@ -229,37 +229,42 @@ public class Properties {
 				if (command.isFromPlayer()) {
 					return true;
 				} else {
-					command.sendError(Strings.ERROR_PLAYER_ONLY_MESSAGE);
+					command.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
 					return false;
 				}
 			case OP_ONLY:
 				if (command.isFromConsole() || command.getSenderPlayer().isOp()) {
 					return true;
 				} else {
-					command.sendError(Strings.ERROR_NOT_OP_MESSAGE);
+					command.sendError(StringUtil.ERROR_NOT_OP_MESSAGE);
 					return false;
 				}
 			case ADMIN_ONLY:
 				if (command.isFromConsole() || PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
 					return true;
 				} else {
-					command.sendMessage(Strings.ERROR_ADMIN_ONLY_MESSAGE);
-					command.reportToAdmins(Strings.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
+					command.sendMessage(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
+					command.reportToAdmins(StringUtil.ERROR_ADMIN_ONLY_ADMIN_NOTIFICATION);
 					return false;
 				}
 			case ADMIN_PLAYER_ONLY:
 				if (command.isFromPlayer() && PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
 					return true;
-					// @formatter:off
-				} else if (!command.isFromPlayer()) {
-					// @formatter:on
-					command.sendError(Strings.ERROR_PLAYER_ONLY_MESSAGE);
+				} else if (command.isFromConsole()) {
+					command.sendError(StringUtil.ERROR_PLAYER_ONLY_MESSAGE);
 					return false;
 				} else {
-					command.sendError(Strings.ERROR_ADMIN_ONLY_MESSAGE);
+					command.sendError(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
 					return false;
 				}
+			case CONSOLE_ONLY:
+				if (command.isFromConsole()) {
+					return true;
+				} else {
+					command.sendError(StringUtil.ERROR_CONSOLE_ONLY_MESSAGE);
+				}
 			default:
+				command.sendError("An unexpected error occured. Please notify an admin.");
 				command.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
 				throw new UnsupportedOperationException("An unexpected value of Properties.Source was found.");
 		}
@@ -270,23 +275,70 @@ public class Properties {
 	 * single command.
 	 */
 	public static enum Source {
+		
+		/**
+		 * All players or consoles are allowed to use the command.
+		 */
 		ALL,
+		
+		/**
+		 * All players are allowed to use the command, but the console cannot.
+		 */
 		PLAYER_ONLY,
+		
+		/**
+		 * Only players with special OP privileges (and the console) are allowed to use the command.
+		 */
 		OP_ONLY,
+		
+		/**
+		 * Only the admin and the console are allowed to use the command.
+		 */
 		ADMIN_ONLY,
+		
+		/**
+		 * Only the admin is allowed to use the command; the console cannot.
+		 */
 		ADMIN_PLAYER_ONLY,
+		
+		/**
+		 * Only the console is allowed to use the command.
+		 */
 		CONSOLE_ONLY
 	}
 
 	/**
-	 * The set of possible targets, or ranges of targets, that may be allowed to be
+	 * The set of possible target players, or types of players, that may be allowed to be
 	 * targeted by any single command.
 	 */
 	public static enum Target {
+		
+		/**
+		 * The command does not accept a target player.
+		 */
 		NONE,
+		
+		/**
+		 * All players except the admin player may be targeted by the command.
+		 */
 		RESTRICT_ADMIN,
+		
+		/**
+		 * The command will accept a target player only when used by a player with special OP privileges, or by the console.
+		 * Regular players may still use the command without a specified target player.
+		 */
 		IF_SENDER_OP,
+		
+		/**
+		 * Any player that is currently online may be targeted by the command.
+		 */
 		ALL_ONLINE,
+		
+		/**
+		 * Any player may be targeted by the command, including offline players. Note that information about
+		 * offline players may not be persistent through restarts, and the command may fail if the server is stopped
+		 * since the specified target player was last online.
+		 */
 		ALLOW_OFFLINE
 	}
 

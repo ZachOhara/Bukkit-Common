@@ -20,8 +20,10 @@ import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
 import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -34,11 +36,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public abstract class SimplePlugin extends JavaPlugin {
+	
+	/**
+	 * The list of all plugins, and their associated {@code SimplePlugin} subclass objects, that are currently running
+	 * on the server.
+	 */
+	private static Map<Class<? extends SimplePlugin>, SimplePlugin> pluginList;
 
 	/**
 	 * The list of all {@code PersistentObject}s that have been registered to this plugin.
 	 */
 	private List<PersistentObject> persistentData;
+	
+	static {
+		SimplePlugin.pluginList = new HashMap<Class<? extends SimplePlugin>, SimplePlugin>();
+	}
 
 	/**
 	 * Starts the plugin and initializes functionality. This method is called anytime
@@ -47,6 +59,8 @@ public abstract class SimplePlugin extends JavaPlugin {
 	 */
 	@Override
 	public void onEnable() {
+		super.onEnable();
+		SimplePlugin.pluginList.put(this.getClass(), this);
 		this.persistentData = new LinkedList<PersistentObject>();
 	}
 
@@ -59,14 +73,22 @@ public abstract class SimplePlugin extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		super.onDisable();
+		SimplePlugin.pluginList.remove(this.getClass());
 		for (PersistentObject obj : this.persistentData) {
 			obj.attemptSaveToFile(this);
 		}
 	}
-
+	
 	/**
-	 * {@inheritDoc}
+	 * Gets the active instance of a given plugin.
+	 *
+	 * @param pluginMainClass the main class of the plugin, as specified in the {@code plugin.yml} file.
+	 * @return the active instance of the given plugin.
 	 */
+	public static SimplePlugin getPluginInstance(Class<? extends SimplePlugin> pluginMainClass) {
+		return SimplePlugin.pluginList.get(pluginMainClass);
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandInstance instance = new CommandInstance(sender, command, args, this.getCommandSet());

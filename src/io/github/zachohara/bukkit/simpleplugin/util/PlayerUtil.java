@@ -21,6 +21,9 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
+import io.github.zachohara.bukkit.simpleplugin.plugin.main.SimplePluginMain;
+
 /**
  * The {@code PlayerUtil} class outlines some useful static methods that are relevant to
  * players in the game.
@@ -38,38 +41,20 @@ public final class PlayerUtil {
 
 	/**
 	 * The UUID of the player that is the acting admin for the server that this library
-	 * (and its plugins) are running on. If the library ever needs to run on another
-	 * server, this should be changed to reflect the admin of the new server.
+	 * (and its plugins) are running on. This should be specified in the {@code config.yml}
+	 * file for SimplePlugin.
 	 */
-	public static final UUID ADMIN_UUID = UUID.fromString("5420ca86-36f0-4d54-8096-4352555fd1d6");
-
-	/**
-	 * The in-game name of the player that is the acting admin for the server that this
-	 * library (and its plugins) are running on. If the library ever needs to run on
-	 * another server, this should be changed to reflect the admin of the new server.
-	 * Additionally, if the admin ever changes their in-game name, this string should be
-	 * adjusted to reflect the admin's new name.
-	 */
-	public static final String ADMIN_NAME = "Chezburgr";
-
-	/**
-	 * Determines if a given player is the admin of this server by comparing UUID values.
-	 *
-	 * @param other the player to compare to the admin.
-	 * @return {@code true} if the given player is the local admin; {@code false}
-	 * otherwise.
-	 */
-	public static boolean playerIsAdmin(Player other) {
-		return other.getUniqueId().equals(PlayerUtil.ADMIN_UUID);
+	public static final UUID getAdminUUID() {
+		return (UUID) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().get("admin-uuid");
 	}
 
 	/**
-	 * Determines if the local admin is online.
-	 *
-	 * @return {@code true} if the admin is currently online; {@code false} otherwise;
+	 * The in-game name of the player that is the acting admin for the server that this
+	 * library (and its plugins) are running on. This should be specified in the {@code config.yml}
+	 * file for SimplePlugin.
 	 */
-	public static boolean adminIsOnline() {
-		return PlayerUtil.getAdmin() != null;
+	public static final String getAdminName() {
+		return (String) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().get("admin-name");
 	}
 
 	/**
@@ -79,17 +64,27 @@ public final class PlayerUtil {
 	 * @return the admin of this server.
 	 */
 	public static Player getAdmin() {
-		return Bukkit.getPlayer(PlayerUtil.ADMIN_UUID);
+		return Bukkit.getPlayer(PlayerUtil.getAdminUUID());
 	}
 
 	/**
-	 * Gets the in-game display name of the admin of this server, regardless of whether the
-	 * admin is currently online.
+	 * Determines if a given player is the admin of this server by comparing UUID values.
 	 *
-	 * @return the name of the admin.
+	 * @param other the player to compare to the admin.
+	 * @return {@code true} if the given player is the local admin; {@code false}
+	 * otherwise.
 	 */
-	public static String getAdminName() {
-		return PlayerUtil.ADMIN_NAME;
+	public static boolean playerIsAdmin(Player other) {
+		return other.getUniqueId().equals(PlayerUtil.getAdminUUID());
+	}
+
+	/**
+	 * Determines if the local admin is online.
+	 *
+	 * @return {@code true} if the admin is currently online; {@code false} otherwise;
+	 */
+	public static boolean adminIsOnline() {
+		return PlayerUtil.getAdmin() != null;
 	}
 
 	/**

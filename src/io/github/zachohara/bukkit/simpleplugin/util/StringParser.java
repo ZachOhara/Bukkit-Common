@@ -39,21 +39,20 @@ public final class StringParser {
 	/**
 	 * Gets nicely-formatted String with the coordinates and world name for a given
 	 * location. This method assumes the default naming scheme for bukkit worlds, which is
-	 * that the overworld will be named some arbitrary, user-defined name, that its
-	 * corresponding nether world will be named that same arbitrary name suffixed by
-	 * "_nether", and that its corresponding end world will be named the arbitrary name
-	 * suffixed by "_the_end".
+	 * that the overworld will have an arbitrary user-defined name, and its
+	 * corresponding nether world and end worlds will have that same arbitrary name suffixed by
+	 * "_nether" and "_the_end" respectively.
 	 *
 	 * @param loc the location to be formatted into a String.
 	 * @return a formatted String of the location.
 	 */
 	public static String getLocationString(Location loc) {
 		//@formatter:off
-		String locString = Strings.LOCATIONCOLOR + "("
+		String locString = StringUtil.LOCATIONCOLOR + "("
 				+ loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
 				+ loc.getBlockZ() + ")"
-				+ Strings.TEXTCOLOR + " in " + Strings.LOCATIONCOLOR;
+				+ StringUtil.TEXTCOLOR + " in " + StringUtil.LOCATIONCOLOR;
 		//@formatter:on
 		String worldName = loc.getWorld().getName();
 		boolean isNether = worldName.endsWith("_nether");
@@ -65,6 +64,7 @@ public final class StringParser {
 		} else {
 			locString += "the overworld";
 		}
+		locString += StringUtil.TEXTCOLOR;
 		return locString;
 	}
 
@@ -77,7 +77,7 @@ public final class StringParser {
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseString(String message, CommandInstance source) {
-		return StringParser.parseText(message, Strings.TEXTCOLOR, source);
+		return StringParser.parseText(message, StringUtil.TEXTCOLOR, source);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public final class StringParser {
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseError(String message, CommandInstance source) {
-		return StringParser.parseText(message, Strings.ERRORCOLOR, source);
+		return StringParser.parseText(message, StringUtil.ERRORCOLOR, source);
 	}
 
 	/**
@@ -134,13 +134,13 @@ public final class StringParser {
 				{"%s", source.getSenderName()},
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
-				{"/%c", "@name(/)%c"},
+				{"/%c", "@name/%c"},
 				{"%c", source.getName()}
 		};
 		//@formatter:on
 
 		for (String[] parseKey : parsingKeys) {
-			String substitute = Strings.NAMECOLOR + parseKey[1] + color;
+			String substitute = StringUtil.NAMECOLOR + parseKey[1] + color;
 			while (message.indexOf(parseKey[0]) != -1) {
 				int index = message.indexOf(parseKey[0]);
 				String head = message.substring(0, index);
@@ -195,11 +195,11 @@ public final class StringParser {
 		//@formatter:off
 		final String[][] colorKeys = {
 				{"@default", color.toString()},
-				{"@admin", Strings.ADMINCOLOR.toString()},
-				{"@name", Strings.NAMECOLOR.toString()},
-				{"@text", Strings.TEXTCOLOR.toString()},
-				{"@error", Strings.ERRORCOLOR.toString()},
-				{"@location", Strings.LOCATIONCOLOR.toString()}
+				{"@admin", StringUtil.ADMINCOLOR.toString()},
+				{"@name", StringUtil.NAMECOLOR.toString()},
+				{"@text", StringUtil.TEXTCOLOR.toString()},
+				{"@error", StringUtil.ERRORCOLOR.toString()},
+				{"@location", StringUtil.LOCATIONCOLOR.toString()}
 		};
 		//@formatter:on
 

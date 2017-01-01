@@ -85,97 +85,61 @@ Map<K, V> {
 
 	// @formatter:on
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void clear() {
 		this.mapdata().clear();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean containsKey(Object arg0) {
 		return this.mapdata().containsKey(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean containsValue(Object arg0) {
 		return this.mapdata().containsValue(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Set<java.util.Map.Entry<K, V>> entrySet() {
 		return this.mapdata().entrySet();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public V get(Object arg0) {
 		return this.mapdata().get(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isEmpty() {
 		return this.mapdata().isEmpty();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Set<K> keySet() {
 		return this.mapdata().keySet();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public V put(K arg0, V arg1) {
 		return this.mapdata().put(arg0, arg1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void putAll(Map<? extends K, ? extends V> arg0) {
 		this.mapdata().putAll(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public V remove(Object arg0) {
 		return this.mapdata().remove(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int size() {
 		return this.mapdata().size();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Collection<V> values() {
 		return this.mapdata().values();

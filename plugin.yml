@@ -1,6 +1,6 @@
 name: SimplePlugin
 version: 2.0
-main: io.github.zachohara.bukkit.simpleplugin.plugin.EmptyPlugin
+main: io.github.zachohara.bukkit.simpleplugin.plugin.main.SimplePluginMain
 description: A library for simplifying the creation of Bukkit plugins
 author: Zach Ohara
 commands:

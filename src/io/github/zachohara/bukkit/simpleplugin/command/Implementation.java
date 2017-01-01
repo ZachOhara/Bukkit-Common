@@ -34,7 +34,7 @@ public abstract class Implementation {
 	 * @see #doPlayerCommand(CommandInstance)
 	 * @see #doConsoleCommand(CommandInstance)
 	 */
-	public boolean doCommand(CommandInstance instance) {
+	public final boolean doCommand(CommandInstance instance) {
 		if (instance.isFromPlayer()) {
 			return this.doPlayerCommand(instance);
 		} else {

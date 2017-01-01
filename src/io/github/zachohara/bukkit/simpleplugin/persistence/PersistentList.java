@@ -74,194 +74,127 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 		}
 	}
 
+	// @formatter:off
+
 	/*
-	 * +------------------------------------------------------------------------------------
-	 * -+ | All methods below this point are delegate methods extending this.listdata() to
-	 * this |
-	 * +------------------------------------------------------------------------------
-	 * -------+
+	 * +-------------------------------------------------------------------------------------+
+	 * | All methods below this point are delegate methods extending this.listdata() to this |
+	 * +-------------------------------------------------------------------------------------+
 	 */
 
-	/**
-	 * {@inheritDoc}
-	 */
+	// @formatter:on
+
 	@Override
 	public boolean add(E arg0) {
 		return this.listdata().add(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void add(int arg0, E arg1) {
 		this.listdata().add(arg0, arg1);
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean addAll(Collection<? extends E> arg0) {
 		return this.listdata().addAll(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean addAll(int arg0, Collection<? extends E> arg1) {
 		return this.listdata().addAll(arg0, arg1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void clear() {
 		this.listdata().clear();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean contains(Object arg0) {
 		return this.listdata().contains(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean containsAll(Collection<?> arg0) {
 		return this.listdata().containsAll(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public E get(int arg0) {
 		return this.listdata().get(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int indexOf(Object arg0) {
 		return this.listdata().indexOf(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean isEmpty() {
 		return this.listdata().isEmpty();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Iterator<E> iterator() {
 		return this.listdata().iterator();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int lastIndexOf(Object arg0) {
 		return this.listdata().lastIndexOf(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ListIterator<E> listIterator() {
 		return this.listdata().listIterator();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public ListIterator<E> listIterator(int arg0) {
 		return this.listdata().listIterator(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean remove(Object arg0) {
 		return this.listdata().remove(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public E remove(int arg0) {
 		return this.listdata().remove(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean removeAll(Collection<?> arg0) {
 		return this.listdata().removeAll(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean retainAll(Collection<?> arg0) {
 		return this.listdata().retainAll(arg0);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public E set(int arg0, E arg1) {
 		return this.listdata().set(arg0, arg1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public int size() {
 		return this.listdata().size();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public List<E> subList(int arg0, int arg1) {
 		return this.listdata().subList(arg0, arg1);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Object[] toArray() {
 		return this.listdata().toArray();
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
+	
 	@Override
 	public <T> T[] toArray(T[] arg0) {
 		return this.listdata().toArray(arg0);
