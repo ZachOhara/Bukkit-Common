@@ -79,17 +79,6 @@ public abstract class SimplePlugin extends JavaPlugin {
 		}
 	}
 
-	/**
-	 * Gets the active instance of a given plugin.
-	 *
-	 * @param pluginMainClass the main class of the plugin, as specified in the
-	 * {@code plugin.yml} file.
-	 * @return the active instance of the given plugin.
-	 */
-	public static SimplePlugin getPluginInstance(Class<? extends SimplePlugin> pluginMainClass) {
-		return SimplePlugin.pluginList.get(pluginMainClass);
-	}
-
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		CommandInstance instance = new CommandInstance(sender, command, args, this.getCommandSet());
@@ -114,6 +103,30 @@ public abstract class SimplePlugin extends JavaPlugin {
 	 */
 	public void regiserPersistentObject(PersistentObject data) {
 		this.persistentData.add(data);
+	}
+
+	/**
+	 * Gets the active instance of a given plugin.
+	 *
+	 * @param pluginMainClass the main class of the plugin, as specified in the
+	 * {@code plugin.yml} file.
+	 * @return the active instance of the given plugin.
+	 */
+	public static SimplePlugin getPluginInstance(Class<? extends SimplePlugin> pluginMainClass) {
+		return SimplePlugin.pluginList.get(pluginMainClass);
+	}
+	
+	/**
+	 * Gets a list of all plugins currently running on SimplePlugin.
+	 *
+	 * @return a list of all active plugins.
+	 */
+	public static List<String> getActivePluginList() {
+		List<String> pluginList = new LinkedList<String>();
+		for (SimplePlugin plugin : SimplePlugin.pluginList.values()) {
+			pluginList.add(plugin.getName());
+		}
+		return pluginList;
 	}
 
 	/**

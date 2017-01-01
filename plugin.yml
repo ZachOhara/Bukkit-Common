@@ -4,3 +4,6 @@ main: io.github.zachohara.bukkit.simpleplugin.plugin.main.SimplePluginMain
 description: A library for simplifying the creation of Bukkit plugins
 author: Zach Ohara
 commands:
+  simpleplugin:
+    description: Basic information about SimplePlugin
+    usage: /simpleplugin
