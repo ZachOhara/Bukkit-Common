@@ -16,13 +16,13 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * A {@code PersistentMap} is responsible for loading and storing any given {@code HashMap}
@@ -33,8 +33,7 @@ import java.util.Set;
  * @see java.util.Map
  * @author Zach Ohara
  */
-public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject implements
-Map<K, V> {
+public class PersistentMap<K extends Serializable, V extends Serializable> extends PersistentObject implements Map<K, V> {
 
 	/**
 	 * Constructs a new {@code PersistentMap} with the given plugin as an owner, the data
@@ -45,7 +44,8 @@ Map<K, V> {
 	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <T extends Map<K, V> & Serializable> PersistentMap(SimplePlugin owner, T data, String filename) {
+	public <T extends Map<K, V> & Serializable> PersistentMap(SimplePlugin owner, T data,
+			String filename) {
 		super(owner, data, filename);
 	}
 

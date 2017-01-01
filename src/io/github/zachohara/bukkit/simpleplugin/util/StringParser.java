@@ -16,10 +16,10 @@
 
 package io.github.zachohara.bukkit.simpleplugin.util;
 
-import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 
 /**
  * The {@code StringParser} class provides static constants and methods that are useful in
@@ -39,9 +39,9 @@ public final class StringParser {
 	/**
 	 * Gets nicely-formatted String with the coordinates and world name for a given
 	 * location. This method assumes the default naming scheme for bukkit worlds, which is
-	 * that the overworld will have an arbitrary user-defined name, and its
-	 * corresponding nether world and end worlds will have that same arbitrary name suffixed by
-	 * "_nether" and "_the_end" respectively.
+	 * that the overworld will have an arbitrary user-defined name, and its corresponding
+	 * nether world and end worlds will have that same arbitrary name suffixed by "_nether"
+	 * and "_the_end" respectively.
 	 *
 	 * @param loc the location to be formatted into a String.
 	 * @return a formatted String of the location.
@@ -125,7 +125,8 @@ public final class StringParser {
 	 * @return the message with expanded instance information.
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
-	private static String parseStringForInstance(String message, ChatColor color, CommandInstance source) {
+	private static String parseStringForInstance(String message, ChatColor color,
+			CommandInstance source) {
 		//@formatter:off
 		final String[][] parsingKeys = {
 				{"%admin", "@admin" + PlayerUtil.getAdminName()},

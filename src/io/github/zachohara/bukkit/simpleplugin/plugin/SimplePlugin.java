@@ -16,10 +16,6 @@
 
 package io.github.zachohara.bukkit.simpleplugin.plugin;
 
-import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
-import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
-import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +25,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
+import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
+import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
+
 /**
  * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin that
  * uses the SimplePlugin library.
@@ -36,10 +36,10 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Zach Ohara
  */
 public abstract class SimplePlugin extends JavaPlugin {
-	
+
 	/**
-	 * The list of all plugins, and their associated {@code SimplePlugin} subclass objects, that are currently running
-	 * on the server.
+	 * The list of all plugins, and their associated {@code SimplePlugin} subclass objects,
+	 * that are currently running on the server.
 	 */
 	private static Map<Class<? extends SimplePlugin>, SimplePlugin> pluginList;
 
@@ -47,7 +47,7 @@ public abstract class SimplePlugin extends JavaPlugin {
 	 * The list of all {@code PersistentObject}s that have been registered to this plugin.
 	 */
 	private List<PersistentObject> persistentData;
-	
+
 	static {
 		SimplePlugin.pluginList = new HashMap<Class<? extends SimplePlugin>, SimplePlugin>();
 	}
@@ -78,11 +78,12 @@ public abstract class SimplePlugin extends JavaPlugin {
 			obj.attemptSaveToFile(this);
 		}
 	}
-	
+
 	/**
 	 * Gets the active instance of a given plugin.
 	 *
-	 * @param pluginMainClass the main class of the plugin, as specified in the {@code plugin.yml} file.
+	 * @param pluginMainClass the main class of the plugin, as specified in the
+	 * {@code plugin.yml} file.
 	 * @return the active instance of the given plugin.
 	 */
 	public static SimplePlugin getPluginInstance(Class<? extends SimplePlugin> pluginMainClass) {

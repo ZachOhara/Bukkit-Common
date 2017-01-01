@@ -16,14 +16,14 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * A {@code PersistentList} is responsible for loading and storing any given {@code List}
@@ -44,7 +44,8 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 * @param data the serializable {@code List} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, L data, String filename) {
+	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, L data,
+			String filename) {
 		super(owner, data, filename);
 	}
 
@@ -194,7 +195,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	public Object[] toArray() {
 		return this.listdata().toArray();
 	}
-	
+
 	@Override
 	public <T> T[] toArray(T[] arg0) {
 		return this.listdata().toArray(arg0);

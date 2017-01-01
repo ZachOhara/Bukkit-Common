@@ -20,9 +20,9 @@ import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
 import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
- * The {@code SimplePluginMain} class is a dummy class that acts as the main class of SimplePlugin itself.
- * A main class is required for all bukkit plugins, including this one, even though SimplePlugin alone adds
- * no new funcionality to a server.
+ * The {@code SimplePluginMain} class is a dummy class that acts as the main class of
+ * SimplePlugin itself. A main class is required for all bukkit plugins, including this
+ * one, even though SimplePlugin alone adds no new funcionality to a server.
  *
  * @author Zach Ohara
  */
@@ -32,5 +32,5 @@ public final class SimplePluginMain extends SimplePlugin {
 	public Class<? extends CommandSet> getCommandSet() {
 		return null;
 	}
-	
+
 }

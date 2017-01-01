@@ -45,16 +45,18 @@ public final class PlayerUtil {
 	 * file for SimplePlugin.
 	 */
 	public static final UUID getAdminUUID() {
-		return (UUID) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().get("admin-uuid");
+		return (UUID) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig()
+				.get("admin-uuid");
 	}
 
 	/**
 	 * The in-game name of the player that is the acting admin for the server that this
-	 * library (and its plugins) are running on. This should be specified in the {@code config.yml}
-	 * file for SimplePlugin.
+	 * library (and its plugins) are running on. This should be specified in the
+	 * {@code config.yml} file for SimplePlugin.
 	 */
 	public static final String getAdminName() {
-		return (String) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().get("admin-name");
+		return (String) SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig()
+				.get("admin-name");
 	}
 
 	/**

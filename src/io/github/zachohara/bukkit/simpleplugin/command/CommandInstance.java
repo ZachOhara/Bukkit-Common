@@ -16,13 +16,13 @@
 
 package io.github.zachohara.bukkit.simpleplugin.command;
 
-import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
-import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import io.github.zachohara.bukkit.simpleplugin.util.PlayerUtil;
+import io.github.zachohara.bukkit.simpleplugin.util.StringParser;
 
 /**
  * A {@code CommandInstance} object represents a single invocation of any command that is
@@ -62,8 +62,8 @@ public class CommandInstance {
 	private Player senderPlayer;
 
 	/**
-	 * The name of the entity that sent the command. This is either the name of a player, or {@code "The Console"}
-	 * if the command was sent by the console.
+	 * The name of the entity that sent the command. This is either the name of a player,
+	 * or {@code "The Console"} if the command was sent by the console.
 	 */
 	private String senderName;
 
@@ -78,8 +78,8 @@ public class CommandInstance {
 	private String targetName;
 
 	/**
-	 * The name that was supplied as a target player, regardless of whether or not that name is a
-	 * valid target.
+	 * The name that was supplied as a target player, regardless of whether or not that
+	 * name is a valid target.
 	 */
 	private String givenTarget;
 
@@ -315,7 +315,8 @@ public class CommandInstance {
 	 * @return the rules for the given command.
 	 */
 	@SuppressWarnings("unchecked")
-	private static Properties propertiesFromString(String name, Class<? extends CommandSet> ruleSet) {
+	private static Properties propertiesFromString(String name,
+			Class<? extends CommandSet> ruleSet) {
 		CommandSet[] allCommands = ruleSet.getEnumConstants();
 		for (CommandSet command : allCommands) {
 			Enum<? extends CommandSet> enumConst = (Enum<? extends CommandSet>) command;

@@ -87,7 +87,8 @@ public class Properties {
 	 * @param target see instance variable {@link #targetable}
 	 * @param implement see instance variable {@link #implementation}
 	 */
-	public Properties(int minArgs, int maxArgs, Source access, Target target, Implementation implement) {
+	public Properties(int minArgs, int maxArgs, Source access, Target target,
+			Implementation implement) {
 		this.minArgs = minArgs;
 		this.maxArgs = maxArgs;
 		this.accessible = access;
@@ -123,7 +124,8 @@ public class Properties {
 	 * <li>An appropriate number of arguments were sent with the command.</li>
 	 * <li>The target player that was specified with the command (if applicable) is a valid
 	 * player given the conditions of the specific command.</li>
-	 * <li>The entity that sent the command has permission to use the specific command.</li>
+	 * <li>The entity that sent the command has permission to use the specific command.
+	 * </li>
 	 * </ol>
 	 * If all the above conditions are met given the circumstances, the command has been
 	 * successfully verified, and this method will return {@code true}.
@@ -137,7 +139,8 @@ public class Properties {
 	 * @see #verifyValidSource(CommandInstance)
 	 */
 	public boolean verifyCommand(CommandInstance command) {
-		return this.verifyValidSource(command) && this.verifyValidArguments(command) && this.verifyValidTarget(command);
+		return this.verifyValidSource(command) && this.verifyValidArguments(command)
+				&& this.verifyValidTarget(command);
 	}
 
 	/**
@@ -188,7 +191,8 @@ public class Properties {
 					return true;
 				}
 			case IF_SENDER_OP:
-				if (command.hasTarget() && command.isFromPlayer() && !command.getSenderPlayer().isOp()) {
+				if (command.hasTarget() && command.isFromPlayer()
+						&& !command.getSenderPlayer().isOp()) {
 					command.sendError(StringUtil.ERROR_TARGET_ONLY_IF_OP);
 					return false;
 				} else {
@@ -205,8 +209,10 @@ public class Properties {
 				return true;
 			default:
 				command.sendError("An unexpected error occured. Please notify an admin.");
-				command.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException("An unexpected value of Properties.Target was found.");
+				command.logConsoleError(
+						"An unexpected error occured. Try updating the server's plugins!");
+				throw new UnsupportedOperationException(
+						"An unexpected value of Properties.Target was found.");
 		}
 	}
 
@@ -240,7 +246,8 @@ public class Properties {
 					return false;
 				}
 			case ADMIN_ONLY:
-				if (command.isFromConsole() || PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
+				if (command.isFromConsole()
+						|| PlayerUtil.playerIsAdmin(command.getSenderPlayer())) {
 					return true;
 				} else {
 					command.sendMessage(StringUtil.ERROR_ADMIN_ONLY_MESSAGE);
@@ -265,8 +272,10 @@ public class Properties {
 				}
 			default:
 				command.sendError("An unexpected error occured. Please notify an admin.");
-				command.logConsoleError("An unexpected error occured. Try updating the server's plugins!");
-				throw new UnsupportedOperationException("An unexpected value of Properties.Source was found.");
+				command.logConsoleError(
+						"An unexpected error occured. Try updating the server's plugins!");
+				throw new UnsupportedOperationException(
+						"An unexpected value of Properties.Source was found.");
 		}
 	}
 
@@ -275,32 +284,33 @@ public class Properties {
 	 * single command.
 	 */
 	public static enum Source {
-		
+
 		/**
 		 * All players or consoles are allowed to use the command.
 		 */
 		ALL,
-		
+
 		/**
 		 * All players are allowed to use the command, but the console cannot.
 		 */
 		PLAYER_ONLY,
-		
+
 		/**
-		 * Only players with special OP privileges (and the console) are allowed to use the command.
+		 * Only players with special OP privileges (and the console) are allowed to use the
+		 * command.
 		 */
 		OP_ONLY,
-		
+
 		/**
 		 * Only the admin and the console are allowed to use the command.
 		 */
 		ADMIN_ONLY,
-		
+
 		/**
 		 * Only the admin is allowed to use the command; the console cannot.
 		 */
 		ADMIN_PLAYER_ONLY,
-		
+
 		/**
 		 * Only the console is allowed to use the command.
 		 */
@@ -312,32 +322,34 @@ public class Properties {
 	 * targeted by any single command.
 	 */
 	public static enum Target {
-		
+
 		/**
 		 * The command does not accept a target player.
 		 */
 		NONE,
-		
+
 		/**
 		 * All players except the admin player may be targeted by the command.
 		 */
 		RESTRICT_ADMIN,
-		
+
 		/**
-		 * The command will accept a target player only when used by a player with special OP privileges, or by the console.
-		 * Regular players may still use the command without a specified target player.
+		 * The command will accept a target player only when used by a player with special
+		 * OP privileges, or by the console. Regular players may still use the command
+		 * without a specified target player.
 		 */
 		IF_SENDER_OP,
-		
+
 		/**
 		 * Any player that is currently online may be targeted by the command.
 		 */
 		ALL_ONLINE,
-		
+
 		/**
-		 * Any player may be targeted by the command, including offline players. Note that information about
-		 * offline players may not be persistent through restarts, and the command may fail if the server is stopped
-		 * since the specified target player was last online.
+		 * Any player may be targeted by the command, including offline players. Note that
+		 * information about offline players may not be persistent through restarts, and
+		 * the command may fail if the server is stopped since the specified target player
+		 * was last online.
 		 */
 		ALLOW_OFFLINE
 	}

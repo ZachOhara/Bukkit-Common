@@ -66,7 +66,8 @@ public class SerializableLocation extends Location implements Serializable {
 	 * from.
 	 */
 	public SerializableLocation(Location location) {
-		this(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(),
+		this(location.getWorld(), location.getX(), location.getY(), location.getZ(),
+				location.getYaw(),
 				location.getPitch());
 	}
 

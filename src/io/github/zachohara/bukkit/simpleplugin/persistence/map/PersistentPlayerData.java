@@ -16,14 +16,14 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence.map;
 
-import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentKeyedMap;
-import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
-
 import java.io.IOException;
 import java.io.Serializable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentKeyedMap;
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * A {@code PersistentPlayerData} object is responsible for loading and storing any given

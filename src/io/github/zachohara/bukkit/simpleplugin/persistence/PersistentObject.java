@@ -16,8 +16,6 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,6 +25,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.bukkit.plugin.java.JavaPlugin;
+
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * A {@code PersistentObject} is responsible for loading and storing any given

@@ -16,10 +16,10 @@
 
 package io.github.zachohara.bukkit.simpleplugin.persistence;
 
-import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
-
 import java.io.Serializable;
 import java.util.Collection;
+
+import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
  * A {@code PersistentKeyedMap} object is responsible for loading and storing any given
