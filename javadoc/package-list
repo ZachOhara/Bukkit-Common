@@ -2,5 +2,6 @@ io.github.zachohara.bukkit.simpleplugin.command
 io.github.zachohara.bukkit.simpleplugin.persistence
 io.github.zachohara.bukkit.simpleplugin.persistence.map
 io.github.zachohara.bukkit.simpleplugin.plugin
+io.github.zachohara.bukkit.simpleplugin.plugin.main
 io.github.zachohara.bukkit.simpleplugin.serializable
 io.github.zachohara.bukkit.simpleplugin.util
