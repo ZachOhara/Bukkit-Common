@@ -115,8 +115,7 @@ public final class StringUtil {
 	 * command on them, but that the admin was protected from the command.
 	 */
 	public static final String ERROR_ADMIN_PROTECTED_ADMIN_NOTIFICATION =
-			"%s has tried to use /%c on "
-					+ "overlord %admin!";
+			"%s has tried to use /%c on overlord %admin!";
 
 	/**
 	 * The message that is sent to players when they try to use a command that requires a

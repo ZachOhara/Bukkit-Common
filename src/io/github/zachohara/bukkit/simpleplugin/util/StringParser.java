@@ -135,7 +135,7 @@ public final class StringParser {
 				{"%s", source.getSenderName()},
 				{"%t", source.getTargetName()},
 				{"%gt", source.getGivenTarget()},
-				{"/%c", "@name/%c"},
+				{"/%c", "@name(/)%c"},
 				{"%c", source.getName()}
 		};
 		//@formatter:on

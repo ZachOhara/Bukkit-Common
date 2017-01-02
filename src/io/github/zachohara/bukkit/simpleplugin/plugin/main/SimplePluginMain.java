@@ -27,10 +27,16 @@ import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
  * @author Zach Ohara
  */
 public final class SimplePluginMain extends SimplePlugin {
+	
+	@Override
+	public void onEnable() {
+		super.onEnable();
+		this.saveDefaultConfig();
+	}
 
 	@Override
 	public Class<? extends CommandSet> getCommandSet() {
-		return null;
+		return Commands.class;
 	}
 
 }

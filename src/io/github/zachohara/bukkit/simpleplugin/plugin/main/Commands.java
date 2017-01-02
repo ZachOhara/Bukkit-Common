@@ -62,7 +62,7 @@ public enum Commands implements CommandSet {
 
 		@Override
 		protected boolean doPlayerCommand(CommandInstance instance) {
-			instance.sendMessage("This server is currently running the @nameSimplePlugin@text library. Here are all the other plugins on this server that use @nameSimplePlugin@text:");
+			instance.sendMessage("This server is currently running the @nameSimplePlugin@text library.\n@nameSimplePlugin@text is used by the following plugins:");
 			String message = "";
 			for (String pluginName : SimplePlugin.getActivePluginList()) {
 				message += "@name" + pluginName + "@text, ";
