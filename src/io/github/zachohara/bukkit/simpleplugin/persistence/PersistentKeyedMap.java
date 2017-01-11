@@ -153,5 +153,9 @@ public abstract class PersistentKeyedMap<K, D extends Serializable> extends Pers
 	public String generateMapKey(K key) {
 		return key.toString();
 	}
+	
+	public void put(K key, D data) {
+		this.put(this.generateMapKey(key), data);
+	}
 
 }
