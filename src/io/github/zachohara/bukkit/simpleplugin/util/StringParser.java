@@ -47,24 +47,43 @@ public final class StringParser {
 	 * @return a formatted String of the location.
 	 */
 	public static String getLocationString(Location loc) {
+		return StringParser.getLocationString(loc, true);
+	}
+
+	/**
+	 * Gets nicely-formatted String with the coordinates and world name for a given
+	 * location. This method assumes the default naming scheme for bukkit worlds, which is
+	 * that the overworld will have an arbitrary user-defined name, and its corresponding
+	 * nether world and end worlds will have that same arbitrary name suffixed by "_nether"
+	 * and "_the_end" respectively.
+	 *
+	 * @param loc the location to be formatted into a String.
+	 * @param includeWorld {@code true} if the world name should be included in the
+	 * resulting string, or {@code false} if only the coordinates should be returned.
+	 * @return a formatted String of the location.
+	 */
+	public static String getLocationString(Location loc, boolean includeWorld) {
 		//@formatter:off
 		String locString = StringUtil.LOCATIONCOLOR + "("
 				+ loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
 				+ loc.getBlockZ() + ")"
-				+ StringUtil.TEXTCOLOR + " in " + StringUtil.LOCATIONCOLOR;
+				+ StringUtil.TEXTCOLOR;
 		//@formatter:on
-		String worldName = loc.getWorld().getName();
-		boolean isNether = worldName.endsWith("_nether");
-		boolean isTheEnd = worldName.endsWith("_the_end");
-		if (isNether) {
-			locString += "the nether";
-		} else if (isTheEnd) {
-			locString += "the end";
-		} else {
-			locString += "the overworld";
+		if (includeWorld) {
+			locString += " in " + StringUtil.LOCATIONCOLOR;
+			String worldName = loc.getWorld().getName();
+			boolean isNether = worldName.endsWith("_nether");
+			boolean isTheEnd = worldName.endsWith("_the_end");
+			if (isNether) {
+				locString += "the nether";
+			} else if (isTheEnd) {
+				locString += "the end";
+			} else {
+				locString += "the overworld";
+			}
+			locString += StringUtil.TEXTCOLOR;
 		}
-		locString += StringUtil.TEXTCOLOR;
 		return locString;
 	}
 

@@ -43,14 +43,14 @@ public abstract class SimplePlugin extends JavaPlugin {
 	 */
 	private static Map<Class<? extends SimplePlugin>, SimplePlugin> pluginList;
 
+	static {
+		SimplePlugin.pluginList = new HashMap<Class<? extends SimplePlugin>, SimplePlugin>();
+	}
+
 	/**
 	 * The list of all {@code PersistentObject}s that have been registered to this plugin.
 	 */
 	private List<PersistentObject> persistentData;
-
-	static {
-		SimplePlugin.pluginList = new HashMap<Class<? extends SimplePlugin>, SimplePlugin>();
-	}
 
 	/**
 	 * Starts the plugin and initializes functionality. This method is called anytime
