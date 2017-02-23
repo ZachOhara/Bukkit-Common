@@ -1,2 +1,9 @@
-admin-uuid: 5420ca86-36f0-4d54-8096-4352555fd1d6
-admin-name: BornToLOL
+admin: 
+  uuid: 5420ca86-36f0-4d54-8096-4352555fd1d6
+  name: BornToLOL
+colors:
+  text: aqua
+  error: red
+  names: white
+  admin-name: lightpurple
+  locations: green

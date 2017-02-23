@@ -47,7 +47,7 @@ public final class PlayerUtil {
 	 * @return the admin's UUID.
 	 */
 	public static final UUID getAdminUUID() {
-		return UUID.fromString(SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().getString("admin-uuid"));
+		return UUID.fromString(SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().getString("admin.uuid"));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public final class PlayerUtil {
 	 * @return the admin's username.
 	 */
 	public static final String getAdminName() {
-		return SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().getString("admin-name");
+		return SimplePlugin.getPluginInstance(SimplePluginMain.class).getConfig().getString("admin.name");
 	}
 
 	/**

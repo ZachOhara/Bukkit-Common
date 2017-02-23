@@ -252,7 +252,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void broadcastMessage(String message) {
-		Bukkit.getServer().broadcastMessage(StringParser.parseString(message, this));
+		Bukkit.getServer().broadcastMessage(StringParser.parseMessage(message, this));
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void sendTargetMessage(String message) {
-		this.targetPlayer.sendMessage(StringParser.parseString(message, this));
+		this.targetPlayer.sendMessage(StringParser.parseMessage(message, this));
 	}
 
 	/**
@@ -273,7 +273,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void sendMessage(String message) {
-		this.senderRaw.sendMessage(StringParser.parseString(message, this));
+		this.senderRaw.sendMessage(StringParser.parseMessage(message, this));
 	}
 
 	/**
@@ -293,7 +293,7 @@ public class CommandInstance {
 	 * @param message the message to be sent.
 	 */
 	public void reportToAdmins(String message) {
-		String formattedMessage = StringParser.parseString(message, this);
+		String formattedMessage = StringParser.parseMessage(message, this);
 		PlayerUtil.sendAllAdmins(formattedMessage);
 	}
 

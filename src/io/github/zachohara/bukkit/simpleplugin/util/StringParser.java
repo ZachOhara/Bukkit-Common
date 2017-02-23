@@ -64,14 +64,14 @@ public final class StringParser {
 	 */
 	public static String getLocationString(Location loc, boolean includeWorld) {
 		//@formatter:off
-		String locString = StringUtil.LOCATIONCOLOR + "("
+		String locString = StringColor.getLocationColor() + "("
 				+ loc.getBlockX() + ", "
 				+ loc.getBlockY() + ", "
 				+ loc.getBlockZ() + ")"
-				+ StringUtil.TEXTCOLOR;
+				+ StringColor.getTextColor();
 		//@formatter:on
 		if (includeWorld) {
-			locString += " in " + StringUtil.LOCATIONCOLOR;
+			locString += " in " + StringColor.getLocationColor();
 			String worldName = loc.getWorld().getName();
 			boolean isNether = worldName.endsWith("_nether");
 			boolean isTheEnd = worldName.endsWith("_the_end");
@@ -82,9 +82,20 @@ public final class StringParser {
 			} else {
 				locString += "the overworld";
 			}
-			locString += StringUtil.TEXTCOLOR;
+			locString += StringColor.getTextColor();
 		}
 		return locString;
+	}
+	
+	/**
+	 * Parses and colors a message, and substitutes any of the supported shortcuts.
+	 *
+	 * @param message the message to be parsed.
+	 * @return a colored and formatted version of the given message.
+	 * @see #parseText(String, ChatColor, CommandInstance)
+	 */
+	public static String parseMessage(String message) {
+		return StringParser.parseMessage(message, null);
 	}
 
 	/**
@@ -95,8 +106,31 @@ public final class StringParser {
 	 * @return a colored and formatted version of the given message.
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
-	public static String parseString(String message, CommandInstance source) {
-		return StringParser.parseText(message, StringUtil.TEXTCOLOR, source);
+	public static String parseMessage(String message, CommandInstance source) {
+		return StringParser.parseText(message, StringColor.getTextColor(), source);
+	}
+
+	/**
+	 * Parses and colors an error message, and substitutes any of the supported shortcuts.
+	 *
+	 * @param message the error message to be parsed.
+	 * @return a colored and formatted version of the given error message.
+	 * @see #parseText(String, ChatColor, CommandInstance)
+	 */
+	public static String parseError(String message) {
+		return StringParser.parseError(message, null);
+	}
+	
+	/**
+	 * Parses and colors a message, and substitues any of the supported shortcuts.
+	 *
+	 * @param message the message to parse.
+	 * @param primayColor the color that the plain text of this message should appear in.
+	 * @return a colored and formatted version of the given message.
+	 * @see #parseText(String, ChatColor, CommandInstance)
+	 */
+	public static String parseText(String message, String primaryColor) {
+		return StringParser.parseText(message, primaryColor, null);
 	}
 
 	/**
@@ -108,7 +142,7 @@ public final class StringParser {
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
 	public static String parseError(String message, CommandInstance source) {
-		return StringParser.parseText(message, StringUtil.ERRORCOLOR, source);
+		return StringParser.parseText(message, StringColor.getErrorColor(), source);
 	}
 
 	/**
@@ -118,18 +152,19 @@ public final class StringParser {
 	 * {@code null}.
 	 *
 	 * @param message the message to parse.
-	 * @param color the color that the plain text of this message should appear in.
+	 * @param primayColor the color that the plain text of this message should appear in.
 	 * @param source the {@code CommandInstance} object that this message is attached to.
 	 * {@code null} if the message is not attached to any specific instance of a command.
 	 * @return a colored and formatted version of the given message.
-	 * @see #parseStringForColor(String, ChatColor)
+	 * @see #parseStringForCustomColor(String, ChatColor)
 	 */
-	private static String parseText(String message, ChatColor color, CommandInstance source) {
-		message = color + message;
+	private static String parseText(String message, String primaryColor, CommandInstance source) {
+		message = primaryColor + message;
 		if (source != null) {
-			message = StringParser.parseStringForInstance(message, color, source);
+			message = StringParser.parseStringForInstance(message, primaryColor, source);
 		}
-		message = StringParser.parseStringForColor(message, color);
+		message = StringParser.parseStringForCustomColor(message, primaryColor);
+		message = StringParser.parseStringForDefaultColors(message, primaryColor);
 		return message;
 	}
 
@@ -138,13 +173,13 @@ public final class StringParser {
 	 * information from the source and context of a command.
 	 *
 	 * @param message the message to parse.
-	 * @param color the color that the plain text of this message should appear in.
+	 * @param primaryColor the color that the plain text of this message should appear in.
 	 * @param source the {@code CommandInstance} that this message is attached to. Cannot
 	 * be {@code null}.
 	 * @return the message with expanded instance information.
 	 * @see #parseText(String, ChatColor, CommandInstance)
 	 */
-	private static String parseStringForInstance(String message, ChatColor color,
+	private static String parseStringForInstance(String message, String primaryColor,
 			CommandInstance source) {
 		//@formatter:off
 		final String[][] parsingKeys = {
@@ -160,7 +195,7 @@ public final class StringParser {
 		//@formatter:on
 
 		for (String[] parseKey : parsingKeys) {
-			String substitute = StringUtil.NAMECOLOR + parseKey[1] + color;
+			String substitute = StringColor.getNameColor() + parseKey[1] + primaryColor;
 			while (message.indexOf(parseKey[0]) != -1) {
 				int index = message.indexOf(parseKey[0]);
 				String head = message.substring(0, index);
@@ -208,21 +243,62 @@ public final class StringParser {
 	 * Parse a given message for color keys, and color the message appropriately.
 	 *
 	 * @param message the message to be parsed.
-	 * @param color the color that the "@default" tag should be expanded to.
+	 * @param primarycolor the color that the "@default" tag should be expanded to.
 	 * @return the recolored message.
 	 */
-	private static String parseStringForColor(String message, ChatColor color) {
+	private static String parseStringForCustomColor(String message, String primaryColor) {
 		//@formatter:off
 		final String[][] colorKeys = {
-				{"@default", color.toString()},
-				{"@admin", StringUtil.ADMINCOLOR.toString()},
-				{"@name", StringUtil.NAMECOLOR.toString()},
-				{"@text", StringUtil.TEXTCOLOR.toString()},
-				{"@error", StringUtil.ERRORCOLOR.toString()},
-				{"@location", StringUtil.LOCATIONCOLOR.toString()}
+				{"@default", primaryColor.toString()},
+				{"@admin", StringColor.getAdminNameColor()},
+				{"@name", StringColor.getNameColor()},
+				{"@text", StringColor.getTextColor()},
+				{"@error", StringColor.getErrorColor()},
+				{"@location", StringColor.getLocationColor()}
+		};
+		//@formatter:on
+		
+		return StringParser.parseForColorKeys(message, colorKeys, primaryColor);
+	}
+	
+	private static String parseStringForDefaultColors(String message, String primaryColor) {
+		//@formatter:off
+		final String[][] colorKeys = {
+			{"&aqua", ChatColor.AQUA.toString()},
+			{"&black", ChatColor.BLACK.toString()},
+			{"&blue", ChatColor.BLUE.toString()},
+			{"&darkaqua", ChatColor.DARK_AQUA.toString()},
+			{"&darkblue", ChatColor.DARK_BLUE.toString()},
+			{"&darkgray", ChatColor.DARK_GRAY.toString()},
+			{"&darkgreen", ChatColor.DARK_GREEN.toString()},
+			{"&darkpurple", ChatColor.DARK_PURPLE.toString()},
+			{"&darkred", ChatColor.DARK_RED.toString()},
+			{"&gold", ChatColor.GOLD.toString()},
+			{"&gray", ChatColor.GRAY.toString()},
+			{"&green", ChatColor.GREEN.toString()},
+			{"&lightpurple", ChatColor.LIGHT_PURPLE.toString()},
+			{"&red", ChatColor.RED.toString()},
+			{"&white", ChatColor.WHITE.toString()},
+			{"&yellow", ChatColor.YELLOW.toString()},
+			{"&bold", ChatColor.BOLD.toString()},
+			{"&italic", ChatColor.ITALIC.toString()},
+			{"&strikethrough", ChatColor.STRIKETHROUGH.toString()},
+			{"&underline", ChatColor.UNDERLINE.toString()},
+			{"&magic", ChatColor.MAGIC.toString()},
+			{"&reset", ChatColor.RESET.toString()}
 		};
 		//@formatter:on
 
+		return StringParser.parseForColorKeys(message, colorKeys, primaryColor);
+	}
+	
+	private static String parseForColorKeys(String message, String[][] colorKeys, String primaryColor) {		
+		for (String[] colorKey : colorKeys) {
+			if (colorKey[0].equals(primaryColor)) {
+				primaryColor = colorKey[1];
+			}
+		}
+		
 		for (String[] colorKey : colorKeys) {
 			String substitute = colorKey[1];
 			while (message.indexOf(colorKey[0]) != -1) {
@@ -232,7 +308,7 @@ public final class StringParser {
 					int endIndex = message.indexOf(")", index);
 					String body = message.substring(index + colorKey[0].length() + 1, endIndex);
 					String tail = message.substring(endIndex + 1);
-					message = head + substitute + body + color + tail;
+					message = head + substitute + body + primaryColor + tail;
 				} else {
 					String tail = message.substring(index + colorKey[0].length());
 					message = head + substitute + tail;

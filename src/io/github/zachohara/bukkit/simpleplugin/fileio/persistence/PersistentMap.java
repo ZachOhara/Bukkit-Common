@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.simpleplugin.persistence;
+package io.github.zachohara.bukkit.simpleplugin.fileio.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -44,9 +44,8 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 * @param data the serializable {@code Map} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <T extends Map<K, V> & Serializable> PersistentMap(SimplePlugin owner, T data,
-			String filename) {
-		super(owner, data, filename);
+	public <T extends Map<K, V> & Serializable> PersistentMap(SimplePlugin owner, String filename, T data) {
+		super(owner, filename, data);
 	}
 
 	/**
@@ -58,7 +57,7 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 * @param filename the filename to store the object as.
 	 */
 	public PersistentMap(SimplePlugin owner, String filename) {
-		this(owner, new HashMap<K, V>(), filename);
+		this(owner, filename, new HashMap<K, V>());
 	}
 
 	/**
@@ -68,8 +67,8 @@ public class PersistentMap<K extends Serializable, V extends Serializable> exten
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<K, V> mapdata() {
-		if (this.getObject() instanceof Map<?, ?>) {
-			return (Map<K, V>) this.getObject();
+		if (this.getPayload() instanceof Map<?, ?>) {
+			return (Map<K, V>) this.getPayload();
 		} else {
 			return null;
 		}

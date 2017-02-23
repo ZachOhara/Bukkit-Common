@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.simpleplugin.persistence;
+package io.github.zachohara.bukkit.simpleplugin.fileio.persistence;
 
 import java.io.Serializable;
 import java.util.Collection;
