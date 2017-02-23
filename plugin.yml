@@ -1,5 +1,5 @@
 name: SimplePlugin
-version: 3.2.1
+version: 4.0
 main: io.github.zachohara.bukkit.simpleplugin.plugin.main.SimplePluginMain
 description: A library for simplifying the creation of Bukkit plugins
 author: Zach Ohara

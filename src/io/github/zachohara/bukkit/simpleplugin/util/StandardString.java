@@ -16,20 +16,18 @@
 
 package io.github.zachohara.bukkit.simpleplugin.util;
 
-import org.bukkit.ChatColor;
-
 /**
- * The {@code StringUtil} class contains some common strings that are exchanged between the
+ * The {@code StandardString} class contains some common strings that are exchanged between the
  * server and the players using it.
  *
  * @author Zach Ohara
  */
-public final class StringUtil {
+public final class StandardString {
 
 	/**
-	 * The {@code StringUtil} class should not be instantiable.
+	 * The {@code StandardString} class should not be instantiable.
 	 */
-	private StringUtil() {
+	private StandardString() {
 
 	}
 
@@ -42,31 +40,6 @@ public final class StringUtil {
 	 * The width, in characters, of the default console window.
 	 */
 	public static final int CONSOLE_WIDTH = 63;
-
-	/**
-	 * The color that the server admin's name should appear in.
-	 */
-	public static final ChatColor ADMINCOLOR = ChatColor.LIGHT_PURPLE;
-
-	/**
-	 * The color that all standard text should appear in.
-	 */
-	public static final ChatColor TEXTCOLOR = ChatColor.AQUA;
-
-	/**
-	 * The color that player's and command's names should appear in.
-	 */
-	public static final ChatColor NAMECOLOR = ChatColor.WHITE;
-
-	/**
-	 * The color that error messages should appear in.
-	 */
-	public static final ChatColor ERRORCOLOR = ChatColor.RED;
-
-	/**
-	 * The color that location coordinates should appear in.
-	 */
-	public static final ChatColor LOCATIONCOLOR = ChatColor.GREEN;
 
 	/**
 	 * The message that is sent to players when a command they have submitted did not have
