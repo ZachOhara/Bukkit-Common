@@ -14,15 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.simpleplugin.persistence.map;
+package io.github.zachohara.bukkit.simpleplugin.fileio.persistence;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentKeyedMap;
 import io.github.zachohara.bukkit.simpleplugin.plugin.SimplePlugin;
 
 /**
@@ -49,7 +47,6 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	public PersistentPlayerData(SimplePlugin owner, String filename) {
 		super(owner, filename);
 		this.useUUID = false;
-		this.saveAllPlayerData();
 	}
 
 	/**
@@ -97,17 +94,6 @@ public abstract class PersistentPlayerData<D extends Serializable> extends Persi
 	 */
 	public void saveAllPlayerData() {
 		this.saveAllKeyedData(Bukkit.getOnlinePlayers());
-	}
-
-	/**
-	 * Calls the {@link #saveAllPlayerData()} method of this class before returning control
-	 * to the overridden method. This method ensures that all data will be saved to the map
-	 * before the map is saved to a file.
-	 */
-	@Override
-	public void saveToFile() throws IOException {
-		this.saveAllPlayerData();
-		super.saveToFile();
 	}
 
 }

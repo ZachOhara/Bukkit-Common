@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.zachohara.bukkit.simpleplugin.persistence;
+package io.github.zachohara.bukkit.simpleplugin.fileio.persistence;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,9 +44,8 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 * @param data the serializable {@code List} that should be stored in an external file.
 	 * @param filename the filename to store the object as.
 	 */
-	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, L data,
-			String filename) {
-		super(owner, data, filename);
+	public <L extends List<E> & Serializable> PersistentList(SimplePlugin owner, String filename, L data) {
+		super(owner, filename, data);
 	}
 
 	/**
@@ -58,7 +57,7 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 * @param filename the filename to store the object as.
 	 */
 	public PersistentList(SimplePlugin owner, String filename) {
-		super(owner, new ArrayList<E>(), filename);
+		super(owner, filename, new ArrayList<E>());
 	}
 
 	/**
@@ -68,8 +67,8 @@ public class PersistentList<E extends Serializable> extends PersistentObject imp
 	 */
 	@SuppressWarnings("unchecked")
 	private List<E> listdata() {
-		if (this.getObject() instanceof List<?>) {
-			return (List<E>) this.getObject();
+		if (this.getPayload() instanceof List<?>) {
+			return (List<E>) this.getPayload();
 		} else {
 			return null;
 		}

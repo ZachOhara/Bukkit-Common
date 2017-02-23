@@ -27,7 +27,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.zachohara.bukkit.simpleplugin.command.CommandInstance;
 import io.github.zachohara.bukkit.simpleplugin.command.CommandSet;
-import io.github.zachohara.bukkit.simpleplugin.persistence.PersistentObject;
+import io.github.zachohara.bukkit.simpleplugin.fileio.PluginDataFile;
 
 /**
  * The {@code SimplePlugin} class acts as a supertype for the main class of any plugin that
@@ -48,9 +48,9 @@ public abstract class SimplePlugin extends JavaPlugin {
 	}
 
 	/**
-	 * The list of all {@code PersistentObject}s that have been registered to this plugin.
+	 * The list of all {@code PluginDataFile}s that have been registered to this plugin.
 	 */
-	private List<PersistentObject> persistentData;
+	private List<PluginDataFile> ownedFilesList;
 
 	/**
 	 * Starts the plugin and initializes functionality. This method is called anytime
@@ -61,21 +61,21 @@ public abstract class SimplePlugin extends JavaPlugin {
 	public void onEnable() {
 		super.onEnable();
 		SimplePlugin.pluginList.put(this.getClass(), this);
-		this.persistentData = new LinkedList<PersistentObject>();
+		this.ownedFilesList = new LinkedList<PluginDataFile>();
 	}
 
 	/**
 	 * Safely closes the plugin. This method is called anytime before the plugin is
 	 * disabled on the server, including during the server shutdown procedure. This method
-	 * will close and save all of the registered {@code PersistentData} objects registered
+	 * will close and save all of the registered {@code PluginDataFile} objects registered
 	 * to this plugin.
 	 */
 	@Override
 	public void onDisable() {
 		super.onDisable();
 		SimplePlugin.pluginList.remove(this.getClass());
-		for (PersistentObject obj : this.persistentData) {
-			obj.attemptSaveToFile(this);
+		for (PluginDataFile file : this.ownedFilesList) {
+			file.closeFile(this.getLogger());
 		}
 	}
 
@@ -97,12 +97,12 @@ public abstract class SimplePlugin extends JavaPlugin {
 	public abstract Class<? extends CommandSet> getCommandSet();
 
 	/**
-	 * Register the given {@code PersistentObject} with this plugin.
+	 * Register the given {@code PluginDataFile} with this plugin.
 	 *
-	 * @param data the {@code PersistentObject} to register.
+	 * @param data the {@code PluginDataFile} to register.
 	 */
-	public void regiserPersistentObject(PersistentObject data) {
-		this.persistentData.add(data);
+	public void registerPluginFile(PluginDataFile data) {
+		this.ownedFilesList.add(data);
 	}
 
 	/**
